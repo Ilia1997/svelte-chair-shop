@@ -1,11 +1,12 @@
 <script lang="ts">
+  import Image from "$lib/components/Image.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
   export let product: IProduct;
   export let selectedProductImage: string;
   export let productGalleryModal: boolean;
 
   const openModal = () => {
-    selectedProductImage = product.image;
+    selectedProductImage = product.main_image;
     productGalleryModal = true;
   };
 </script>
@@ -90,7 +91,14 @@
     </div>
   </div>
   <div class="flex justify-center pt-12 pb-3 relative rounded-sm text-white">
-    <img src={product.image} alt="" class="w-[148px]" />
+    <div class="h-[165px] flex items-center">
+      <Image
+        imageSrc={product.main_image}
+        altText={product.name}
+        className={"w-[148px]"}
+      />
+    </div>
+
     <button
       class="text-xs absolute -bottom-9 px-3 py-2 bg-shop-green transition-all duration-500 group-hover/main:bottom-2.5 hover:bg-shop-purple"
       >View Details</button

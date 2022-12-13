@@ -4,13 +4,11 @@
   import BestSellers from "./tabs/BestSellers.svelte";
   import Featured from "./tabs/Featured.svelte";
   import NewArrivals from "./tabs/NewArrivals.svelte";
-  import ProuctImage1 from "$lib/assets/prod-3.png";
-  import ProuctImage2 from "$lib/assets/prod-4.png";
-  import ProuctImage3 from "$lib/assets/prod-5.png";
-  import ProuctImage4 from "$lib/assets/prod-6.png";
-  import ProuctImage5 from "$lib/assets/prod-7.png";
-  import ProuctImage6 from "$lib/assets/prod-8.png";
+
   import { setContext } from "svelte";
+  export let newArrivalProducts: Array<IProduct>,
+    bestSellersProducts: Array<IProduct>,
+    featuredProducts: Array<IProduct>;
 
   let items: Array<ITabs> = [
     { label: "New Arrival", value: 1, component: NewArrivals },
@@ -18,87 +16,7 @@
     { label: "Featured", value: 3, component: Featured },
   ];
 
-  const newArrivalsProducts: Array<IProduct> = [
-    {
-      name: "Cantilever chair",
-      code: "Y523201",
-      price: 42.0,
-      oldPrice: 65.0,
-      isSale: false,
-      image: ProuctImage1,
-    },
-    {
-      name: "Cantilever chair 2",
-      code: "Y523563",
-      price: 65.0,
-      oldPrice: 65.0,
-      isSale: false,
-      image: ProuctImage2,
-    },
-    {
-      name: "Cantilever chair 3",
-      code: "Y523561",
-      price: 30.0,
-      oldPrice: 40.0,
-      isSale: true,
-      image: ProuctImage3,
-    },
-  ];
-  const bestSellersProducts: Array<IProduct> = [
-    {
-      name: "Cantilever chair 4",
-      code: "Y523555",
-      price: 30.0,
-      oldPrice: 34.0,
-      isSale: false,
-      image: ProuctImage4,
-    },
-    {
-      name: "Cantilever chair 4",
-      code: "Y523555",
-      price: 30.0,
-      oldPrice: 34.0,
-      isSale: true,
-      image: ProuctImage5,
-    },
-    {
-      name: "Cantilever chair 4",
-      code: "Y523555",
-      price: 30.0,
-      oldPrice: 34.0,
-      isSale: false,
-      image: ProuctImage6,
-    },
-  ];
-
-  const featuredProducts: Array<IProduct> = [
-    {
-      name: "Cantilever chair 4",
-      code: "Y523555",
-      price: 30.0,
-      oldPrice: 34.0,
-      isSale: true,
-      image: ProuctImage5,
-    },
-    {
-      name: "Cantilever chair",
-      code: "Y523201",
-      price: 42.0,
-      oldPrice: 65.0,
-      isSale: false,
-      image: ProuctImage1,
-    },
-    {
-      name: "Cantilever chair 2",
-      code: "Y523563",
-      price: 65.0,
-      oldPrice: 65.0,
-      isSale: false,
-      image: ProuctImage2,
-    },
-  ];
-
-  setContext("newArrivalsProducts", newArrivalsProducts);
+  setContext("newArrivalProducts", newArrivalProducts);
   setContext("bestSellersProducts", bestSellersProducts);
   setContext("featuredProducts", featuredProducts);
 </script>

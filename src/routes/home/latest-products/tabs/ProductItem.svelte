@@ -1,13 +1,14 @@
 <script lang="ts">
   import ProuctImage1 from "$lib/assets/prod1.png";
   import SaleImg from "$lib/assets/sale.svg";
+  import Image from "$lib/components/Image.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
   import { getContext } from "svelte";
   export let openModal = () => {};
   export let product: IProduct;
   const modalImage: any = getContext("modalImage");
   const openModalWithImage = () => {
-    $modalImage = product.image;
+    $modalImage = product.main_image;
     openModal();
   };
 </script>
@@ -92,11 +93,10 @@
         </svg>
       </div>
     </div>
-    {#if product.isSale}
+    {#if product.is_sale}
       <img src={SaleImg} alt="sale" class="absolute top-0 left-0" />
     {/if}
-
-    <img src={product.image} class="w-[220px]" alt="" />
+    <Image imageSrc={product.main_image} className={"w-[220px]"} />
   </div>
   <div class="flex justify-between mt-4">
     <a
@@ -107,7 +107,7 @@
     <div class="flex items-center">
       <span class="text-shop-navy-blue text-sm">${product.price}</span><span
         class="text-xs text-shop-red ml-2 line-through"
-        >${product.oldPrice}</span
+        >${product.old_price}</span
       >
     </div>
   </div>

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
-
   import ProuctImage1 from "$lib/assets/prod1.png";
   import ProuctImage2 from "$lib/assets/prod-2.png";
   import ProuctImage3 from "$lib/assets/prod-3.png";
   import SliderItem from "./SliderItem.svelte";
   import type { ISlides } from "$lib/interfaces/interface";
+  export let heroSliderProducts;
 
   let Carousel: any;
   onMount(async () => {
@@ -13,35 +13,50 @@
     Carousel = module.default;
   });
 
-  const items: Array<ISlides> = [
-    {
-      title: "Best Furniture For Your Castle....",
-      heading: "New Furniture CollectionTrends in 2020",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
-      link: "#",
-      sale: 25,
-      image: ProuctImage1,
-    },
-    {
-      title: "Best Furniture For Your Castle....",
-      heading: "New Furniture CollectionTrends in 2022",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
-      link: "#",
-      sale: 50,
-      image: ProuctImage2,
-    },
-    {
-      title: "Best Furniture For Your Castle....",
-      heading: "New Furniture CollectionTrends in 2021",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
-      link: "#",
-      sale: 30,
-      image: ProuctImage3,
-    },
+  let items: Array<ISlides> = [
+    // {
+    //   title: "Best Furniture For Your Castle....",
+    //   heading: "New Furniture CollectionTrends in 2020",
+    //   description:
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
+    //   link: "#",
+    //   sale: 25,
+    //   image: ProuctImage1,
+    // },
+    // {
+    //   title: "Best Furniture For Your Castle....",
+    //   heading: "New Furniture CollectionTrends in 2022",
+    //   description:
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
+    //   link: "#",
+    //   sale: 50,
+    //   image: ProuctImage2,
+    // },
+    // {
+    //   title: "Best Furniture For Your Castle....",
+    //   heading: "New Furniture CollectionTrends in 2021",
+    //   description:
+    //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
+    //   link: "#",
+    //   sale: 30,
+    //   image: ProuctImage3,
+    // },
   ];
+  heroSliderProducts.forEach((element: any) => {
+    items = [
+      ...items,
+      {
+        title: "Best Furniture For Your Castle....",
+        heading: "New Furniture CollectionTrends in 2020",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna in est adipiscing in phasellus non in justo.",
+        sale: element.sale,
+        isSale: element.is_sale,
+        link: element.slug,
+        image: element.main_image,
+      },
+    ];
+  });
 </script>
 
 <div class="bg-shop-off-purple-white pb-12 sm:min-h-[764px] min-h-max relative">

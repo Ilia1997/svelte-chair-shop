@@ -6,38 +6,7 @@
   import ProuctImage4 from "$lib/assets/prod-4.png";
   import TrendingBanners from "./TrendingBanners.svelte";
   import ProductItem from "./TrandProductItem.svelte";
-
-  const trandingProducts: Array<IProduct> = [
-    {
-      name: "Cantilever chair",
-      code: "Y523201",
-      price: 42.0,
-      oldPrice: 45.0,
-      image: ProuctImage1,
-    },
-    {
-      name: "Cantilever chair 2",
-      code: "Y523563",
-      price: 65.0,
-      oldPrice: 75.0,
-      image: ProuctImage2,
-    },
-    {
-      name: "Cantilever chair 3",
-      code: "Y523561",
-      price: 30.0,
-      oldPrice: 45.0,
-      image: ProuctImage3,
-    },
-    {
-      name: "Cantilever chair 2",
-      code: "Y523563",
-      price: 65.0,
-      oldPrice: 69.0,
-      isSale: false,
-      image: ProuctImage4,
-    },
-  ];
+  export let trendingProducts: Array<IProduct>;
 </script>
 
 <h2 class="pt-[142px] text-center text-shop-off-blue font-medium">
@@ -45,9 +14,11 @@
 </h2>
 <div class="container">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-10">
-    {#each trandingProducts as product}
-      <ProductItem {product} />
+    {#each trendingProducts as product, index}
+      {#if index < 4}
+        <ProductItem {product} />
+      {/if}
     {/each}
   </div>
-  <TrendingBanners {trandingProducts} />
+  <TrendingBanners {trendingProducts} />
 </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Image from "$lib/components/Image.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
   export let product: IProduct;
 </script>
@@ -7,10 +8,9 @@
   <div
     class="w-full min-h-[244px] bg-[#F5F6F8] flex items-center justify-center py-7"
   >
-    <img
-      src={product.image}
-      class="w-[171px] group-hover:scale-105 transition-transform"
-      alt=""
+    <Image
+      imageSrc={product.main_image}
+      className=" group-hover:scale-105 max-h-44 transition-transform"
     />
   </div>
   <div class="flex justify-center flex-col items-center mt-4">

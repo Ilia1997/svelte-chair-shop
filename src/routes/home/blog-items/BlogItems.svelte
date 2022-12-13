@@ -5,48 +5,43 @@
   import Pen_ico from "$lib/assets/pen-ico.svg";
   import Date_ico from "$lib/assets/calendar.svg";
   import type { BlogItem } from "$lib/interfaces/interface";
+  import Image from "$lib/components/Image.svelte";
+  export let latestPosts: Array<BlogItem>;
 
-  const items: Array<BlogItem> = [
-    {
-      name: "Top esssential Trends in 2021",
-      date: "21 August,2020",
-      image: Blog_1,
-      author: "SaberAli",
-      shortDesc:
-        "More off this less hello samlande lied much over tightly circa horse taped mightly",
-    },
-    {
-      name: "Top esssential Trends in 2021",
-      date: "21 August,2020",
-      image: Blog_2,
-      author: "Surfauxion",
-      shortDesc:
-        "More off this less hello samlande lied much over tightly circa horse taped mightly",
-    },
-    {
-      name: "Top esssential Trends in 2021",
-      date: "21 August,2020",
-      image: Blog_3,
-      author: "SaberAli",
-      shortDesc:
-        "More off this less hello samlande lied much over tightly circa horse taped mightly",
-    },
-  ];
+  const convertDate = (date: string) => {
+    const d = new Date(date);
+    const month = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    return `${d.getDate()} ${month[d.getMonth()]} ${d.getFullYear()}`;
+  };
+  console.log("🚀 ~ file: BlogItems.svelte:10 ~ latestPosts", latestPosts);
 </script>
 
 <div class="py-[96px]">
   <h2 class="pb-20 text-center">Leatest Blog</h2>
   <div class="container">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[53px]">
-      {#each items as item}
+      {#each latestPosts as item}
         <a href="#">
           <div class=" shadow-base rounded-md bg-white group">
             <!-- svelte-ignore a11y-img-redundant-alt -->
             <div class="rounded-md overflow-hidden">
-              <img
-                src={item.image}
-                alt="blog image "
-                class="group-hover:scale-105 transition-transform w-full"
+              <Image
+                imageSrc={item.main_image}
+                className="group-hover:scale-105 transition-transform w-full"
+                altText="blog image"
               />
             </div>
 
@@ -55,23 +50,23 @@
                 <div class="flex">
                   <img src={Pen_ico} alt="decorative" />
                   <span class="text-sm leading-4 text-shop-off-blue ml-2"
-                    >{item.author}</span
+                    >{item.author.name}</span
                   >
                 </div>
                 <div class="flex ml-7">
                   <img src={Date_ico} alt="decorative" />
                   <span class="text-sm leading-4 text-shop-off-blue ml-2"
-                    >{item.date}</span
+                    >{convertDate(item._createdAt)}</span
                   >
                 </div>
               </div>
               <div class="text-shop-off-blue text-lg leading-[21px] pb-4">
-                {item.name}
+                {item.title}
               </div>
               <div
                 class="text-base text-[#72718F] leading-7 font-lato font-normal"
               >
-                {item.shortDesc}
+                {item.short_desc}
               </div>
               <div
                 class="font-lato text-base leading-7 mt-3.5 text-shop-off-blue underline underline-offset-2 group-hover:text-shop-purple"

@@ -4,6 +4,7 @@
 
   import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
   import type { ITabs } from "$lib/interfaces/interface";
+  import Image from "$lib/components/Image.svelte";
 
   export let items: Array<ITabs> = [];
   export let activeTabValue = 1;
@@ -47,6 +48,6 @@
       modalState = false;
     }}
   >
-    <img src={$modalImage} class="w-[400px]" alt="" />
+    <Image imageSrc={$modalImage} className={"w-[400px]"} />
   </ModalSlot>
 {/if}

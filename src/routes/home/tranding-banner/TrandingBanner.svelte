@@ -1,5 +1,8 @@
 <script lang="ts">
-  import Banner from "$lib/assets/sofa.png";
+  import Image from "$lib/components/Image.svelte";
+  import type { IProduct } from "$lib/interfaces/interface";
+  export let bannerProduct: Array<IProduct>;
+  const product: IProduct = bannerProduct[0];
 </script>
 
 <div class="w-full bg-[#F1F0FF] pt-[97px] pb-[61px] overflow-hidden">
@@ -18,10 +21,10 @@
             </svg>
           </div>
         </div>
-        <img
-          src={Banner}
-          class="lg:max-w-[465px] max-w-[345px] relative"
-          alt="banner"
+        <Image
+          imageSrc={product.main_image}
+          className="lg:max-w-[465px] max-w-[345px] relative"
+          altText="banner"
         />
       </div>
       <div class="pl-[38px] mt-12 lg:mt-0">
@@ -52,11 +55,11 @@
           <div class="flex flex-col ml-5">
             <span
               class="text-sm text-shop-off-blue leading-4 tracking-wide font-medium"
-              >B&B Italian Sofa</span
+              >{product.name}</span
             >
             <span
               class="text-sm text-shop-off-blue leading-4 font-lato font-normal mt-[3px]"
-              >$32.00</span
+              >${product.price}</span
             >
           </div>
         </div>

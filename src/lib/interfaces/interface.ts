@@ -2,17 +2,18 @@ export interface ISlides {
   title: string;
   heading: string;
   description: string;
+  isSale: boolean;
   sale: number;
   link: string;
-  image: string;
+  image: any;
 }
 export interface IProduct {
   name: string;
   code: string;
   price: number;
-  image: string;
-  isSale?: boolean;
-  oldPrice?: number;
+  main_image: any;
+  is_sale?: boolean;
+  old_price?: number;
 }
 export interface ITabs {
   label: string;
@@ -20,13 +21,18 @@ export interface ITabs {
   component: any;
 }
 export interface ICategory {
-  name: string;
-  image: string;
+  title: string;
+  main_image: any;
 }
-export interface BlogItem {
+interface IAuthor {
   name: string;
-  date: string;
-  image: string;
-  author: string;
-  shortDesc: string;
+}
+
+export interface BlogItem {
+  title: string;
+  _createdAt: string;
+  main_image: any;
+  author: IAuthor;
+  short_desc: string;
+  body: any;
 }

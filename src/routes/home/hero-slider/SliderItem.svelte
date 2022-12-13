@@ -4,6 +4,8 @@
   import type { ISlides } from "$lib/interfaces/interface";
   export let data: ISlides;
   import Lamp from "$lib/assets/lamp.png";
+  //@ts-ignore
+  import Image from "$lib/components/Image.svelte";
 </script>
 
 <div class="w-full  flex items-center overflow-hidden" transition:fade>
@@ -37,27 +39,27 @@
       <div
         class="absolute sm:w-[500px] w-[300px] sm:h-[500px] h-[300px] bg-[#ECD2FA] opacity-30 rounded-full -z-10 -top-[38px] sm:-right-[45px] right-auto sm:left-auto left-7"
       />
-      <div
-        class="absolute w-[136px] h-[136px] -top-[100px] xl:-right-[50px] sm:-right-[20px] sm:left-auto left-[220px]"
-      >
+      {#if data.isSale}
         <div
-          class="absolute pt-1.5 font-josefin text-3xl text-center text-white z-10 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 font-semibold"
+          class="absolute w-[136px] h-[136px] -top-[100px] xl:-right-[50px] sm:-right-[20px] sm:left-auto left-[220px]"
         >
-          {data.sale}% <br /> off
+          <div
+            class="absolute pt-1.5 font-josefin text-3xl text-center text-white z-10 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 font-semibold"
+          >
+            {data.sale}% <br /> off
+          </div>
+          <div class="tk-blob" style="--time: 10s; --fill: #00C1FE;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 274 303.2">
+              <path
+                d="M260.2 41.4c20 29.2 14.6 74.5 7.2 124.4-7.3 49.9-16.6 104.5-49.2 126-32.5 21.6-88.4 10.2-132-15.2s-75-64.7-83.6-107.8C-6.1 125.7 8 79 36.3 47.8 64.5 16.7 107 1.3 150.9.1c43.9-1.1 89.3 12 109.3 41.3z"
+              />
+            </svg>
+          </div>
         </div>
-        <div class="tk-blob" style="--time: 10s; --fill: #00C1FE;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 274 303.2">
-            <path
-              d="M260.2 41.4c20 29.2 14.6 74.5 7.2 124.4-7.3 49.9-16.6 104.5-49.2 126-32.5 21.6-88.4 10.2-132-15.2s-75-64.7-83.6-107.8C-6.1 125.7 8 79 36.3 47.8 64.5 16.7 107 1.3 150.9.1c43.9-1.1 89.3 12 109.3 41.3z"
-            />
-          </svg>
-        </div>
-      </div>
-
-      <img
-        src={data.image}
-        alt=""
-        class="sm:w-[500px] sm:h-[500px] w-[300px] h-[300]"
+      {/if}
+      <Image
+        imageSrc={data.image}
+        className={"sm:w-[500px] sm:h-[500px] w-[300px] h-[300]"}
       />
     </div>
   </div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Image from "$lib/components/Image.svelte";
   import type { ICategory } from "$lib/interfaces/interface";
   export let category: ICategory;
 </script>
@@ -15,11 +16,11 @@
       class="absolute top-0 bottom-0 right-0 transition-all group-hover:translate-x-2  group-hover:-translate-y-2
         left-0 rounded-full bg-[#F6F7FB] z-10"
     />
-    <img
-      src={category.image}
-      class="w-[158px] relative z-20 transition-all group-hover:translate-x-2  group-hover:-translate-y-2"
-      alt=""
+    <Image
+      imageSrc={category.main_image}
+      className="w-[158px] relative z-20 transition-all group-hover:translate-x-2  group-hover:-translate-y-2"
     />
+
     <button
       class="text-xs absolute bottom-12 left-1/2 -translate-x-1/2 z-20 px-3 py-2 bg-shop-green rounded-sm transition-all duration-500 group-hover:visible group-hover:opacity-100 opacity-0 invisible hover:bg-shop-purple hover:text-white"
       >View Details</button
@@ -27,6 +28,6 @@
   </div>
 
   <div class="text-shop-off-blue text-xl text-center mt-6">
-    {category.name}
+    {category.title}
   </div>
 </div>

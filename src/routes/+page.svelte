@@ -9,14 +9,19 @@
   import TopCatItems from "./home/top-categories/TopCatItems.svelte";
   import Cta from "./home/cta/Cta.svelte";
   import BlogItems from "./home/blog-items/BlogItems.svelte";
+  export let data: any;
 </script>
 
-<HeroSlider />
-<FeaturedProductsSlider />
-<LatestMain />
+<HeroSlider heroSliderProducts={data.heroSliderProducts} />
+<FeaturedProductsSlider featuredProducts={data.featuredProducts} />
+<LatestMain
+  newArrivalProducts={data.newArrivalProducts}
+  bestSellersProducts={data.bestSellersProducts}
+  featuredProducts={data.featuredProducts}
+/>
 <Shopex />
-<TrandingBanner />
-<ProductItems />
-<TopCatItems />
+<TrandingBanner bannerProduct={data.bannerProduct} />
+<ProductItems trendingProducts={data.trendingProducts} />
+<TopCatItems categories={data.categories} />
 <Cta />
-<BlogItems/>
+<BlogItems latestPosts={data.latestPosts} />

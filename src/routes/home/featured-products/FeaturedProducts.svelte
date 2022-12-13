@@ -6,41 +6,13 @@
 
   import type { IProduct } from "$lib/interfaces/interface";
   import FeaturedItem from "./FeaturedItem.svelte";
-  import ProuctImage1 from "$lib/assets/prod1.png";
-  import ProuctImage2 from "$lib/assets/prod-2.png";
-  import ProuctImage3 from "$lib/assets/prod-3.png";
-  import ProuctImage4 from "$lib/assets/prod-4.png";
   import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
+  import Image from "$lib/components/Image.svelte";
 
   let productGalleryModal: boolean = false;
   let selectedProductImage: string = "";
 
-  const featuresProducts: Array<IProduct> = [
-    {
-      name: "Cantilever chair",
-      code: "Y523201",
-      price: 42.0,
-      image: ProuctImage1,
-    },
-    {
-      name: "Cantilever chair 2",
-      code: "Y523563",
-      price: 65.0,
-      image: ProuctImage2,
-    },
-    {
-      name: "Cantilever chair 3",
-      code: "Y523561",
-      price: 30.0,
-      image: ProuctImage3,
-    },
-    {
-      name: "Cantilever chair 4",
-      code: "Y523555",
-      price: 30.0,
-      image: ProuctImage4,
-    },
-  ];
+  export let featuredProducts: Array<IProduct>;
 
   onMount(() => {
     const swiper = new Swiper(".mySwiper", {
@@ -64,12 +36,14 @@
         <div
           class="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4  gap-7"
         >
-          {#each featuresProducts as product}
-            <FeaturedItem
-              {product}
-              bind:selectedProductImage
-              bind:productGalleryModal
-            />
+          {#each featuredProducts as product, index}
+            {#if index <= 3}
+              <FeaturedItem
+                {product}
+                bind:selectedProductImage
+                bind:productGalleryModal
+              />
+            {/if}
           {/each}
         </div>
       </div>
@@ -77,25 +51,14 @@
         <div
           class="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-7"
         >
-          {#each featuresProducts as product}
-            <FeaturedItem
-              {product}
-              bind:selectedProductImage
-              bind:productGalleryModal
-            />
-          {/each}
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div
-          class="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-7"
-        >
-          {#each featuresProducts as product}
-            <FeaturedItem
-              {product}
-              bind:selectedProductImage
-              bind:productGalleryModal
-            />
+          {#each featuredProducts as product, index}
+            {#if index > 3 && index <= 7}
+              <FeaturedItem
+                {product}
+                bind:selectedProductImage
+                bind:productGalleryModal
+              />
+            {/if}
           {/each}
         </div>
       </div>
@@ -110,7 +73,7 @@
     }}
   >
     <div class="flex items-center justify-center">
-      <img src={selectedProductImage} class="w-[500px]" alt="product" />
+      <Image imageSrc={selectedProductImage} className={"w-[500px]"} />
     </div>
   </ModalSlot>
 {/if}

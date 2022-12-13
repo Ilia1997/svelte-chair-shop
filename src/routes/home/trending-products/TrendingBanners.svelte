@@ -1,8 +1,9 @@
 <script lang="ts">
   import Banner from "$lib/assets/banner2.png";
   import Banner2 from "$lib/assets/banner3.png";
+  import Image from "$lib/components/Image.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
-  export let trandingProducts: Array<IProduct>;
+  export let trendingProducts: Array<IProduct>;
 </script>
 
 <div
@@ -35,18 +36,18 @@
     <img src={Banner2} class="absolute bottom-0 right-1 max-w-[312px]" alt="" />
   </div>
   <div>
-    {#each trandingProducts as product, index}
+    {#each trendingProducts as product, index}
       {#if index < 3}
         <a href="#" class="flex gap-[10px] mb-5 last:mb-0">
           <div
             class="bg-[#F5F6F8] w-[107px] min-h-[74px] flex items-center justify-center"
           >
-            <img src={product.image} class="h-[74px]" alt="" />
+            <Image imageSrc={product.main_image} className="h-[74px]" />
           </div>
           <div class="flex flex-col justify-center">
             <span class="text-shop-navy-blue">{product.name}</span>
             <span class="text-xs text-shop-navy-blue line-through"
-              >${product.oldPrice}</span
+              >${product.old_price}</span
             >
           </div>
         </a>
