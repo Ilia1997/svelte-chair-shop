@@ -22,7 +22,7 @@
           class="text-base leading-5 text-shop-sub-text font-normal font-lato mt-6"
         >
           <div class="mb-2.5">Contact Info</div>
-          <div>17 Princess Road, London, Greater London NW1 8JR, UK</div>
+          <div>Ukraine</div>
         </div>
       </div>
       <div>
@@ -92,7 +92,7 @@
 </div>
 <div class="bg-[#E7E4F8]">
   <div class="container max-w-[960px] flex place-content-between py-4">
-    <span>©Webecy - All Rights Reserved</span>
+    <span>©WarmDevs - All Rights Reserved</span>
     <div class="w-[80px] flex justify-between">
       <a href="#" class="group">
         <div

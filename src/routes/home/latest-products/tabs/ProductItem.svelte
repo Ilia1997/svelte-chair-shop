@@ -100,7 +100,7 @@
   </div>
   <div class="flex justify-between mt-4">
     <a
-      href="#"
+      href="/products/{product.code}"
       class="text-base block leading-5 underline underline-offset-2 decoration-[#EEEFFB] text-shop-navy-blue"
       >{product.name}</a
     >
