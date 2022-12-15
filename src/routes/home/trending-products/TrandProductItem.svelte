@@ -4,7 +4,7 @@
   export let product: IProduct;
 </script>
 
-<a href="#" class="px-3 pt-3 pb-8 bg-white drop-shadow-base group">
+<a href="/products/{product.code}" class="px-3 pt-3 pb-8 bg-white drop-shadow-base group">
   <div
     class="w-full min-h-[244px] bg-[#F5F6F8] flex items-center justify-center py-7"
   >

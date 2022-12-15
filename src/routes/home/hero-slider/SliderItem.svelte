@@ -8,7 +8,7 @@
   import Image from "$lib/components/Image.svelte";
 </script>
 
-<div class="w-full  flex items-center overflow-hidden" transition:fade>
+<div class="w-full  flex items-center overflow-hidden" in:fade>
   <div
     class="container flex justify-between lg:flex-row flex-col mx-auto relative lg:py-32"
   >

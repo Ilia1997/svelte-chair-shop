@@ -98,10 +98,9 @@
         className={"w-[148px]"}
       />
     </div>
-
-    <button
+    <a href="/products/{product.code}"
       class="text-xs absolute -bottom-9 px-3 py-2 bg-shop-green transition-all duration-500 group-hover/main:bottom-2.5 hover:bg-shop-purple"
-      >View Details</button
+      >View Details</a
     >
   </div>
   <div
