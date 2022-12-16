@@ -8,8 +8,9 @@
 </script>
 
 <svelte:head>
-  <title>Demo site</title>
   <link rel="canonical" href={$page.url.href} />
+  <meta property="og:url" content={$page.url.href} />
+  <meta property="og:image" content="/images/logo.svg" />
 </svelte:head>
 
 <TopBar />

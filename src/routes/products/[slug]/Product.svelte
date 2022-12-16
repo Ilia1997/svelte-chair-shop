@@ -2,26 +2,8 @@
   import { fade } from "svelte/transition";
   import Image from "$lib/components/Image.svelte";
   export let data: any;
-  console.log(data);
+  //console.log(data);
 </script>
-
-<svelte:head>
-  {#if data[0].seoTitle}
-    <title>{data[0].seoTitle}</title>
-    <meta property="og:title" content={data[0].seoTitle} />
-  {:else}
-    <title>{data[0].name}</title>
-    <meta property="og:title" content={data[0].name} />
-  {/if}
-  {#if data[0].seoDesc}
-    <meta name="description" content={data[0].seoDesc} />
-  {:else if data[0].body}
-    <meta name="description" content={data[0].body[0].children[0].text} />
-  {/if}
-  {#if data[0].seoKeywords}
-    <meta name="keywords" content={data[0].seoKeywords} />
-  {/if}
-</svelte:head>
 
 <div
   class="grid gap-8 grid-cols-1 md:grid-cols-2 shadow-product my-32 p-3"
