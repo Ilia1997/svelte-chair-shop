@@ -32,6 +32,7 @@ module.exports = {
         "shop-off-navy-blue": "#3F509E",
         "shop-navy-blue": "#151875",
         "shop-purple": "#7E33E0",
+        "shop-purple-light": "#A9ACC6",
         "shop-off-purple": "#9F63B5",
         "shop-off-purple-white": "#F2F0FF",
         "shop-red": "#FB2448",

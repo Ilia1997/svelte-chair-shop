@@ -73,7 +73,12 @@
     }}
   >
     <div class="flex items-center justify-center">
-      <Image imageSrc={selectedProductImage} className={"w-[500px]"} />
+      <Image
+        imageSrc={selectedProductImage
+          ? selectedProductImage
+          : "/images/no-image.png"}
+        className={"w-[500px]"}
+      />
     </div>
   </ModalSlot>
 {/if}

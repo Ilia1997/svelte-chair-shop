@@ -44,7 +44,11 @@
         <div
           class="pt-14 pb-11 px-6 bg-white shadow-md flex flex-col justify-center items-center"
         >
-          <img src={element.image} alt="delivery" class="mb-6 w-[65px]" />
+          <img
+            src={element.image ? element.image : "/images/no-image.png"}
+            alt="delivery"
+            class="mb-6 w-[65px]"
+          />
           <div class="text-[22px] leading-6 text-shop-off-blue mb-5">
             {element.name}
           </div>

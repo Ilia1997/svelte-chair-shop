@@ -93,12 +93,15 @@
   <div class="flex justify-center pt-12 pb-3 relative rounded-sm text-white">
     <div class="h-[165px] flex items-center">
       <Image
-        imageSrc={product.main_image}
+        imageSrc={product.main_image
+          ? product.main_image
+          : "/images/no-image.png"}
         altText={product.name}
         className={"w-[148px]"}
       />
     </div>
-    <a href="/products/{product.code}"
+    <a
+      href="/products/{product.code}"
       class="text-xs absolute -bottom-9 px-3 py-2 bg-shop-green transition-all duration-500 group-hover/main:bottom-2.5 hover:bg-shop-purple"
       >View Details</a
     >

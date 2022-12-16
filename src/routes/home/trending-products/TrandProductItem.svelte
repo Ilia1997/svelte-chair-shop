@@ -4,12 +4,17 @@
   export let product: IProduct;
 </script>
 
-<a href="/products/{product.code}" class="px-3 pt-3 pb-8 bg-white drop-shadow-base group">
+<a
+  href="/products/{product.code}"
+  class="px-3 pt-3 pb-8 bg-white drop-shadow-base group"
+>
   <div
     class="w-full min-h-[244px] bg-[#F5F6F8] flex items-center justify-center py-7"
   >
     <Image
-      imageSrc={product.main_image}
+      imageSrc={product.main_image
+        ? product.main_image
+        : "/images/no-image.png"}
       className=" group-hover:scale-105 max-h-44 transition-transform"
     />
   </div>

@@ -12,7 +12,9 @@
 </script>
 
 <img
-  src={urlFor(imageSrc).fit("max").auto("format")}
+  src={imageSrc != "/images/no-image.png"
+    ? urlFor(imageSrc).fit("max").auto("format")
+    : imageSrc}
   class={className}
   alt={altText}
 />

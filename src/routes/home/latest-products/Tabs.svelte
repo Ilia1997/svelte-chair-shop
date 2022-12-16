@@ -48,6 +48,9 @@
       modalState = false;
     }}
   >
-    <Image imageSrc={$modalImage} className={"w-[400px]"} />
+    <Image
+      imageSrc={$modalImage ? $modalImage : "/images/no-image.png"}
+      className={"w-[400px]"}
+    />
   </ModalSlot>
 {/if}

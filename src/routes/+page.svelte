@@ -12,6 +12,10 @@
   export let data: any;
 </script>
 
+<svelte:head>
+  <title>Demo site - Home Page</title>
+</svelte:head>
+
 <HeroSlider heroSliderProducts={data.heroSliderProducts} />
 <FeaturedProductsSlider featuredProducts={data.featuredProducts} />
 <LatestMain

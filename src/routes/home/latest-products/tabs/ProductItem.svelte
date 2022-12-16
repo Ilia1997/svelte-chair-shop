@@ -96,7 +96,12 @@
     {#if product.is_sale}
       <img src={SaleImg} alt="sale" class="absolute top-0 left-0" />
     {/if}
-    <Image imageSrc={product.main_image} className={"w-[220px]"} />
+    <Image
+      imageSrc={product.main_image
+        ? product.main_image
+        : "/images/no-image.png"}
+      className={"w-[220px]"}
+    />
   </div>
   <div class="flex justify-between mt-4">
     <a

@@ -17,7 +17,9 @@
         left-0 rounded-full bg-[#F6F7FB] z-10"
     />
     <Image
-      imageSrc={category.main_image}
+      imageSrc={category.main_image
+        ? category.main_image
+        : "/images/no-image.png"}
       className="w-[158px] relative z-20 transition-all group-hover:translate-x-2  group-hover:-translate-y-2"
     />
 

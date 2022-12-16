@@ -42,7 +42,12 @@
           <div
             class="bg-[#F5F6F8] w-[107px] min-h-[74px] flex items-center justify-center"
           >
-            <Image imageSrc={product.main_image} className="h-[74px]" />
+            <Image
+              imageSrc={product.main_image
+                ? product.main_image
+                : "/images/no-image.png"}
+              className="h-[74px]"
+            />
           </div>
           <div class="flex flex-col justify-center">
             <span class="text-shop-navy-blue">{product.name}</span>

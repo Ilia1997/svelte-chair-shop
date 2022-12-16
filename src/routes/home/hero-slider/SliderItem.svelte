@@ -58,7 +58,7 @@
         </div>
       {/if}
       <Image
-        imageSrc={data.image}
+        imageSrc={data.image ? data.image : "/images/no-image.png"}
         className={"sm:w-[500px] sm:h-[500px] w-[300px] h-[300]"}
       />
     </div>

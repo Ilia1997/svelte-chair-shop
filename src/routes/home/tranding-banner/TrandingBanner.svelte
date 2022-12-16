@@ -22,7 +22,9 @@
           </div>
         </div>
         <Image
-          imageSrc={product.main_image}
+          imageSrc={product.main_image
+            ? product.main_image
+            : "/images/no-image.png"}
           className="lg:max-w-[465px] max-w-[345px] relative"
           altText="banner"
         />

@@ -39,7 +39,9 @@
             <!-- svelte-ignore a11y-img-redundant-alt -->
             <div class="rounded-md overflow-hidden">
               <Image
-                imageSrc={item.main_image}
+                imageSrc={item.main_image
+                  ? item.main_image
+                  : "/images/no-image.png"}
                 className="group-hover:scale-105 transition-transform w-full"
                 altText="blog image"
               />

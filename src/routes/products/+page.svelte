@@ -8,6 +8,10 @@
   let productsArray: any[] = Object.entries(data);
 </script>
 
+<svelte:head>
+  <title>Demo site - Products</title>
+</svelte:head>
+
 <BreadCrumbs
   data={{
     heading: "Products",
@@ -41,7 +45,9 @@
       <div in:fade>
         <a href="/products/{product[1].slug.current}">
           <Image
-            imageSrc={product[1].main_image}
+            imageSrc={product[1].main_image
+              ? product[1].main_image
+              : "/images/no-image.png"}
             altText={product[1].name}
             className={"w-[148px]"}
           />
