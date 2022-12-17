@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-josefin;
+  }
+}
+h1 {
+  font-size: 40px;
+  line-height: 60px;
+  letter-spacing: 1.5%;
+}
+h2 {
+  font-size: 32px;
+  line-height: 40px;
+}
+h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@media screen and (min-width: 640px) {
+  h1 {
+    font-size: 53px;
+    line-height: 81px;
+    letter-spacing: 1.5%;
+  }
+  h2 {
+    font-size: 42px;
+    line-height: 50px;
+    color: #151875;
+  }
+  h3 {
+    font-size: 35px;
+    line-height: 46px;
+    color: #151875;
+    letter-spacing: 0.015em;
+  }
+}
