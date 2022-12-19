@@ -23,7 +23,7 @@
 />
 
 <div class="container">
-  <div class="pt-24 flex items-center justify-between">
+  <div class="py-24 flex items-center justify-between">
     <h2 class="text-2xl font-josefin text-shop-off-blue leading-8">Chairs</h2>
     <div>
       Sort by <select
@@ -36,18 +36,37 @@
       </select>
     </div>
   </div>
-  <div class="container">
+  <div
+    class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 pb-20"
+  >
     {#each allProducts as product (product.code)}
-      <div in:fade>
+      <div
+        in:fade
+        class="product__item transition duration-150 ease-linear text-center overflow-hidden"
+      >
         <a href="/products/{product.slug.current}">
           <Image
             imageSrc={product.main_image}
             altText={product.name}
-            className={"w-[148px]"}
+            className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB]"}
           />
-          <div>{product.name}</div>
+          <div class="my-4">{product.name}</div>
+          <div class="mb-4">
+            <span>${product.price}</span>
+            {#if product.old_price}
+              <span class="text-shop-pink line-through"
+                >${product.old_price}</span
+              >
+            {/if}
+          </div>
         </a>
       </div>
     {/each}
   </div>
 </div>
+
+<style>
+  .product__item:hover {
+    transform: scale(0.95, 0.95);
+  }
+</style>
