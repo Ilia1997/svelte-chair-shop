@@ -12,6 +12,7 @@ declare global {
       sb: TypedSupabaseClient;
       session: AuthSession | null;
     }
+
     interface Error {}
     interface Platform {}
     interface ISlides {

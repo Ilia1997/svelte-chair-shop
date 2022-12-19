@@ -27,8 +27,11 @@
   <meta property="og:url" content={$page.url.href} />
   <meta property="og:image" content="/images/logo.svg" />
 </svelte:head>
-
-<TopBar />
-<Header />
-<slot />
-<Footer />
+<div class="flex flex-col justify-between min-h-[100vh]">
+  <div>
+    <TopBar />
+    <Header />
+  </div>
+  <slot />
+  <Footer />
+</div>
