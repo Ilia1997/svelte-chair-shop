@@ -24,7 +24,7 @@
     <div class="text-base mb-2.5">
       <span>${product.price}</span>
       {#if product.old_price}
-        <span class="text-shop-pink">${product.old_price}</span>
+        <span class="text-shop-pink line-through">${product.old_price}</span>
       {/if}
     </div>
     {#if product.body}
