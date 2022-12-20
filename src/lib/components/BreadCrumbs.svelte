@@ -7,7 +7,7 @@
 
 <div class="pt-24 pb-32 w-full bg-[#F6F5FF]">
   <div class="container">
-    <h1 class="font-josefin text-[36px] leading-[42px] text-shop-off-blue">
+    <h1 class="font-josefin text-[36px] leading-[42px] text-shop-off-blue mb-2">
       {data.heading}
     </h1>
     <nav class="rounded-md w-full">

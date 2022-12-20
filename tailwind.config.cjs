@@ -42,9 +42,11 @@ module.exports = {
         "shop-pantone": "#E0D3F5",
         "shop-green": "#08D15F",
         "shop-sub-text": "#8A8FB9",
+        "shop-grey": "#9096B2",
       },
       boxShadow: {
         base: "0px 8px 40px rgba(49, 32, 138, 0.05)",
+        "base-big": "0px 8px 40px rgba(49, 32, 138, 0.15)",
       },
       dropShadow: {
         base: "0px 8px 40px rgba(49, 32, 138, 0.05)",
