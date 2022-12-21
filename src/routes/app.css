@@ -20,6 +20,9 @@ h3 {
   font-size: 24px;
   line-height: 32px;
 }
+.product__item:hover {
+  transform: scale(0.95, 0.95);
+}
 
 @media screen and (min-width: 640px) {
   h1 {

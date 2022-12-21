@@ -62,7 +62,6 @@
           return 1;
         } else return -1;
       }
-      // names must be equal
       return 0;
     });
   };
@@ -181,9 +180,3 @@
     </div>
   </ModalSlot>
 {/if}
-
-<style>
-  .product__item:hover {
-    transform: scale(0.95, 0.95);
-  }
-</style>
