@@ -13,12 +13,14 @@ interface ISlug {
 export interface IProduct {
   name: string;
   code: string;
+  short_desc?: string;
   price: number;
   main_image: any;
   body?: any;
   slug: ISlug;
   is_sale?: boolean;
   old_price?: number;
+  related?: any;
   // seo
   seoTitle?: string;
   seoDesc?: string;
