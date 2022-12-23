@@ -1,5 +1,10 @@
 <script type="ts">
   import Icon from "@iconify/svelte";
+  import Image from "./Image.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
+
   let menuToggle: boolean = false;
 </script>
 
@@ -32,11 +37,23 @@
         <div class="w-0.5 h-7 bg-black -rotate-45 absolute top-0 rounded-sm" />
         <div class="w-0.5 h-7 bg-black rotate-45 absolute  top-0 rounded-sm" />
       </div>
-      <div class="text-black text-4xl font-bold">Hekto</div>
-      <nav class="px-8 ml-16">
-        <ul class="list-none flex gap-9 flex-col lg:flex-row">
+      <div class="text-black text-4xl font-bold">
+        {#if pageSettings}
+          <Image
+            imageSrc={pageSettings?.logotype}
+            altText={pageSettings?.name}
+            className={"min-w-[200px] object-contain"}
+          />
+        {:else}
+          WarmDevs
+        {/if}
+      </div>
+      <nav class="ml-[3vw]">
+        <ul class="list-none flex gap-9 flex-col lg:flex-row whitespace-nowrap">
           <li>
             <a
+              style:color={pageSettings?.linkColor?.hex &&
+                pageSettings.linkColor.hex}
               href="/"
               class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
               >Home</a
@@ -44,6 +61,8 @@
           </li>
           <li>
             <a
+              style:color={pageSettings?.linkColor?.hex &&
+                pageSettings.linkColor.hex}
               href="/products"
               class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
               >Products</a
@@ -51,6 +70,8 @@
           </li>
           <li>
             <a
+              style:color={pageSettings?.linkColor?.hex &&
+                pageSettings.linkColor.hex}
               href="/blog"
               class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
               >Blog</a
@@ -58,13 +79,17 @@
           </li>
           <li>
             <a
-              href="/shop"
+              style:color={pageSettings?.linkColor?.hex &&
+                pageSettings.linkColor.hex}
+              href="/static/about"
               class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
-              >Shop</a
+              >About Us</a
             >
           </li>
           <li>
             <a
+              style:color={pageSettings?.linkColor?.hex &&
+                pageSettings.linkColor.hex}
               href="/contact"
               class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
               >Contact</a
@@ -78,10 +103,12 @@
       <input
         type="text"
         name="serch"
-        class="outline-0 sm:w-[317px] w-full h-[40px] border-2  border-gray-100 focus:border-shop-blue px-4 py-2"
+        class="outline-0 sm:w-[317px] w-full h-[40px] border-2  border-gray-100 focus:border-black px-4 py-2"
       />
       <button
         type="submit"
+        style:background-color={pageSettings?.buttonBgColor?.hex &&
+          pageSettings.buttonBgColor.hex}
         class="bg-shop-pink absolute right-0 w-[51px] h-[40px]"
       >
         <div class="flex justify-center">

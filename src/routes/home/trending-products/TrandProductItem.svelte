@@ -1,6 +1,9 @@
 <script lang="ts">
   import Image from "$lib/components/Image.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let product: IProduct;
 </script>
 
@@ -19,13 +22,18 @@
     />
   </div>
   <div class="flex justify-center flex-col items-center mt-4">
-    <span class="font-lato text-base font-bold text-shop-off-blue"
+    <span
+      style:color={pageSettings?.textHeadingColor?.hex &&
+        pageSettings.textHeadingColor.hex}
+      class="font-lato text-base font-bold text-shop-off-blue"
       >{product.name}</span
     >
 
     <div class="flex items-center mt-2 ">
-      <span class="text-shop-navy-blue text-sm">${product.price}</span><span
-        class="text-xs text-shop-navy-blue opacity-30 ml-3 line-through"
+      <span
+        style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
+        class="text-shop-navy-blue text-sm">${product.price}</span
+      ><span class="text-xs text-shop-red ml-3 line-through"
         >${product.price}</span
       >
     </div>

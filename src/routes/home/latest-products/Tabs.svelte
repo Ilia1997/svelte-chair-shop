@@ -1,10 +1,12 @@
 <script lang="ts">
   import { writable, type Writable } from "svelte/store";
   import { setContext } from "svelte";
-
   import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
   import type { ITabs } from "$lib/interfaces/interface";
   import Image from "$lib/components/Image.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
 
   export let items: Array<ITabs> = [];
   export let activeTabValue = 1;
@@ -19,6 +21,11 @@
 <ul class="w-full max-w-[527px] mx-auto flex justify-between mb-16">
   {#each items as item}
     <li
+      style={activeTabValue === item.value
+        ? `color: ${pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}`
+        : `color: ${
+            pageSettings?.textColor?.hex && pageSettings.textColor.hex
+          }`}
       class="font-lato text-lg leading-6 hover:text-shop-pink  {activeTabValue ===
       item.value
         ? 'text-shop-pink underline underline-offset-2'

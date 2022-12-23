@@ -1,11 +1,36 @@
+<script lang="ts">
+  import Image from "./Image.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
+</script>
+
 <div>
-  <div class="bg-[#EEEFFB]">
+  <div
+    style:background-color={pageSettings?.bgMainColor2?.hex &&
+      pageSettings.bgMainColor2.hex}
+    class="bg-[#EEEFFB]"
+  >
     <div class="container py-[96px]">
       <div
         class="grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-[400px_1fr_1fr_1fr]"
       >
         <div>
-          <div class="text-black text-4xl font-bold">Hekto</div>
+          <div
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
+            class="text-black text-4xl font-bold"
+          >
+            {#if pageSettings}
+              <Image
+                imageSrc={pageSettings?.logotype}
+                altText={pageSettings?.name}
+                className={"min-w-[200px] object-contain"}
+              />
+            {:else}
+              WarmDevs
+            {/if}
+          </div>
           <form class="relative w-full max-w-[377px] mt-8">
             <input
               type="email"
@@ -14,41 +39,66 @@
               class="px-5 py-3 outline-0 rounded-md bg-white w-full font-lato"
             />
             <button
+              style:background-color={pageSettings?.buttonBgColor?.hex &&
+                pageSettings.buttonBgColor.hex}
+              style:color={pageSettings?.buttonTextColor?.hex &&
+                pageSettings.buttonTextColor.hex}
               type="submit"
-              class="absolute top-1/2 -translate-y-1/2 right-[4px] text-[#EEEFFB] text-base bg-shop-pink hover:bg-shop-purple rounded-[3px] leading-5 font-lato px-10 py-2.5"
+              class="border border-current absolute top-1/2 -translate-y-1/2 right-[4px] text-[#EEEFFB] text-base bg-shop-pink hover:bg-shop-purple rounded-[3px] leading-5 font-lato px-10 py-2.5"
               >Sign Up</button
             >
           </form>
           <div
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
             class="text-base leading-5 text-shop-sub-text font-normal font-lato mt-6"
           >
-            <div class="mb-2.5">Contact Info</div>
-            <div>Ukraine</div>
+            <div>{pageSettings?.address}</div>
           </div>
         </div>
         <div>
-          <div class="text-[22px] leading-[26px] text-black mb-10">
+          <div
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
+            class="text-[22px] leading-[26px] text-black mb-10"
+          >
             Catagories
           </div>
           <ul
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
             class="text-shop-sub-text text-base leading-5 font-lato font-normal list-none"
           >
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Laptops & Computers</a>
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple"
-                >Cameras & Photography</a
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Laptops & Computers</a
               >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple"
-                >Video Games & Consoles</a
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Cameras & Photography</a
               >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple"
-                >Waterproof Headphones</a
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Video Games & Consoles</a
+              >
+            </li>
+            <li class="mb-5 last:mb-0">
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Waterproof Headphones</a
               >
             </li>
           </ul>
@@ -58,49 +108,104 @@
             Customer Care
           </div>
           <ul
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
             class="text-shop-sub-text text-base leading-5 font-lato font-normal list-none"
           >
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">My Account</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">My Account</a
+              >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Discount</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Discount</a
+              >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Returns</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Returns</a
+              >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Orders History</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Orders History</a
+              >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Order Tracking</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Order Tracking</a
+              >
             </li>
           </ul>
         </div>
         <div>
           <div class="text-[22px] leading-[26px] text-black mb-10">Pages</div>
           <ul
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
             class="text-shop-sub-text text-base leading-5 font-lato font-normal list-none"
           >
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Blog</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Blog</a
+              >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Browse the Shop</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Browse the Shop</a
+              >
             </li>
             <li class="mb-5 last:mb-0">
-              <a href="#" class="hover:text-shop-purple">Category</a>
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="#"
+                class="hover:text-shop-purple">Category</a
+              >
             </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="bg-[#E7E4F8]">
-    <div class="container max-w-[960px] flex place-content-between py-4">
-      <span>©WarmDevs - All Rights Reserved</span>
+  <div
+    style:background-color={pageSettings?.bgMainColor1?.hex &&
+      pageSettings.bgMainColor1.hex}
+    class="bg-[#E7E4F8]"
+  >
+    <div
+      class="container max-w-[960px] flex place-content-between py-4 text-white"
+    >
+      <span>©{pageSettings?.name} - All Rights Reserved</span>
       <div class="w-[80px] flex justify-between">
-        <a href="#" class="group">
+        <a
+          style:color={pageSettings?.linkColor?.hex &&
+            pageSettings.linkColor.hex}
+          href="#"
+          class="group"
+        >
           <div
             class="rounded-full bg-shop-off-blue flex place-content-center w-5 h-5 group-hover:bg-shop-purple"
           >
@@ -115,7 +220,12 @@
             >
           </div></a
         >
-        <a href="#" class="group">
+        <a
+          style:color={pageSettings?.linkColor?.hex &&
+            pageSettings.linkColor.hex}
+          href="#"
+          class="group"
+        >
           <div
             class="rounded-full bg-shop-off-blue flex place-content-center w-5 h-5 group-hover:bg-shop-purple"
           >
@@ -130,7 +240,12 @@
             >
           </div>
         </a>
-        <a href="#" class="group">
+        <a
+          style:color={pageSettings?.linkColor?.hex &&
+            pageSettings.linkColor.hex}
+          href="#"
+          class="group"
+        >
           <div
             class="rounded-full bg-shop-off-blue flex place-content-center w-5 h-5 group-hover:bg-shop-purple"
           >

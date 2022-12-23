@@ -6,8 +6,15 @@
   import { supabaseClient } from "$lib/supabase";
   import { invalidate } from "$app/navigation";
   import { onMount } from "svelte";
+  import { setContext } from "svelte";
 
   import "./app.css";
+
+  const projectSettings = $page?.data?.projectSettings
+    ? $page.data.projectSettings[0]
+    : {};
+
+  setContext("pageSettings", projectSettings);
 
   onMount(() => {
     const {
