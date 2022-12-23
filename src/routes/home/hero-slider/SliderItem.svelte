@@ -6,6 +6,9 @@
   import Lamp from "$lib/assets/lamp.png";
   //@ts-ignore
   import Image from "$lib/components/Image.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
 </script>
 
 <div class="w-full  flex items-center overflow-hidden" in:fade>
@@ -14,19 +17,33 @@
   >
     <img src={Lamp} alt="Lamp" class="absolute top-0 -left-[226px]" />
     <div
+      style:background-color={pageSettings?.bgMainColor1?.hex &&
+        pageSettings.bgMainColor1.hex}
       class="absolute w-[15px] h-[15px] top-[530px] -left-[190px] rounded-full bg-shop-pink"
     />
-    <div class="max-w-[100%] xl:max-w-[644px] lg:max-w-[550px] lg:mt-0 pt-20">
-      <div class="text-base text-shop-pink leading-7 font-lato mb-3">
+    <div
+      style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
+      class="max-w-[100%] xl:max-w-[644px] lg:max-w-[550px] lg:mt-0 pt-20"
+    >
+      <div class="text-base leading-7 font-lato mb-3">
         {data.title}
       </div>
-      <h1>{data.heading}</h1>
-      <p class="text-baseleading-7 font-lato text-gray-500 mt-3">
+      <h1
+        style:color={pageSettings?.textHeadingColor?.hex &&
+          pageSettings.textHeadingColor.hex}
+      >
+        {data.heading}
+      </h1>
+      <p class="text-baseleading-7 font-lato mt-3">
         {data.description}
       </p>
       <a
+        style:background-color={pageSettings?.buttonBgColor?.hex &&
+          pageSettings.buttonBgColor.hex}
+        style:color={pageSettings?.buttonTextColor?.hex &&
+          pageSettings.buttonTextColor.hex}
         href={data.link}
-        class="px-10 py-4 block text-base leading-5 text-white hover:bg-shop-purple bg-shop-pink transition-all rounded-sm w-[163px] mt-7"
+        class="border border-current px-10 py-4 block text-base leading-5 text-white hover:bg-shop-purple bg-shop-pink transition-all rounded-sm w-[163px] mt-7"
         >Shop Now</a
       >
     </div>
@@ -64,6 +81,3 @@
     </div>
   </div>
 </div>
-
-<style>
-</style>

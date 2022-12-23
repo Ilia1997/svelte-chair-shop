@@ -1,11 +1,17 @@
 <script lang="ts">
   import type { ICategory } from "$lib/interfaces/interface";
-
   import TopCatItem from "./TopCatItem.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let categories: Array<ICategory>;
 </script>
 
-<h2 class="pt-[80px] text-center text-shop-off-blue font-medium">
+<h2
+  style:color={pageSettings?.textHeadingColor?.hex &&
+    pageSettings.textHeadingColor.hex}
+  class="pt-[80px] text-center text-shop-off-blue font-medium"
+>
   Top Categories
 </h2>
 <div class="container">

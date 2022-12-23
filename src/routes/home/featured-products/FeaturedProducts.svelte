@@ -8,6 +8,9 @@
   import FeaturedItem from "./FeaturedItem.svelte";
   import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
   import Image from "$lib/components/Image.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
 
   let productGalleryModal: boolean = false;
   let selectedProductImage: string = "";
@@ -29,7 +32,13 @@
 </script>
 
 <div class="pt-[129px] pb-20">
-  <h2 class="pb-12 text-center">Featured Products</h2>
+  <h2
+    style:color={pageSettings?.textHeadingColor?.hex &&
+      pageSettings.textHeadingColor.hex}
+    class="pb-12 text-center"
+  >
+    Featured Products
+  </h2>
   <div class="swiper mySwiper">
     <div class="swiper-wrapper pb-16">
       <div class="swiper-slide">

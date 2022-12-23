@@ -3,6 +3,9 @@
   import BasketIcon from "$lib/components/svg/BasketIcon.svelte";
   import ZoomIcon from "$lib/components/svg/ZoomIcon.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let product: IProduct;
   export let selectedProductImage: string;
   export let productGalleryModal: boolean;
@@ -43,15 +46,20 @@
       />
     </div>
     <a
+      style:background-color={pageSettings?.buttonBgColor?.hex &&
+        pageSettings.buttonBgColor.hex}
+      style:color={pageSettings?.buttonTextColor?.hex &&
+        pageSettings.buttonTextColor.hex}
       href="/products/{product.code}"
-      class="text-xs absolute -bottom-9 px-3 py-2 bg-shop-green transition-all duration-500 group-hover/main:bottom-2.5 hover:bg-shop-purple"
+      class="border border-current text-xs absolute -bottom-9 px-3 py-2 bg-shop-green transition-all duration-500 group-hover/main:bottom-2.5 hover:bg-shop-purple"
       >View Details</a
     >
   </div>
-  <div
-    class="bg-white flex flex-col items-center  py-4 relative z-10 transition-colors group-hover/main:bg-shop-blue"
-  >
-    <div class="text-shop-pink group-hover/main:text-white transition-colors">
+  <div class="bg-white flex flex-col items-center  py-4 relative z-10">
+    <div
+      style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
+      class="text-shop-pink"
+    >
       {product.name}
     </div>
     <div class="w-[52px] mx-auto flex my-3 justify-between">
@@ -60,12 +68,14 @@
       <div class="w-[14px] h-1 rounded-xl bg-[#00009D]" />
     </div>
     <div
-      class="text-sm leading-4 transition-colors text-shop-off-blue mb-3 group-hover/main:text-white"
+      style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
+      class="text-sm leading-4 transition-colors text-shop-off-blue mb-3"
     >
       Code - {product.code}
     </div>
     <div
-      class="text-sm leading-4 transition-colors text-shop-off-blue font-normal group-hover/main:text-white"
+      style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
+      class="text-sm leading-4 transition-colors text-shop-off-blue font-normal"
     >
       ${product.price}
     </div>

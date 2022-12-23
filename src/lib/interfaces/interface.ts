@@ -48,3 +48,19 @@ export interface BlogItem {
   short_desc: string;
   body: any;
 }
+
+export interface IPageSettings {
+  logotype?: string;
+  name?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  textColor?: any;
+  textHeadingColor?: any;
+  linkColor?: any;
+  buttonTextColor?: any;
+  buttonBgColor?: any;
+  bgCrumbs?: any;
+  bgMainColor1?: any;
+  bgMainColor2?: any;
+}

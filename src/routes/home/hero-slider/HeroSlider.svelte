@@ -5,6 +5,9 @@
   import ProuctImage3 from "$lib/assets/prod-3.png";
   import SliderItem from "./SliderItem.svelte";
   import type { ISlides } from "$lib/interfaces/interface";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let heroSliderProducts;
 
   let Carousel: any;
@@ -59,7 +62,11 @@
   });
 </script>
 
-<div class="bg-shop-off-purple-white pb-12 sm:min-h-[764px] min-h-max relative">
+<div
+  style:background-color={pageSettings?.bgMainColor2?.hex &&
+    pageSettings.bgMainColor2.hex}
+  class="bg-shop-off-purple-white pb-12 sm:min-h-[764px] min-h-max relative"
+>
   <svelte:component
     this={Carousel}
     arrows={false}
@@ -75,6 +82,8 @@
       {#each Array.from(Array(pagesCount).keys()) as element, i}
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
+          style:border-color={pageSettings?.buttonBgColor?.hex &&
+            pageSettings.buttonBgColor.hex}
           class="border-2 border-shop-pink rotate-45 w-[10px] h-[10px] mx-2 hover:bg-shop-pink transition-all cursor-pointer {currentPageIndex ===
           i
             ? 'bg-shop-pink'

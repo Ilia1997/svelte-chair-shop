@@ -6,6 +6,8 @@
   import ZoomIcon from "$lib/components/svg/ZoomIcon.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
   import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let openModal = () => {};
   export let product: IProduct;
   const modalImage: any = getContext("modalImage");
@@ -47,12 +49,16 @@
   </div>
   <div class="flex justify-between mt-4">
     <a
+      style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
       href="/products/{product.code}"
       class="text-base block leading-5 underline underline-offset-2 decoration-[#EEEFFB] text-shop-navy-blue"
       >{product.name}</a
     >
     <div class="flex items-center">
-      <span class="text-shop-navy-blue text-sm">${product.price}</span>
+      <span
+        style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
+        class="text-shop-navy-blue text-sm">${product.price}</span
+      >
       {#if product.old_price}
         <span class="text-xs text-shop-red ml-2 line-through"
           >${product.old_price}</span

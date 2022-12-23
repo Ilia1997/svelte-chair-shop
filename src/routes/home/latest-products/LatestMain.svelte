@@ -21,7 +21,7 @@
   setContext("featuredProducts", featuredProducts);
 </script>
 
-<div class=" pb-[56px]">
+<div class=" pb-20">
   <h2 class="pb-5 text-center">Leatest Products</h2>
   <div class="container">
     <Tabs {items} />
