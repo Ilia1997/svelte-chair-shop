@@ -21,6 +21,7 @@ export interface IProduct {
   is_sale?: boolean;
   old_price?: number;
   related?: any;
+  features?: any;
   // seo
   seoTitle?: string;
   seoDesc?: string;

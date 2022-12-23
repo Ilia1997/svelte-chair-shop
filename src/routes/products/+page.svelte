@@ -17,6 +17,8 @@
   let sortBy: any;
   let { allProducts }: { allProducts: Array<IProduct> } = data;
 
+  console.log(allProducts);
+
   $: allProductsForSorting = allProducts;
 
   onMount(async () => {
