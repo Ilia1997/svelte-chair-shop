@@ -25,6 +25,7 @@
         productName={item.productName}
         fullDesc={item.fullDesc}
         shortDesc={item.shortDesc}
+        productFeatures={item.productFeatures}
       />
     </div>
   {/if}

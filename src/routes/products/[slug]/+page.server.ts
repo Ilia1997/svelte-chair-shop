@@ -9,6 +9,13 @@ export const load = (async ({ params }) => {
     price,
     old_price,
     body,
+    features[]-> {
+      brand[0]->{brand},
+      type[0]->{type},
+      color,
+      size,
+      warranty,
+    },
     "related": *[_type == "products" && count(categories[@._ref in ^.^.categories[]._ref]) > 0] | order(publishedAt desc, _createdAt desc) [0..3] {
       code,
       name,

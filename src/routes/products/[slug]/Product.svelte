@@ -17,7 +17,12 @@
       fullDesc: product.body,
       shortDesc: product.short_desc,
     },
-    { label: "Features", value: 2, component: Tab2 },
+    {
+      label: "Features",
+      value: 2,
+      component: Tab2,
+      productFeatures: product.features[0],
+    },
     { label: "Reviews", value: 3, component: Tab3 },
   ];
 </script>
