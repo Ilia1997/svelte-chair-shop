@@ -1,10 +1,11 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  //@ts-ignore
   import Swiper from "swiper/swiper-bundle.esm.js";
   import "swiper/css";
   import "swiper/css/pagination";
 
-  import type { IProduct } from "$lib/interfaces/interface";
+  import type { AddToCartType, IProduct } from "$lib/interfaces/interface";
   import FeaturedItem from "./FeaturedItem.svelte";
   import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
   import Image from "$lib/components/Image.svelte";
@@ -13,6 +14,7 @@
   let selectedProductImage: string = "";
 
   export let featuredProducts: Array<IProduct>;
+  export let addToCart: AddToCartType = () => {};
 
   onMount(() => {
     const swiper = new Swiper(".mySwiper", {
@@ -39,6 +41,7 @@
           {#each featuredProducts as product, index}
             {#if index <= 3}
               <FeaturedItem
+                {addToCart}
                 {product}
                 bind:selectedProductImage
                 bind:productGalleryModal
@@ -54,6 +57,7 @@
           {#each featuredProducts as product, index}
             {#if index > 3 && index <= 7}
               <FeaturedItem
+                {addToCart}
                 {product}
                 bind:selectedProductImage
                 bind:productGalleryModal

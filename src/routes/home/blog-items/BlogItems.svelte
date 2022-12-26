@@ -1,7 +1,4 @@
 <script lang="ts">
-  import Blog_1 from "$lib/assets/blog-1.jpg";
-  import Blog_2 from "$lib/assets/blog-2.jpg";
-  import Blog_3 from "$lib/assets/blog-3.jpg";
   import Pen_ico from "$lib/assets/pen-ico.svg";
   import Date_ico from "$lib/assets/calendar.svg";
   import type { BlogItem } from "$lib/interfaces/interface";
@@ -26,7 +23,6 @@
     ];
     return `${d.getDate()} ${month[d.getMonth()]} ${d.getFullYear()}`;
   };
-  console.log("🚀 ~ file: BlogItems.svelte:10 ~ latestPosts", latestPosts);
 </script>
 
 <div class="py-[96px]">

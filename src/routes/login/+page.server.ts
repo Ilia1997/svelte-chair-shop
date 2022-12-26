@@ -11,7 +11,6 @@ export const actions: Actions = {
       password: body.password as string,
     });
     if (err) {
-      console.log("🚀 ~ file: +page.server.ts:14 ~ login: ~ err", err);
       if (err instanceof AuthApiError && err.status == 400) {
         return fail(400, {
           error: { email: "", password: "", all: "Invalid credentials" },

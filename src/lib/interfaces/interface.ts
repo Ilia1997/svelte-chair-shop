@@ -26,6 +26,13 @@ export interface IProduct {
   seoTitle?: string;
   seoDesc?: string;
   seoKeywords?: string;
+  // cart
+  quantity?: number;
+  total?: number;
+}
+
+export interface AddToCartType {
+  (item: IProduct): void;
 }
 export interface ITabs {
   label: string;
