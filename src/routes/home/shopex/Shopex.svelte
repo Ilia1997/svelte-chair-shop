@@ -3,6 +3,9 @@
   import CashbackImg from "$lib/assets/shopex-icon/premium-quality.svg";
   import PremiumImg from "$lib/assets/shopex-icon/24-hours-support.svg";
   import SupportImg from "$lib/assets/shopex-icon/cashback.svg";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   interface Shopex {
     image: string;
     name: string;
@@ -37,7 +40,13 @@
 </script>
 
 <div class="pb-[135px]">
-  <h2 class="pb-14 text-center">What Shopex Offer!</h2>
+  <h2
+    style:color={pageSettings?.textHeadingColor?.hex &&
+      pageSettings.textHeadingColor.hex}
+    class="pb-5 text-center"
+  >
+    What Shopex Offer!
+  </h2>
   <div class="container">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
       {#each items as element}
@@ -49,10 +58,18 @@
             alt="delivery"
             class="mb-6 w-[65px]"
           />
-          <div class="text-[22px] leading-6 text-shop-off-blue mb-5">
+          <div
+            style:color={pageSettings?.textHeadingColor?.hex &&
+              pageSettings.textHeadingColor.hex}
+            class="text-[22px] leading-6 text-shop-off-blue mb-5"
+          >
             {element.name}
           </div>
-          <p class="text-[#1A0B5B] opacity-30 text-center">
+          <p
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
+            class="text-[#1A0B5B] opacity-60 text-center"
+          >
             {element.description}
           </p>
         </div>

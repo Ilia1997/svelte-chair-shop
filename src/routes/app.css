@@ -7,6 +7,10 @@
     @apply font-josefin;
   }
 }
+body {
+  background-color: #fff;
+  color: #000;
+}
 h1 {
   font-size: 40px;
   line-height: 60px;
@@ -22,6 +26,14 @@ h3 {
 }
 .product__item:hover {
   transform: scale(0.95, 0.95);
+}
+a,
+button {
+  transition: 0.3s;
+}
+a:hover,
+button:hover {
+  opacity: 0.7;
 }
 
 @media screen and (min-width: 640px) {
