@@ -1,12 +1,11 @@
 <script lang="ts">
-  import ProuctImage1 from "$lib/assets/prod1.png";
   import SaleImg from "$lib/assets/sale.svg";
   import Image from "$lib/components/Image.svelte";
-  import BasketIcon from "$lib/components/svg/BasketIcon.svelte";
   import ZoomIcon from "$lib/components/svg/ZoomIcon.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
+  import AddToCartBtn from "$lib/components/AddToCartBtn.svelte";
   const pageSettings: IPageSettings = getContext("pageSettings");
   export let openModal = () => {};
   export let product: IProduct;
@@ -24,11 +23,7 @@
     <div
       class="absolute bottom-8 -left-[120%] transition-all duration-300 group-hover/main:z-10 group-hover/main:left-2.5 "
     >
-      <div
-        class="group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"
-      >
-        <BasketIcon />
-      </div>
+      <AddToCartBtn {product} />
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class=" mt-2 group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"

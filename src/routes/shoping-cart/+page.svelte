@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fade } from "svelte/transition";
+  import { fade, scale } from "svelte/transition";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
   import Image from "$lib/components/Image.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
@@ -57,7 +57,7 @@
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
       1: {
         name: "Cart",
-        path: "/shoping-card",
+        path: "/shoping-cart",
         class: "text-shop-pink hover:text-blue-700",
       },
     },
@@ -217,7 +217,12 @@
         <h2 class="text-2xl font-lato text-shop-off-blue text-center">
           Cart is empty
         </h2>
-        <img src={EmptyCartImage} alt="Empty Cart" class="mt-4 w-80 h-80" />
+        <img
+          src={EmptyCartImage}
+          alt="Empty Cart"
+          in:scale={{ delay: 400, duration: 300 }}
+          class="mt-4 w-80 h-80"
+        />
         <a
           href="/products"
           class="block text-center w-full py-2.5 bg-shop-green mt-10 text-white font-bold font-lato hover:bg-shop-purple"

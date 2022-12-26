@@ -1,15 +1,14 @@
 <script lang="ts">
+  import AddToCartBtn from "$lib/components/AddToCartBtn.svelte";
   import Image from "$lib/components/Image.svelte";
-  import BasketIcon from "$lib/components/svg/BasketIcon.svelte";
   import ZoomIcon from "$lib/components/svg/ZoomIcon.svelte";
-  import type { AddToCartType, IProduct } from "$lib/interfaces/interface";
+  import type { IProduct, IPageSettings } from "$lib/interfaces/interface";
   import { getContext } from "svelte";
-  import type { IPageSettings } from "$lib/interfaces/interface";
+
   const pageSettings: IPageSettings = getContext("pageSettings");
   export let product: IProduct;
   export let selectedProductImage: string;
   export let productGalleryModal: boolean;
-  export let addToCart: AddToCartType = () => {};
 
   const openModal = () => {
     selectedProductImage = product.main_image;
@@ -23,13 +22,8 @@
   <div
     class="grid gap-1 grid-cols-3 absolute top-2.5 left-2.5 transition-all duration-500 group-hover/main:z-10 group-hover/main:opacity-100 opacity-0"
   >
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div
-      class="group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"
-      on:click={() => addToCart(product)}
-    >
-      <BasketIcon />
-    </div>
+    <AddToCartBtn {product} />
+
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       class=" group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"

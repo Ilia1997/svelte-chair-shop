@@ -50,7 +50,6 @@
           {#each featuredProducts as product, index}
             {#if index <= 3}
               <FeaturedItem
-                {addToCart}
                 {product}
                 bind:selectedProductImage
                 bind:productGalleryModal
@@ -66,7 +65,6 @@
           {#each featuredProducts as product, index}
             {#if index > 3 && index <= 7}
               <FeaturedItem
-                {addToCart}
                 {product}
                 bind:selectedProductImage
                 bind:productGalleryModal

@@ -3,10 +3,10 @@
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
   import { fade } from "svelte/transition";
   import type { IProduct } from "$lib/interfaces/interface";
-  import BasketIcon from "$lib/components/svg/BasketIcon.svelte";
   import ZoomIcon from "$lib/components/svg/ZoomIcon.svelte";
   import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
   import { onMount } from "svelte";
+  import AddToCartBtn from "$lib/components/AddToCartBtn.svelte";
 
   export let data: any;
   export let product: IProduct;
@@ -16,8 +16,6 @@
   let selected: any;
   let sortBy: any;
   let { allProducts }: { allProducts: Array<IProduct> } = data;
-
-  console.log(allProducts);
 
   $: allProductsForSorting = allProducts;
 
@@ -101,7 +99,7 @@
       Sort by <select
         name="sort"
         id=""
-        class="px-2 py-1 border border-[#E7E6EF] border-shop-off-blue cursor-pointer"
+        class="px-2 py-1 border border-[#E7E6EF]  cursor-pointer"
         bind:value={selected}
         on:change={() => checkSelection(selected)}
       >
@@ -131,11 +129,8 @@
               <div
                 class="absolute bottom-6 left-[10px] sm:-left-[100%] transition-all duration-300 group-hover/main:z-10 group-hover/main:left-[10px]"
               >
-                <div
-                  class="group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"
-                >
-                  <BasketIcon />
-                </div>
+                <AddToCartBtn {product} />
+
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div
                   class=" mt-2 group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"

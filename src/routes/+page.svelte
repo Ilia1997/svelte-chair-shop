@@ -10,27 +10,6 @@
   import Cta from "./home/cta/Cta.svelte";
   import BlogItems from "./home/blog-items/BlogItems.svelte";
   export let data: any;
-  import { productsInCart } from "$lib/cartStore";
-  import type { AddToCartType } from "$lib/interfaces/interface";
-
-  const addToCart: AddToCartType = (product) => {
-    let cartArray = $productsInCart ? $productsInCart : [];
-
-    for (let item of cartArray) {
-      if (item.code === product.code && item.quantity) {
-        item.quantity += 1;
-        item.total = item.price * item.quantity;
-        $productsInCart = cartArray;
-        console.log("🚀 ~ file: +page.svelte:24 ~ cartArray", cartArray);
-        return;
-      }
-    }
-
-    product.quantity = 1;
-    product.total = product.price;
-    $productsInCart = [...cartArray, product];
-    console.log("🚀 ~ file: +page.svelte:32 ~ productsInCart", $productsInCart);
-  };
 </script>
 
 <svelte:head>
@@ -38,7 +17,7 @@
 </svelte:head>
 
 <HeroSlider heroSliderProducts={data.heroSliderProducts} />
-<FeaturedProductsSlider featuredProducts={data.featuredProducts} {addToCart} />
+<FeaturedProductsSlider featuredProducts={data.featuredProducts} />
 <LatestMain
   newArrivalProducts={data.newArrivalProducts}
   bestSellersProducts={data.bestSellersProducts}

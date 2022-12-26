@@ -1,7 +1,8 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
   import Image from "$lib/components/Image.svelte";
-  import type { IProduct } from "$lib/interfaces/interface";
+  import type { AddToCartType, IProduct } from "$lib/interfaces/interface";
+  import { productsInCart } from "$lib/cartStore";
   import Tab1 from "./tabs/Tab1.svelte";
   import Tab2 from "./tabs/Tab2.svelte";
   import Tab3 from "./tabs/Tab3.svelte";
@@ -25,6 +26,25 @@
     },
     { label: "Reviews", value: 3, component: Tab3 },
   ];
+
+  let addedStatus: boolean = false;
+  export const addToCart: AddToCartType = (product) => {
+    let cartArray = $productsInCart ? $productsInCart : [];
+
+    for (let item of cartArray) {
+      if (item.code === product.code && item.quantity) {
+        item.quantity += 1;
+        item.total = item.price * item.quantity;
+        $productsInCart = cartArray;
+        addedStatus = true;
+        return;
+      }
+    }
+    addedStatus = true;
+    product.quantity = 1;
+    product.total = product.price;
+    $productsInCart = [...cartArray, product];
+  };
 </script>
 
 <div
@@ -57,10 +77,19 @@
       </div>
     {/if}
     <div class="my-2.5">
-      <button
-        class="text-shop-navy-blue mr-2.5 border border-current px-4 py-2 hover:bg-[#151875] hover:text-white"
-        >Add To Cart</button
-      >
+      {#if !addedStatus}
+        <button
+          on:click={() => addToCart(product)}
+          class="text-shop-navy-blue mr-2.5 border border-current px-4 py-2 hover:bg-[#151875] w-[150px] hover:text-white"
+          >Add To Cart</button
+        >
+      {:else}
+        <a
+          href="/shoping-cart"
+          class="text-shop-navy-blue mr-2.5 border block border-current px-4 py-2 hover:bg-[#151875] w-[150px] text-center hover:text-white"
+          >Go To Cart</a
+        >
+      {/if}
     </div>
   </div>
 </div>
