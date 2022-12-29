@@ -6,9 +6,23 @@
   import EmptyCartImage from "$lib/assets/empty-cart.jpg";
   import { productsInCart } from "$lib/cartStore";
   import { browser } from "$app/environment";
+  import { onMount } from "svelte";
 
   let products: Array<IProduct>;
+  let total: any;
+
   $: products = $productsInCart ? $productsInCart : [];
+
+  $: {
+    if (products.length) {
+      total = products.reduce((amount, item) => {
+        if (item.total) {
+          return item.total + amount;
+        }
+        return amount;
+      }, 0);
+    }
+  }
 
   const minusItem = (product: IProduct) => {
     for (let item of products) {
@@ -180,7 +194,7 @@
               class="font-lato text-shop-off-blue text-[18px] leading-6 font-medium"
               >Totals:</span
             >
-            <span class="text-base text-shop-off-blue font-lato">£325.00</span>
+            <span class="text-base text-shop-off-blue font-lato">${total}</span>
           </div>
           <div class="flex items-center mt-7">
             <svg
