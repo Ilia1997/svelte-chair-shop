@@ -9,11 +9,16 @@
   import TopCatItems from "./home/top-categories/TopCatItems.svelte";
   import Cta from "./home/cta/Cta.svelte";
   import BlogItems from "./home/blog-items/BlogItems.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let data: any;
 </script>
 
 <svelte:head>
-  <title>Demo site - Home Page</title>
+  <title>{pageSettings?.seoTitle}</title>
+  <meta name="description" content={pageSettings?.seoDesc} />
+  <meta name="keywords" content={pageSettings?.seoKeywords} />
 </svelte:head>
 
 <HeroSlider heroSliderProducts={data.heroSliderProducts} />

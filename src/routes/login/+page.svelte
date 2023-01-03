@@ -4,6 +4,9 @@
   import { slide } from "svelte/transition";
   import { error } from "@sveltejs/kit";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let form: ActionData;
   let emailError: any, passError: any;
   const resetForm = () => {
@@ -31,10 +34,15 @@
   />
   <div class="container pb-6">
     <div class="p-12 mx-auto my-24 max-w-xl shadow-base-big">
-      <h2 class="mx-auto text-3xl font-josefin font-bold  text-center">
+      <h2
+        style:color={pageSettings?.textHeadingColor?.hex &&
+          pageSettings.textHeadingColor.hex}
+        class="mx-auto text-3xl font-josefin font-bold  text-center"
+      >
         Login
       </h2>
       <p
+        style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
         class="font-lato text-base text-[#9096B2] mt-2 mb-9 mx-auto text-center"
       >
         Please login using account detail bellow.
@@ -84,18 +92,26 @@
           {/if}
         </div>
         <a
+          style:color={pageSettings?.linkColor?.hex &&
+            pageSettings.linkColor.hex}
           href="reset-password"
           class="font-lato text-base text-shop-grey hover:text-shop-purple transition-colors mb-4 block"
           >Forgot your password?</a
         >
         <div>
           <button
+            style:color={pageSettings?.buttonTextColor?.hex &&
+              pageSettings.buttonTextColor.hex}
+            style:background-color={pageSettings?.buttonBgColor?.hex &&
+              pageSettings.buttonBgColor.hex}
             type="submit"
             class="text-white bg-shop-pink font-lato text-base font-bold hover:bg-shop-purple focus:ring-4 focus:outline-none focus:ring-blue-300  w-full   px-5 py-2.5 text-center "
             >Sign In</button
           >
           <div class="flex justify-center text-shop-grey font-lato mt-7">
             Don’t have an Account?<a
+              style:color={pageSettings?.linkColor?.hex &&
+                pageSettings.linkColor.hex}
               href="/register"
               class="ml-1 hover:text-shop-purple transition-colors"
             >

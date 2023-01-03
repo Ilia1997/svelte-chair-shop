@@ -7,6 +7,7 @@
   import { invalidate } from "$app/navigation";
   import { onMount } from "svelte";
   import { setContext } from "svelte";
+  import { urlFor } from "$lib/createImage";
 
   import "./app.css";
 
@@ -32,7 +33,12 @@
 <svelte:head>
   <link rel="canonical" href={$page.url.href} />
   <meta property="og:url" content={$page.url.href} />
-  <meta property="og:image" content="/images/logo.svg" />
+  <meta
+    property="og:image"
+    content={projectSettings?.logotype
+      ? urlFor(projectSettings.logotype).fit("max").auto("format")
+      : ""}
+  />
 </svelte:head>
 <div class="flex flex-col justify-between min-h-[100vh]">
   <div>

@@ -1,14 +1,27 @@
-<script>
+<script lang="ts">
   import { PortableText } from "@portabletext/svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
 </script>
 
-<h2 class="text-shop-navy-blue">Full description</h2>
+<h2
+  style:color={pageSettings?.textHeadingColor?.hex &&
+    pageSettings.textHeadingColor.hex}
+  class="text-shop-navy-blue"
+>
+  Full description
+</h2>
 {#if $$props.fullDesc}
   <PortableText value={$$props.fullDesc} />
 {:else if $$props.shortDesc}
-  <p>{$$props.shortDesc}</p>
+  <p style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}>
+    {$$props.shortDesc}
+  </p>
 {:else}
-  <p>{$$props.productName}</p>
+  <p style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}>
+    {$$props.productName}
+  </p>
 {/if}
 
 <style>
