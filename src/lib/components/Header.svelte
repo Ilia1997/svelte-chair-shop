@@ -90,9 +90,9 @@
             <a
               style:color={pageSettings?.linkColor?.hex &&
                 pageSettings.linkColor.hex}
-              href="/contact"
+              href="/static/contacts"
               class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
-              >Contact</a
+              >Contacts</a
             >
           </li>
         </ul>

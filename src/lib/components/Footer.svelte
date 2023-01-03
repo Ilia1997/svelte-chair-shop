@@ -104,7 +104,11 @@
           </ul>
         </div>
         <div>
-          <div class="text-[22px] leading-[26px] text-black mb-10">
+          <div
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
+            class="text-[22px] leading-[26px] text-black mb-10"
+          >
             Customer Care
           </div>
           <ul
@@ -155,7 +159,13 @@
           </ul>
         </div>
         <div>
-          <div class="text-[22px] leading-[26px] text-black mb-10">Pages</div>
+          <div
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
+            class="text-[22px] leading-[26px] text-black mb-10"
+          >
+            Pages
+          </div>
           <ul
             style:color={pageSettings?.textColor?.hex &&
               pageSettings.textColor.hex}

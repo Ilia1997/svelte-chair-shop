@@ -3,6 +3,9 @@
   import type { ActionData } from "./$types";
   import { slide } from "svelte/transition";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let form: ActionData;
   let emailError: any, passError: any;
   const resetForm = () => {
@@ -33,15 +36,32 @@
       <div
         class="flex place-items-center flex-col px-12 py-24 mx-auto my-6 rounded-xl shadow-base max-w-lg"
       >
-        <h2>Welcome to our app</h2>
-        <p class="mt-4">Please check your email to confirm registration</p>
+        <h2
+          style:color={pageSettings?.textHeadingColor?.hex &&
+            pageSettings.textHeadingColor.hex}
+        >
+          Welcome to our app
+        </h2>
+        <p
+          style:color={pageSettings?.textColor?.hex &&
+            pageSettings.textColor.hex}
+          class="mt-4"
+        >
+          Please check your email to confirm registration
+        </p>
       </div>
     {:else}
       <div class="p-12 mx-auto my-24 max-w-xl shadow-base-big">
-        <h2 class="mx-auto text-3xl font-josefin font-bold  text-center">
+        <h2
+          style:color={pageSettings?.textHeadingColor?.hex &&
+            pageSettings.textHeadingColor.hex}
+          class="mx-auto text-3xl font-josefin font-bold  text-center"
+        >
           Create account
         </h2>
         <p
+          style:color={pageSettings?.textColor?.hex &&
+            pageSettings.textColor.hex}
           class="font-lato text-base text-[#9096B2] mt-2 mb-9 mx-auto text-center"
         >
           Please create account using form bellow.
@@ -80,12 +100,22 @@
               required
             />
             {#if form?.error?.password}
-              <p class="text-sm text-red-600 mt-1" transition:slide|local>
+              <p
+                style:color={pageSettings?.textColor?.hex &&
+                  pageSettings.textColor.hex}
+                class="text-sm text-red-600 mt-1"
+                transition:slide|local
+              >
                 {form?.error?.password}
               </p>
             {/if}
             {#if form?.error?.all}
-              <p class="text-sm text-red-600 mt-1" transition:slide|local>
+              <p
+                style:color={pageSettings?.textColor?.hex &&
+                  pageSettings.textColor.hex}
+                class="text-sm text-red-600 mt-1"
+                transition:slide|local
+              >
                 {form?.error?.all}
               </p>
             {/if}
@@ -93,12 +123,22 @@
 
           <div>
             <button
+              style:background-color={pageSettings?.buttonBgColor?.hex &&
+                pageSettings.buttonBgColor.hex}
+              style:color={pageSettings?.buttonTextColor?.hex &&
+                pageSettings.buttonTextColor.hex}
               type="submit"
               class="text-white bg-shop-pink font-lato text-base font-bold hover:bg-shop-purple focus:ring-4 focus:outline-none focus:ring-blue-300  w-full   px-5 py-2.5 text-center "
               >Sign Up</button
             >
-            <div class="flex justify-center text-shop-grey font-lato mt-7">
+            <div
+              style:color={pageSettings?.textColor?.hex &&
+                pageSettings.textColor.hex}
+              class="flex justify-center text-shop-grey font-lato mt-7"
+            >
               Already have an Account?<a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
                 href="/login"
                 class="ml-1 hover:text-shop-purple transition-colors"
               >

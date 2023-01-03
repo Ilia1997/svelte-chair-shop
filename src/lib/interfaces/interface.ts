@@ -70,4 +70,8 @@ export interface IPageSettings {
   bgCrumbs?: any;
   bgMainColor1?: any;
   bgMainColor2?: any;
+  // seo
+  seoTitle?: string;
+  seoDesc?: string;
+  seoKeywords?: string;
 }

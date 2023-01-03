@@ -8,6 +8,9 @@
   import AvatarImage from "$lib/assets/account-avatar.webp";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
   import { slide } from "svelte/transition";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
 
   let inputFileText = "Upload avatar image";
   const setFileUploadStatus = (e: Event) => {
@@ -45,6 +48,8 @@
             />
           {:else}
             <div
+              style:background-color={pageSettings?.bgMainColor2?.hex &&
+                pageSettings.bgMainColor2.hex}
               class=" bg-gray-500 rounded-full flex justify-center items-center w-full h-full"
             >
               <img src={AvatarImage} alt="" class="max-w-[50px]" />
@@ -54,7 +59,11 @@
       </div>
       <div class="mt-4">Welcome {data.session.user.email}</div>
       {#if form?.updateUserStatus}
-        <p class="text-center font-lato text-shop-grey text-base">
+        <p
+          style:color={pageSettings?.textColor?.hex &&
+            pageSettings.textColor.hex}
+          class="text-center font-lato text-shop-grey text-base"
+        >
           Your accout has been updated
         </p>
       {:else}
@@ -146,6 +155,10 @@
             </p>
           {/if}
           <button
+            style:background-color={pageSettings?.buttonBgColor?.hex &&
+              pageSettings.buttonBgColor.hex}
+            style:color={pageSettings?.buttonTextColor?.hex &&
+              pageSettings.buttonTextColor.hex}
             type="submit"
             class="text-white bg-shop-pink font-lato text-base font-bold hover:bg-shop-purple focus:ring-4 focus:outline-none focus:ring-blue-300  w-full   px-5 py-2.5 text-center "
             >Update user info</button
@@ -155,6 +168,10 @@
 
       <form action="/logout" method="post" class="w-full mt-10">
         <button
+          style:background-color={pageSettings?.buttonBgColor?.hex &&
+            pageSettings.buttonBgColor.hex}
+          style:color={pageSettings?.buttonTextColor?.hex &&
+            pageSettings.buttonTextColor.hex}
           type="submit"
           class="text-white  bg-shop-purple font-lato text-base font-bold hover:bg-shop-pink focus:ring-4 focus:outline-none focus:ring-blue-300  w-auto block ml-auto  px-8 py-2.5 text-center "
           >Logout</button

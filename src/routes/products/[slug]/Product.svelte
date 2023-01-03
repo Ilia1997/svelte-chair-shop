@@ -7,6 +7,9 @@
   import Tab2 from "./tabs/Tab2.svelte";
   import Tab3 from "./tabs/Tab3.svelte";
   import Tabs from "./tabs/Tabs.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
   export let product: IProduct;
 
   let items = [
@@ -62,9 +65,17 @@
     />
   </div>
   <div class="md:py-12 text-center md:text-left">
-    <h1 class="text-shop-off-blue text-4xl mb-2.5">{product.name}</h1>
+    <h1
+      style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
+      class="text-shop-off-blue text-4xl mb-2.5"
+    >
+      {product.name}
+    </h1>
     <div class="text-base py-2.5">
-      <span class="text-3xl">${product.price}</span>
+      <span
+        style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
+        class="text-3xl">${product.price}</span
+      >
       {#if product.old_price}
         <span class="text-shop-pink line-through ml-2"
           >${product.old_price}</span
@@ -72,19 +83,30 @@
       {/if}
     </div>
     {#if product.short_desc}
-      <div class="text-shop-purple-light">
+      <div
+        style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
+        class="text-shop-purple-light"
+      >
         {product.short_desc}
       </div>
     {/if}
     <div class="my-2.5">
       {#if !addedStatus}
         <button
+          style:background-color={pageSettings?.buttonBgColor?.hex &&
+            pageSettings.buttonBgColor.hex}
+          style:color={pageSettings?.buttonTextColor?.hex &&
+            pageSettings.buttonTextColor.hex}
           on:click={() => addToCart(product)}
           class="text-shop-navy-blue mr-2.5 border border-current px-4 py-2 hover:bg-[#151875] w-[150px] hover:text-white"
           >Add To Cart</button
         >
       {:else}
         <a
+          style:background-color={pageSettings?.buttonBgColor?.hex &&
+            pageSettings.buttonBgColor.hex}
+          style:color={pageSettings?.buttonTextColor?.hex &&
+            pageSettings.buttonTextColor.hex}
           href="/shoping-cart"
           class="text-shop-navy-blue mr-2.5 border block border-current px-4 py-2 hover:bg-[#151875] w-[150px] text-center hover:text-white"
           >Go To Cart</a

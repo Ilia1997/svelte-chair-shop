@@ -7,6 +7,9 @@
   import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
   import { onMount } from "svelte";
   import AddToCartBtn from "$lib/components/AddToCartBtn.svelte";
+  import { getContext } from "svelte";
+  import type { IPageSettings } from "$lib/interfaces/interface";
+  const pageSettings: IPageSettings = getContext("pageSettings");
 
   export let data: any;
   export let product: IProduct;
@@ -94,7 +97,13 @@
 
 <div class="container">
   <div class="py-24 flex items-center justify-between">
-    <h2 class="text-2xl font-josefin text-shop-off-blue leading-8">Products</h2>
+    <h2
+      style:color={pageSettings?.textHeadingColor?.hex &&
+        pageSettings.textHeadingColor.hex}
+      class="text-2xl font-josefin text-shop-off-blue leading-8"
+    >
+      Products
+    </h2>
     <div>
       Sort by <select
         name="sort"
@@ -146,8 +155,18 @@
                 className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB] group-hover/main:bg-[#EBF4F3]"}
               />
             </div>
-            <div class="my-4">{product.name}</div>
-            <div class="mb-4">
+            <div
+              style:color={pageSettings?.textColor?.hex &&
+                pageSettings.textColor.hex}
+              class="my-4"
+            >
+              {product.name}
+            </div>
+            <div
+              style:color={pageSettings?.linkColor?.hex &&
+                pageSettings.linkColor.hex}
+              class="mb-4"
+            >
               <span>${product.price}</span>
               {#if product.old_price}
                 <span class="text-shop-pink line-through"

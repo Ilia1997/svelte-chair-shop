@@ -15,10 +15,10 @@
 
 <BreadCrumbs
   data={{
-    heading: "About Us",
+    heading: "Contact Us",
     li: {
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
-      1: { name: "About Us", class: "text-shop-pink" },
+      1: { name: "Contact Us", class: "text-shop-pink" },
     },
   }}
 />
