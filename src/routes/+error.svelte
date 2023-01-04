@@ -8,7 +8,7 @@
 
 <BreadCrumbs
   data={{
-    heading: $page.error?.message,
+    heading: `${$page.status} ${$page.error?.message}`,
     li: {
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
       1: { name: $page.error?.message, class: "text-shop-pink" },
