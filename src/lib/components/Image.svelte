@@ -2,7 +2,7 @@
   export let altText: string = "";
   export let imageSrc: any;
   export let className: string;
-  import { urlFor } from "$lib/createImage";
+  import { urlFor } from "$lib/functions/createImage";
 </script>
 
 <img

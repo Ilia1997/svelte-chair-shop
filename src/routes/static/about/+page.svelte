@@ -1,6 +1,7 @@
 <script lang="ts">
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
   import Image from "$lib/components/Image.svelte";
+  import { fade } from "svelte/transition";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
   const pageSettings: IPageSettings = getContext("pageSettings");
@@ -29,7 +30,7 @@
 />
 
 <div class="container">
-  <div class="grid sm:grid-cols-2 py-20 gap-7">
+  <div class="grid sm:grid-cols-2 py-20 gap-7" in:fade>
     <Image
       imageSrc={pageInfo.main_image}
       altText={pageInfo.name}

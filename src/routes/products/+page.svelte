@@ -88,7 +88,7 @@
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
       1: {
         name: "Products",
-        path: "/products",
+        path: "",
         class: "text-shop-pink hover:text-blue-700",
       },
     },

@@ -3,29 +3,11 @@
   import Date_ico from "$lib/assets/calendar.svg";
   import type { BlogItem } from "$lib/interfaces/interface";
   import Image from "$lib/components/Image.svelte";
+  import { convertDate } from "$lib/functions/convertDate";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
   const pageSettings: IPageSettings = getContext("pageSettings");
   export let latestPosts: Array<BlogItem>;
-
-  const convertDate = (date: string) => {
-    const d = new Date(date);
-    const month = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    return `${d.getDate()} ${month[d.getMonth()]} ${d.getFullYear()}`;
-  };
 </script>
 
 <div class="py-[96px]">
@@ -39,7 +21,7 @@
   <div class="container">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[53px]">
       {#each latestPosts as item}
-        <a href="#">
+        <a href="/blog/{item.slug.current}">
           <div class=" shadow-base rounded-md bg-white group">
             <!-- svelte-ignore a11y-img-redundant-alt -->
             <div class="rounded-md overflow-hidden">
