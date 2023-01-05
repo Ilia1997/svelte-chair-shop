@@ -4,6 +4,7 @@
   import type { ActionData } from "./$types";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
   import Image from "$lib/components/Image.svelte";
+  import { fade } from "svelte/transition";
   import Icon from "@iconify/svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
@@ -42,7 +43,7 @@
   }}
 />
 
-<div class="container">
+<div class="container" in:fade>
   <div class="grid sm:grid-cols-2 pt-16 pb-8 md:py-20 gap-7">
     <div
       class="rich-block"

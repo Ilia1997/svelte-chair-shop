@@ -50,10 +50,16 @@ interface IAuthor {
 export interface BlogItem {
   title: string;
   _createdAt: string;
-  main_image: any;
+  publishedAt: string;
+  main_image?: any;
+  slug: any;
   author: IAuthor;
-  short_desc: string;
-  body: any;
+  short_desc?: string;
+  body?: any;
+  // seo
+  seoTitle?: string;
+  seoDesc?: string;
+  seoKeywords?: string;
 }
 
 export interface IPageSettings {

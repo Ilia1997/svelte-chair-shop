@@ -7,7 +7,7 @@
   import { invalidate } from "$app/navigation";
   import { onMount } from "svelte";
   import { setContext } from "svelte";
-  import { urlFor } from "$lib/createImage";
+  import { urlFor } from "$lib/functions/createImage";
 
   import "./app.css";
 
