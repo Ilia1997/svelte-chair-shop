@@ -175,8 +175,16 @@
               <a
                 style:color={pageSettings?.linkColor?.hex &&
                   pageSettings.linkColor.hex}
-                href="#"
+                href="/blog"
                 class="hover:text-shop-purple">Blog</a
+              >
+            </li>
+            <li class="mb-5 last:mb-0">
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="/static/faq"
+                class="hover:text-shop-purple">FAQ</a
               >
             </li>
             <li class="mb-5 last:mb-0">

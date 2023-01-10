@@ -22,19 +22,39 @@
       {data.heading}
     </h1>
     <nav class="rounded-md w-full">
-      <ol class="list-reset flex">
+      <ol
+        class="list-reset flex"
+        itemscope
+        itemtype="https://schema.org/BreadcrumbList"
+      >
         {#each { length: keys.length } as _, i}
           {#if liItems[i].path}
-            <li>
+            <li
+              itemprop="itemListElement"
+              itemscope
+              itemtype="https://schema.org/ListItem"
+            >
               <a
+                itemprop="item"
                 style:color={pageSettings?.linkColor?.hex &&
                   pageSettings.linkColor.hex}
                 href={liItems[i].path}
                 class={liItems[i].class}>{liItems[i].name}</a
               >
+              <meta itemprop="name" content={liItems[i].name} />
+              <meta itemprop="position" content={i + 1} />
             </li>
           {:else}
-            <li class="text-shop-red">{liItems[i].name}</li>
+            <li
+              itemprop="itemListElement"
+              itemscope
+              itemtype="https://schema.org/ListItem"
+              class="text-shop-red"
+            >
+              <span itemprop="item">{liItems[i].name}</span>
+              <meta itemprop="name" content={liItems[i].name} />
+              <meta itemprop="position" content={i + 1} />
+            </li>
           {/if}
 
           {#if i < keys.length - 1}
