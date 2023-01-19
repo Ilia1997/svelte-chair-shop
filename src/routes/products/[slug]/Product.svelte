@@ -50,73 +50,89 @@
   };
 </script>
 
-<div
-  class="grid gap-8 grid-cols-1 md:grid-cols-2 shadow-product my-16 md:my-32 p-3"
-  style="box-shadow: 0px 0px 25px 10px #F6F4FD;"
-  in:fade
->
-  <div>
-    <Image
-      imageSrc={product.main_image
-        ? product.main_image
-        : "/images/no-image.png"}
-      altText={product.name}
-      className={"w-[375px] m-auto"}
-    />
-  </div>
-  <div class="md:py-12 text-center md:text-left">
-    <h1
-      style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
-      class="text-shop-off-blue text-4xl mb-2.5"
+<div itemscope itemtype="https://schema.org/Product">
+  <div
+    class="grid gap-8 grid-cols-1 md:grid-cols-2 shadow-product my-16 md:my-32 p-3"
+    style="box-shadow: 0px 0px 25px 10px #F6F4FD;"
+    in:fade
+  >
+    <div>
+      <Image
+        imageSrc={product.main_image
+          ? product.main_image
+          : "/images/no-image.png"}
+        altText={product.name}
+        className={"w-[375px] m-auto"}
+        itemprop="image"
+      />
+    </div>
+    <div
+      itemprop="offers"
+      itemscope
+      itemtype="https://schema.org/Offer"
+      class="md:py-12 text-center md:text-left"
     >
-      {product.name}
-    </h1>
-    <div class="text-base py-2.5">
-      <span
-        style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
-        class="text-3xl">${product.price}</span
-      >
-      {#if product.old_price}
-        <span class="text-shop-pink line-through ml-2"
-          >${product.old_price}</span
-        >
-      {/if}
-    </div>
-    {#if product.short_desc}
-      <div
+      <h1
+        itemprop="name"
         style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
-        class="text-shop-purple-light"
+        class="text-shop-off-blue text-4xl mb-2.5"
       >
-        {product.short_desc}
+        {product.name}
+      </h1>
+      <div class="text-base py-2.5">
+        <span
+          style:color={pageSettings?.linkColor?.hex &&
+            pageSettings.linkColor.hex}
+          class="text-3xl"
+        >
+          <meta itemprop="priceCurrency" content="USD" />
+          <span itemprop="price" content={product.price}>${product.price}</span>
+          <link itemprop="availability" href="https://schema.org/InStock" />
+        </span>
+        {#if product.old_price}
+          <span class="text-shop-pink line-through ml-2"
+            >${product.old_price}</span
+          >
+        {/if}
       </div>
-    {/if}
-    <div class="my-2.5">
-      {#if !addedStatus}
-        <button
-          style:background-color={pageSettings?.buttonBgColor?.hex &&
-            pageSettings.buttonBgColor.hex}
-          style:color={pageSettings?.buttonTextColor?.hex &&
-            pageSettings.buttonTextColor.hex}
-          on:click={() => addToCart(product)}
-          class="text-shop-navy-blue mr-2.5 border border-current px-4 py-2 hover:bg-[#151875] w-[150px] hover:text-white"
-          >Add To Cart</button
+      {#if product.short_desc}
+        <div
+          itemprop="description"
+          style:color={pageSettings?.textColor?.hex &&
+            pageSettings.textColor.hex}
+          class="text-shop-purple-light"
         >
-      {:else}
-        <a
-          style:background-color={pageSettings?.buttonBgColor?.hex &&
-            pageSettings.buttonBgColor.hex}
-          style:color={pageSettings?.buttonTextColor?.hex &&
-            pageSettings.buttonTextColor.hex}
-          href="/shoping-cart"
-          class="text-shop-navy-blue mr-2.5 border block border-current px-4 py-2 hover:bg-[#151875] w-[150px] text-center hover:text-white"
-          >Go To Cart</a
-        >
+          {product.short_desc}
+        </div>
       {/if}
+      <div class="my-2.5">
+        {#if !addedStatus}
+          <button
+            style:background-color={pageSettings?.buttonBgColor?.hex &&
+              pageSettings.buttonBgColor.hex}
+            style:color={pageSettings?.buttonTextColor?.hex &&
+              pageSettings.buttonTextColor.hex}
+            on:click={() => addToCart(product)}
+            class="text-shop-navy-blue mr-2.5 border border-current px-4 py-2 hover:bg-[#151875] w-[150px] hover:text-white"
+            >Add To Cart</button
+          >
+        {:else}
+          <a
+            style:background-color={pageSettings?.buttonBgColor?.hex &&
+              pageSettings.buttonBgColor.hex}
+            style:color={pageSettings?.buttonTextColor?.hex &&
+              pageSettings.buttonTextColor.hex}
+            href="/shoping-cart"
+            class="text-shop-navy-blue mr-2.5 border block border-current px-4 py-2 hover:bg-[#151875] w-[150px] text-center hover:text-white"
+            >Go To Cart</a
+          >
+        {/if}
+      </div>
     </div>
   </div>
-</div>
-<div class="bg-[#F9F8FE] py-10 md:py-20 px-[15px] mb-16 md:mb-32">
-  <Tabs {items} />
+  <div class="bg-[#F9F8FE] py-10 md:py-20 px-[15px] mb-16 md:mb-32">
+    <Tabs {items} />
+  </div>
 </div>
 {#if product.related}
   <h2

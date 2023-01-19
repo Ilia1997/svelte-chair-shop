@@ -52,15 +52,25 @@
       <PortableText value={pageInfo.body} />
     </div>
     <div
+      itemscope
+      itemtype="https://schema.org/Organization"
       style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
     >
+      {#if pageSettings?.name}
+        <meta itemprop="name" content={pageSettings.name} />
+      {/if}
       <h2
         style:color={pageSettings?.textHeadingColor?.hex &&
           pageSettings.textHeadingColor.hex}
       >
         Contact Way
       </h2>
-      <div class="grid sm:grid-cols-2 gap-7 mt-4">
+      <div
+        itemprop="address"
+        itemscope
+        itemtype="https://schema.org/PostalAddress"
+        class="grid sm:grid-cols-2 gap-7 mt-4"
+      >
         <div class="grid gap-7 md:block">
           <div class="flex">
             <Icon
@@ -70,7 +80,10 @@
                 : "#000"}
               width="20"
             />
-            <a class="ml-2" href="tel:{pageInfo?.phone ? pageInfo?.phone : ''}"
+            <a
+              itemprop="telephone"
+              class="ml-2"
+              href="tel:{pageInfo?.phone ? pageInfo?.phone : ''}"
               >{pageInfo?.phone ? pageInfo?.phone : "phone"}</a
             >
           </div>
@@ -83,6 +96,7 @@
               width="20"
             />
             <a
+              itemprop="email"
               class="ml-2"
               href="mailto:{pageInfo?.email ? pageInfo?.email : ''}"
               >{pageInfo?.email ? pageInfo?.email : "email"}</a
@@ -109,7 +123,7 @@
               : "#000"}
             width="20"
           />
-          <p class="lg:max-w-[50%] ml-2">
+          <p class="lg:max-w-[50%] ml-2" itemprop="addressLocality">
             {pageInfo?.address ? pageInfo?.address : "Address"}
           </p>
         </div>
@@ -205,7 +219,6 @@
         </div>
         <div class="mb-6 w-full">
           <textarea
-            type="text"
             id="message"
             name="message"
             on:focus={resetForm}

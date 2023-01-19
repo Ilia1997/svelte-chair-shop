@@ -62,7 +62,7 @@
               pageSettings.textColor.hex}
             class="text-[22px] leading-[26px] text-black mb-10"
           >
-            Catagories
+            Products
           </div>
           <ul
             style:color={pageSettings?.textColor?.hex &&
@@ -73,32 +73,8 @@
               <a
                 style:color={pageSettings?.linkColor?.hex &&
                   pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Laptops & Computers</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Cameras & Photography</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Video Games & Consoles</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Waterproof Headphones</a
+                href="/products"
+                class="hover:text-shop-purple">Products</a
               >
             </li>
           </ul>
@@ -109,62 +85,7 @@
               pageSettings.textColor.hex}
             class="text-[22px] leading-[26px] text-black mb-10"
           >
-            Customer Care
-          </div>
-          <ul
-            style:color={pageSettings?.textColor?.hex &&
-              pageSettings.textColor.hex}
-            class="text-shop-sub-text text-base leading-5 font-lato font-normal list-none"
-          >
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">My Account</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Discount</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Returns</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Orders History</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Order Tracking</a
-              >
-            </li>
-          </ul>
-        </div>
-        <div>
-          <div
-            style:color={pageSettings?.textColor?.hex &&
-              pageSettings.textColor.hex}
-            class="text-[22px] leading-[26px] text-black mb-10"
-          >
-            Pages
+            Blog
           </div>
           <ul
             style:color={pageSettings?.textColor?.hex &&
@@ -179,28 +100,35 @@
                 class="hover:text-shop-purple">Blog</a
               >
             </li>
+          </ul>
+        </div>
+        <div>
+          <div
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
+            class="text-[22px] leading-[26px] text-black mb-10"
+          >
+            Additional info
+          </div>
+          <ul
+            style:color={pageSettings?.textColor?.hex &&
+              pageSettings.textColor.hex}
+            class="text-shop-sub-text text-base leading-5 font-lato font-normal list-none"
+          >
             <li class="mb-5 last:mb-0">
               <a
                 style:color={pageSettings?.linkColor?.hex &&
                   pageSettings.linkColor.hex}
-                href="/static/faq"
-                class="hover:text-shop-purple">FAQ</a
+                href="/static/about"
+                class="hover:text-shop-purple">About Us</a
               >
             </li>
             <li class="mb-5 last:mb-0">
               <a
                 style:color={pageSettings?.linkColor?.hex &&
                   pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Browse the Shop</a
-              >
-            </li>
-            <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="#"
-                class="hover:text-shop-purple">Category</a
+                href="/static/contacts"
+                class="hover:text-shop-purple">Contacts</a
               >
             </li>
           </ul>
