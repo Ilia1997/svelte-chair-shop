@@ -131,10 +131,10 @@
       {#each allProductsForSorting as product (product.code)}
         <div
           in:fade
-          class="product__item transition duration-150 ease-linear text-center overflow-hidden"
+          class="transition duration-150 ease-linear text-center overflow-hidden"
         >
-          <a class="group/main" href="/products/{product.slug.current}">
-            <div class="relative">
+          <div class="group/main">
+            <div class="relative overflow-hidden">
               <div
                 class="absolute bottom-6 left-[10px] sm:-left-[100%] transition-all duration-300 group-hover/main:z-10 group-hover/main:left-[10px]"
               >
@@ -152,29 +152,31 @@
               <Image
                 imageSrc={product.main_image}
                 altText={product.name}
-                className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB] group-hover/main:bg-[#EBF4F3]"}
+                className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB] group-hover/main:bg-[#EBF4F3] group-hover/main:scale-110 transition-transform duration-300"}
               />
             </div>
-            <div
-              style:color={pageSettings?.textColor?.hex &&
-                pageSettings.textColor.hex}
-              class="my-4"
-            >
-              {product.name}
-            </div>
-            <div
-              style:color={pageSettings?.linkColor?.hex &&
-                pageSettings.linkColor.hex}
-              class="mb-4"
-            >
-              <span>${product.price}</span>
-              {#if product.old_price}
-                <span class="text-shop-pink line-through"
-                  >${product.old_price}</span
-                >
-              {/if}
-            </div>
-          </a>
+            <a href="/products/{product.slug.current}">
+              <div
+                style:color={pageSettings?.textColor?.hex &&
+                  pageSettings.textColor.hex}
+                class="my-4"
+              >
+                {product.name}
+              </div>
+              <div
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                class="mb-4"
+              >
+                <span>${product.price}</span>
+                {#if product.old_price}
+                  <span class="text-shop-pink line-through"
+                    >${product.old_price}</span
+                  >
+                {/if}
+              </div>
+            </a>
+          </div>
         </div>
       {/each}
     {/key}
