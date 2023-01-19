@@ -26,6 +26,7 @@ export interface IProduct {
   seoTitle?: string;
   seoDesc?: string;
   seoKeywords?: string;
+  content?: any;
   // cart
   quantity?: number;
   total?: number;

@@ -50,12 +50,18 @@
 
 <div class="container" in:fade>
   <div class="py-4 md:py-24">
-    <div class="mb-8 md:mb-16">
+    <div
+      itemscope
+      itemtype="https://schema.org/NewsArticle"
+      class="mb-8 md:mb-16"
+    >
+      <meta itemprop="name" content={post.title} />
       {#if post.main_image}
         <Image
           imageSrc={post.main_image}
           altText={post.title}
           className={"w-full md:h-[453px] object-cover m-auto"}
+          itemprop="image"
         />
       {/if}
       <div class="flex py-3 md:py-6">
@@ -66,7 +72,9 @@
               pageSettings.linkColor.hex}
             class="relative text-sm leading-4 text-shop-off-blue ml-2 py-1 px-6"
           >
-            <span class="relative z-10">{post.author.name}</span>
+            <span itemprop="author" class="relative z-10"
+              >{post.author.name}</span
+            >
             <div
               style:background-color={pageSettings?.bgMainColor1?.hex &&
                 pageSettings.bgMainColor1.hex}
@@ -84,7 +92,9 @@
               pageSettings.linkColor.hex}
             class="relative text-sm leading-4 text-shop-off-blue ml-2 py-1 px-3 md:px-6"
           >
-            <span class="relative z-10">{convertDate(post.publishedAt)}</span>
+            <span itemprop="datePublished" class="relative z-10"
+              >{convertDate(post.publishedAt)}</span
+            >
             <div
               style:background-color={pageSettings?.bgMainColor2?.hex &&
                 pageSettings.bgMainColor2.hex}
@@ -98,6 +108,7 @@
       </div>
       {#if post.body}
         <div
+          itemprop="description"
           class="rich-block"
           style:color={pageSettings?.textColor?.hex &&
             pageSettings.textColor.hex}

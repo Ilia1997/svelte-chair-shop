@@ -2,6 +2,7 @@
   export let altText: string = "";
   export let imageSrc: any;
   export let className: string;
+  export let itemprop: any = null;
   import { urlFor } from "$lib/functions/createImage";
 </script>
 
@@ -11,4 +12,5 @@
     : imageSrc}
   class={className}
   alt={altText}
+  itemprop={itemprop && itemprop}
 />
