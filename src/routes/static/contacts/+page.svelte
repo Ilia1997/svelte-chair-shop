@@ -157,19 +157,69 @@
         ultrices tristique amet erat vitae eget dolor los vitae lobortis quis
         bibendum quam.
       </p>
-      <form action="?/contacts" method="POST" use:enhance>
-        <div class="md:flex justify-between">
-          <div class="mb-6 md:max-w-[48%] w-full">
+      {#if form?.success}
+        <h4
+          in:fade
+          style:color={pageSettings?.textHeadingColor?.hex &&
+            pageSettings.textHeadingColor.hex}
+          class="text-xl"
+        >
+          Thank You for your question! <br />
+          We will ask you soon!
+        </h4>
+      {:else}
+        <form action="?/contacts" method="POST" use:enhance>
+          <div class="md:flex justify-between">
+            <div class="mb-6 md:max-w-[48%] w-full">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                on:focus={resetForm}
+                class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
+                {usernameError
+                  ? 'border-red-600 text-red-600'
+                  : 'border-gray-300 text-gray-900'}"
+                placeholder="Your Name*"
+                required
+              />
+              {#if form?.error?.email}
+                <p class="text-sm text-red-600 mt-1" transition:slide|local>
+                  {form?.error?.email}
+                </p>
+              {/if}
+            </div>
+            <div class="mb-6 md:max-w-[48%] w-full">
+              <input
+                type="email"
+                id="email"
+                name="email"
+                on:focus={resetForm}
+                class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
+                {emailError
+                  ? 'border-red-600 text-red-600'
+                  : 'border-gray-300 text-gray-900'}"
+                placeholder="Your E-mail*"
+                required
+              />
+              {#if form?.error?.email}
+                <p class="text-sm text-red-600 mt-1" transition:slide|local>
+                  {form?.error?.email}
+                </p>
+              {/if}
+            </div>
+          </div>
+          <div class="mb-6 w-full">
             <input
               type="text"
-              id="username"
-              name="username"
+              id="subject"
+              name="subject"
               on:focus={resetForm}
               class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
-              {usernameError
+              {subjectError
                 ? 'border-red-600 text-red-600'
                 : 'border-gray-300 text-gray-900'}"
-              placeholder="Your Name*"
+              placeholder="Subject*"
               required
             />
             {#if form?.error?.email}
@@ -178,17 +228,16 @@
               </p>
             {/if}
           </div>
-          <div class="mb-6 md:max-w-[48%] w-full">
-            <input
-              type="email"
-              id="email"
-              name="email"
+          <div class="mb-6 w-full">
+            <textarea
+              id="message"
+              name="message"
               on:focus={resetForm}
-              class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
-              {emailError
+              class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[140px] 
+              {messageError
                 ? 'border-red-600 text-red-600'
                 : 'border-gray-300 text-gray-900'}"
-              placeholder="Your E-mail*"
+              placeholder="Type Your Message*"
               required
             />
             {#if form?.error?.email}
@@ -197,56 +246,19 @@
               </p>
             {/if}
           </div>
-        </div>
-        <div class="mb-6 w-full">
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            on:focus={resetForm}
-            class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
-            {subjectError
-              ? 'border-red-600 text-red-600'
-              : 'border-gray-300 text-gray-900'}"
-            placeholder="Subject*"
-            required
-          />
-          {#if form?.error?.email}
-            <p class="text-sm text-red-600 mt-1" transition:slide|local>
-              {form?.error?.email}
-            </p>
-          {/if}
-        </div>
-        <div class="mb-6 w-full">
-          <textarea
-            id="message"
-            name="message"
-            on:focus={resetForm}
-            class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[140px] 
-            {messageError
-              ? 'border-red-600 text-red-600'
-              : 'border-gray-300 text-gray-900'}"
-            placeholder="Type Your Message*"
-            required
-          />
-          {#if form?.error?.email}
-            <p class="text-sm text-red-600 mt-1" transition:slide|local>
-              {form?.error?.email}
-            </p>
-          {/if}
-        </div>
-        <div>
-          <button
-            style:color={pageSettings?.buttonTextColor?.hex &&
-              pageSettings.buttonTextColor.hex}
-            style:background-color={pageSettings?.buttonBgColor?.hex &&
-              pageSettings.buttonBgColor.hex}
-            type="submit"
-            class="w-[max-content] text-white bg-shop-pink font-lato text-base font-bold hover:bg-shop-purple focus:ring-4 focus:outline-none focus:ring-blue-300 px-5 py-2.5 text-center "
-            >Send Mail</button
-          >
-        </div>
-      </form>
+          <div>
+            <button
+              style:color={pageSettings?.buttonTextColor?.hex &&
+                pageSettings.buttonTextColor.hex}
+              style:background-color={pageSettings?.buttonBgColor?.hex &&
+                pageSettings.buttonBgColor.hex}
+              type="submit"
+              class="w-[max-content] text-white bg-shop-pink font-lato text-base font-bold hover:bg-shop-purple focus:ring-4 focus:outline-none focus:ring-blue-300 px-5 py-2.5 text-center "
+              >Send Mail</button
+            >
+          </div>
+        </form>
+      {/if}
     </div>
     <Image
       imageSrc={pageInfo.main_image}

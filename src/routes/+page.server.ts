@@ -1,6 +1,30 @@
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import client from "../sanityClient";
+import { AuthApiError } from "@supabase/gotrue-js";
+import { fail, type Actions } from "@sveltejs/kit";
+
+export const actions: Actions = {
+  subscribe: async ({ request, locals }) => {
+    const body = Object.fromEntries(await request.formData());
+    const { data, error: err } = await locals.sb.from('SubscribeForm').insert({ 
+      user_email: body.email,
+    })
+    if (err) {
+      console.log(err)
+      if (err instanceof AuthApiError && err.status == 500) {
+        return fail(500, {
+          error: {
+            email: "",
+            password: "",
+            all: "Server error. Please try again later.",
+          },
+        });
+      }
+    }
+    return { success: true };
+  },
+};
 
 export const load = (async () => {
   const queryProducts = `*[_type == 'products'] {code, is_sale, sale, slug, main_image,name,old_price, price,is_hero_slide,  categories[]->{title}}`;

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { page } from "$app/stores";
+  import { enhance } from "$app/forms";
   import Image from "./Image.svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
@@ -31,7 +33,13 @@
               WarmDevs
             {/if}
           </div>
-          <form class="relative w-full max-w-[377px] mt-8">
+
+          <form
+            action="{$page.url.origin}?/subscribe"
+            method="POST"
+            use:enhance
+            class="relative w-full max-w-[377px] mt-8"
+          >
             <input
               type="email"
               name="email"
