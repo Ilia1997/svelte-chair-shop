@@ -31,6 +31,11 @@ declare global {
       session: import("@supabase/auth-helpers-sveltekit").SupabaseSession;
     }
   }
+  namespace svelteHTML {
+    interface HTMLAttributes<T> {
+      content?: number | string;
+    }
+  }
   declare module "svelte-carousel";
   declare module "swiper/swiper-bundle.esm.js";
 }
