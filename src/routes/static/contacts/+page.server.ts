@@ -1,14 +1,12 @@
 import type { PageServerLoad } from "./$types";
 import client from "../../../sanityClient";
 import { AuthApiError } from "@supabase/gotrue-js";
-import { fail, redirect, type Actions } from "@sveltejs/kit";
+import { fail, type Actions } from "@sveltejs/kit";
 
 export const actions: Actions = {
-  contacts: async ({ request, locals }) => {
-    //console.log(await request.formData());
+  question: async ({ request, locals }) => {
     const body = Object.fromEntries(await request.formData());
-    console.log("body", body);
-    const { data, error: err } = await locals.sb.from('ContactForm').insert({ 
+    const { data, error: err } = await locals.sb.from('QuestionForm').insert({ 
       user_name: body.username,
       user_email: body.email,
       form_subject: body.subject,
