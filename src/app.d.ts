@@ -11,6 +11,7 @@ declare global {
     interface Locals {
       sb: TypedSupabaseClient;
       session: AuthSession | null;
+      shopingDetails: any;
     }
 
     interface Error {}

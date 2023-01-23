@@ -28,7 +28,6 @@
   <a
     href="/shoping-cart"
     class=" group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"
-    on:click={() => addToCart(product)}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"

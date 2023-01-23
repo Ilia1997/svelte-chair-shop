@@ -9,8 +9,10 @@
   import Tabs from "./tabs/Tabs.svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
+  import { HtmlTag } from "svelte/internal";
   const pageSettings: IPageSettings = getContext("pageSettings");
   export let product: IProduct;
+
 
   let items = [
     {
@@ -85,7 +87,7 @@
             pageSettings.linkColor.hex}
           class="text-3xl"
         >
-          <meta itemprop="priceCurrency" content="USD" />
+          <meta itemprop="priceCurrency"  content="USD" />
           <span itemprop="price" content={product.price}>${product.price}</span>
           <link itemprop="availability" href="https://schema.org/InStock" />
         </span>

@@ -9,6 +9,9 @@
 
   import EmptyCard from "./EmptyCard.svelte";
   import ShopingDetail from "./ShopingDetail.svelte";
+  import type { ActionData } from "./$types";
+
+  export let form: ActionData;
 
   let products: Array<IProduct>;
   let total: any;
@@ -232,7 +235,7 @@
         </div>
       </div>
     {:else if checkoutPageCount === 1}
-      <ShopingDetail {products} {total} />
+      <ShopingDetail {products} {total} {form} />
     {/if}
   {/if}
   <EmptyCard productLength={products.length} />

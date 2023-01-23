@@ -2,82 +2,99 @@
   import { enhance } from "$app/forms";
   import Image from "$lib/components/Image.svelte";
   import type { IProduct } from "$lib/interfaces/interface";
+  import type { ActionData } from "../$types";
+  import StripePayment from "./StripePayment.svelte";
   export let products: Array<IProduct>;
   export let total: number;
+  export let form: ActionData;
+  console.log("🚀 ~ file: ShopingDetail.svelte:10 ~ form", form);
 </script>
 
 <div class="grid grid-cols-[1fr_371px] py-24 gap-7">
-  <div class="bg-[#F8F8FD] px-8 py-14">
-    <form action="?addAddresAndShopingDetail" method="post" use:enhance>
-      <div class="flex justify-between">
-        <div class="font-josefin text-[18px] leading-5 text-shop-off-blue">
-          Contact Information
+  {#if form?.success}
+    <StripePayment />
+  {:else}
+    <div class="bg-[#F8F8FD] px-8 py-14">
+      <form action="?/addAddresAndShopingDetail" method="POST" use:enhance>
+        <div class="flex justify-between">
+          <div class="font-josefin text-[18px] leading-5 text-shop-off-blue">
+            Contact Information
+          </div>
+          <div class="flex text-[#C1C8E1] text-sm tracking-[0.01em]">
+            <span> Already have an account? </span>
+            <a
+              href="/login"
+              class="ml-1 hover:text-shop-off-purple transition-colors">Login</a
+            >
+          </div>
         </div>
-        <div class="flex text-[#C1C8E1] text-sm tracking-[0.01em]">
-          <span> Already have an account? </span>
-          <a
-            href="/login"
-            class="ml-1 hover:text-shop-off-purple transition-colors">Login</a
-          >
+        <input
+          type="text"
+          name="email_or_phone"
+          required
+          placeholder="Email or mobile phone number"
+          class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3 mt-7 w-full bg-transparent outline-none focus:outline-none"
+        />
+        <div
+          class="font-josefin text-[18px] leading-5 text-shop-off-blue mt-24"
+        >
+          Shipping address
         </div>
-      </div>
-      <input
-        type="text"
-        name="email_or_phone"
-        placeholder="Email or mobile phone number"
-        class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3 mt-7 w-full bg-transparent outline-none focus:outline-none"
-      />
-      <div class="font-josefin text-[18px] leading-5 text-shop-off-blue mt-24">
-        Shipping address
-      </div>
-      <div class="grid grid-cols-2 gap-7 mt-7">
+        <div class="grid grid-cols-2 gap-7 mt-7">
+          <input
+            required
+            type="text"
+            name="first_name"
+            placeholder="First name"
+            class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
+          />
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Last name"
+            class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
+          />
+        </div>
         <input
+          required
           type="text"
-          name="first_name"
-          placeholder="First name"
-          class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
+          name="address"
+          placeholder="Address"
+          class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] mt-6 appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
         />
         <input
+          required
           type="text"
-          name="last_name"
-          placeholder="Last name"
-          class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
+          name="city"
+          placeholder="City"
+          class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em]  mt-6  appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
         />
-      </div>
-      <input
-        type="text"
-        name="address"
-        placeholder="Address"
-        class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] mt-6 appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
-      />
-      <input
-        type="text"
-        name="city"
-        placeholder="City"
-        class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em]  mt-6  appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
-      />
-      <div class="grid grid-cols-2 gap-7 mt-7">
-        <input
-          type="text"
-          name="country"
-          placeholder="Country"
-          class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
-        />
-        <input
-          type="text"
-          name="postal_code"
-          placeholder="Postal code"
-          class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
-        />
-      </div>
-      <button
-        type="submit"
-        class="w-full py-2.5 bg-shop-green mt-9 text-white font-bold font-lato hover:bg-shop-purple"
-      >
-        Proceed To Checkout
-      </button>
-    </form>
-  </div>
+        <div class="grid grid-cols-2 gap-7 mt-7">
+          <input
+            required
+            type="text"
+            name="country"
+            placeholder="Country"
+            class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
+          />
+          <input
+            required
+            type="text"
+            name="postal_code"
+            placeholder="Postal code"
+            class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3  w-full bg-transparent outline-none focus:outline-none"
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full py-2.5 bg-shop-green mt-9 text-white font-bold font-lato hover:bg-shop-purple"
+        >
+          Proceed To Checkout
+        </button>
+      </form>
+    </div>
+  {/if}
+
   <div>
     {#each products as product}
       <div class="border-b border-[#E1E1E4] mb-3.5">
