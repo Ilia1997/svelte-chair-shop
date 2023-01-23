@@ -139,6 +139,14 @@
                 class="hover:text-shop-purple">Contacts</a
               >
             </li>
+            <li class="mb-5 last:mb-0">
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="/static/faq"
+                class="hover:text-shop-purple">FAQ</a
+              >
+            </li>
           </ul>
         </div>
       </div>
