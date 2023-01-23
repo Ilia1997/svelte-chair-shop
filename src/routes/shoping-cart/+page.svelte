@@ -68,6 +68,7 @@
 
 <svelte:head>
   <title>Demo site - Shoping Cart</title>
+  <script src="https://js.stripe.com/v3/"></script>
 </svelte:head>
 
 <BreadCrumbs
