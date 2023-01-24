@@ -1,17 +1,25 @@
 <script lang="ts">
-  import Pen_ico from "$lib/assets/pen-ico.svg";
-  import Date_ico from "$lib/assets/calendar.svg";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
-  import Image from "$lib/components/Image.svelte";
   import { fade } from "svelte/transition";
-  import { convertDate } from "$lib/functions/convertDate";
+  import PostCard from "./PostCard.svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
-  const pageSettings: IPageSettings = getContext("pageSettings");
 
   export let data: any;
-  const allPosts = data.allPosts;
+
+  const pageSettings: IPageSettings = getContext("pageSettings");
+  const PAGE_SIZE = data?.PAGE_SIZE;
+  let posts = data?.ALL_POSTS;
+  let pageCount = data?.PAGE_COUNT;
+  let currentPage = parseInt(data.PAGE_NUMBER);
 </script>
+
+<svelte:head>
+  <title>{pageSettings.name} - Blog</title>
+  <meta property="og:title" content="{pageSettings.name} - Blog" />
+  <meta name="description" content="{pageSettings.name} - Blog description" />
+  <meta name="keywords" content="blog, article, post, blogpost" />
+</svelte:head>
 
 <BreadCrumbs
   data={{
@@ -28,79 +36,48 @@
 />
 
 <div class="container" in:fade>
-  <div class="py-4 md:py-24">
-    {#each allPosts as post (post.title)}
-      <div class="mb-8 md:mb-16">
-        {#if post.main_image}
-          <Image
-            imageSrc={post.main_image}
-            altText={post.title}
-            className={"w-full md:h-[453px] object-cover m-auto"}
-          />
-        {/if}
-        <div class="flex py-3 md:py-6">
-          <div class="flex mr-7">
-            <img class="w-[16px]" src={Pen_ico} alt="decorative" />
-            <div
-              style:color={pageSettings?.linkColor?.hex &&
-                pageSettings.linkColor.hex}
-              class="relative text-sm leading-4 text-shop-off-blue ml-2 py-1 px-6"
-            >
-              <span class="relative z-10">{post.author.name}</span>
-              <div
-                style:background-color={pageSettings?.bgMainColor1?.hex &&
-                  pageSettings.bgMainColor1.hex}
-                style:opacity="0.15"
-                style:top="0"
-                style:left="0"
-                class="absolute w-full h-full"
-              />
-            </div>
-          </div>
-          <div class="flex">
-            <img class="w-[16px]" src={Date_ico} alt="decorative" />
-            <div
-              style:color={pageSettings?.linkColor?.hex &&
-                pageSettings.linkColor.hex}
-              class="relative text-sm leading-4 text-shop-off-blue ml-2 py-1 px-3 md:px-6"
-            >
-              <span class="relative z-10">{convertDate(post.publishedAt)}</span>
-              <div
-                style:background-color={pageSettings?.bgMainColor2?.hex &&
-                  pageSettings.bgMainColor2.hex}
-                style:opacity="0.5"
-                style:top="0"
-                style:left="0"
-                class="absolute w-full h-full"
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          style:color={pageSettings?.textColor?.hex &&
-            pageSettings.textColor.hex}
-          class="text-2xl pb-3 md:pb-6"
-        >
-          {post.title}
-        </div>
-        {#if post.short_desc}
-          <p
-            style:color={pageSettings?.textColor?.hex &&
-              pageSettings.textColor.hex}
-          >
-            {post.short_desc}
-          </p>
-        {/if}
-        <div class="mt-3 md:mt-7">
-          <a
-            class="text-lg"
-            style:color={pageSettings?.linkColor?.hex &&
-              pageSettings.linkColor.hex}
-            href="/blog/{post.slug.current}"
-            >Read more <span style:color="red">•</span></a
-          >
-        </div>
-      </div>
+  <div class="pt-8 pb-16 md:py-24">
+    {#each posts as post, i}
+      {#if i < PAGE_SIZE}
+        <PostCard {post} />
+      {/if}
     {/each}
+    <!-- pagination -->
+    <div
+      style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
+      class="flex items-center"
+    >
+      {#key currentPage}
+        <span class="mr-auto"
+          >Page: <span
+            style:background-color={pageSettings?.bgMainColor2?.hex &&
+              pageSettings.bgMainColor2.hex}
+            class="px-3 py-2 ml-2">{currentPage}</span
+          ></span
+        >
+        {#if currentPage > 1}
+          <a
+            style:background-color={pageSettings?.buttonBgColor?.hex &&
+              pageSettings.buttonBgColor.hex}
+            style:color={pageSettings?.buttonTextColor?.hex &&
+              pageSettings.buttonTextColor.hex}
+            data-sveltekit-reload
+            href="?page={+currentPage - 1}"
+            class="py-2 px-4">Previous</a
+          >
+        {/if}
+        {#if currentPage < pageCount}
+          <a
+            style:background-color={pageSettings?.buttonBgColor?.hex &&
+              pageSettings.buttonBgColor.hex}
+            style:color={pageSettings?.buttonTextColor?.hex &&
+              pageSettings.buttonTextColor.hex}
+            data-sveltekit-reload
+            href="?page={+currentPage + 1}"
+            class="ml-4 py-2 px-4">Next</a
+          >
+        {/if}
+      {/key}
+    </div>
   </div>
 </div>

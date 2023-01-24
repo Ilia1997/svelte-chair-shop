@@ -70,6 +70,15 @@ export interface BlogItem {
   seoKeywords?: string;
 }
 
+export interface BlogCard {
+  title: string;
+  publishedAt: string;
+  main_image?: any;
+  slug: any;
+  author: IAuthor;
+  short_desc?: string;
+}
+
 export interface IPageSettings {
   logotype?: string;
   name?: string;
