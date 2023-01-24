@@ -3,19 +3,24 @@
   import { fade, scale } from "svelte/transition";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
   import Image from "$lib/components/Image.svelte";
-  import type { IProduct } from "$lib/interfaces/interface";
-
+  import type { IAvailableQauntity, IProduct } from "$lib/interfaces/interface";
+  import client from "../../sanityClient";
   import { productsInCart } from "$lib/cartStore";
 
   import EmptyCard from "./EmptyCard.svelte";
   import ShopingDetail from "./ShopingDetail.svelte";
   import type { ActionData } from "./$types";
+  import { writable, type Writable } from "svelte/store";
+  import { onMount } from "svelte";
 
   export let form: ActionData;
 
   let products: Array<IProduct>;
   let total: any;
   let checkoutPageCount: number = 0;
+
+  // EMPTY PAID
+  const checkoutStatus: Writable<string> = writable("EMPTY");
 
   $: products = $productsInCart ? $productsInCart : [];
 
@@ -32,6 +37,7 @@
 
   const minusItem = (product: IProduct) => {
     for (let item of products) {
+      item.available_quantity_error = false;
       if (item.code === product.code) {
         if (item.quantity && item.quantity > 1) {
           item.quantity -= 1;
@@ -49,6 +55,7 @@
 
   const plusItem = (product: IProduct) => {
     for (let item of products) {
+      item.available_quantity_error = false;
       if (item.code === product.code && item.quantity) {
         item.quantity += 1;
         item.total = item.quantity * item.price;
@@ -63,6 +70,36 @@
   };
   const removeProduct = (item: IProduct) => {
     $productsInCart = products.filter((cartItem: IProduct) => cartItem != item);
+  };
+  const checkProductsAvailability = async () => {
+    let result = true;
+    const productsCodes = products.map((product) => `'${product.code}'`);
+    const query = `*[_type == "products" && code in [${productsCodes}]]{code, available_quantity}`;
+    let availableQuantityFromDB: Array<IAvailableQauntity> = await client.fetch(
+      query
+    );
+
+    products.forEach((product) => {
+      availableQuantityFromDB.forEach((availableItem) => {
+        if (availableItem.code == product.code) {
+          if (
+            product?.quantity &&
+            product?.quantity > availableItem.available_quantity
+          ) {
+            product.available_quantity_error = true;
+            result = false;
+          } else {
+            product.available_quantity_error = false;
+          }
+        }
+      });
+    });
+    products = products;
+    return result;
+  };
+  const goToShopingDetailForm = async () => {
+    const result = await checkProductsAvailability();
+    result ? (checkoutPageCount = 1) : false;
   };
 </script>
 
@@ -158,7 +195,9 @@
                 ${product.price}
               </div>
               <div
-                class="flex items-center overflow-hidden justify-between bg-[#F0EFF2] h-[20px] w-[70px] self-center"
+                class="flex items-center overflow-hidden justify-between bg-[#F0EFF2] h-[20px] w-[70px] self-center  {product.available_quantity_error
+                  ? 'border-red-500 border'
+                  : ''}"
               >
                 <button
                   class="w-[20px] text-[#BEBFC2] bg-[#E7E7EF] flex items-center justify-center"
@@ -180,7 +219,16 @@
                 ${product.total}
               </div>
             </div>
+            {#if product.available_quantity_error === true}
+              <p
+                class="px-4 py-2 bg-red-300 text-sm  text-center w-full rounded-md "
+                in:fade
+              >
+                Please increase quantity to max available - {product.available_quantity}
+              </p>
+            {/if}
           {/each}
+
           <button
             on:click={clearAllProducts}
             class="px-10 py-3 block text-base leading-5 ml-auto mt-8 text-white hover:bg-shop-purple bg-shop-pink transition-all rounded-sm "
@@ -225,9 +273,7 @@
               </div>
             </div>
             <button
-              on:click={() => {
-                checkoutPageCount = 1;
-              }}
+              on:click={goToShopingDetailForm}
               class="w-full py-2.5 bg-shop-green mt-9 text-white font-bold font-lato hover:bg-shop-purple"
             >
               Proceed To Checkout
@@ -236,8 +282,8 @@
         </div>
       </div>
     {:else if checkoutPageCount === 1}
-      <ShopingDetail {products} {total} {form} />
+      <ShopingDetail {products} {total} {form} {checkoutStatus} />
     {/if}
   {/if}
-  <EmptyCard productLength={products.length} />
+  <EmptyCard productLength={products.length} {checkoutStatus} />
 </div>

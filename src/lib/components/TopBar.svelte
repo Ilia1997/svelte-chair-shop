@@ -65,7 +65,11 @@
           <Icon icon="mdi:user-outline" color="#fff" width="24" />
         </div>
       </a>
-      <a href="/shoping-cart" class="ml-3 transition-all duration-300">
+      <a
+        href="/shoping-cart"
+        class="ml-3 transition-all duration-300"
+        data-sveltekit-preload-data
+      >
         <Icon icon="mdi:shopping-cart-outline" color="#fff" width="22" />
       </a>
     </div>

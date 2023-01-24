@@ -28,8 +28,15 @@ export interface IProduct {
   seoKeywords?: string;
   content?: any;
   // cart
+  available_quantity?: number;
   quantity?: number;
   total?: number;
+  // errors
+  available_quantity_error?: boolean;
+}
+export interface IAvailableQauntity {
+  code: string;
+  available_quantity: number;
 }
 
 export interface AddToCartType {

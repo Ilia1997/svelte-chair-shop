@@ -9,6 +9,7 @@ export const load = (async ({ params }) => {
     price,
     old_price,
     body,
+    available_quantity,
     features[]-> {
       brand[0]->{brand},
       type[0]->{type},
@@ -21,6 +22,7 @@ export const load = (async ({ params }) => {
       name,
       main_image,
       price,
+      available_quantity,
     }
   }`;
 

@@ -2,16 +2,16 @@
   //@ts-nocheck
   import { fade } from "svelte/transition";
   import { onMount } from "svelte";
+  import { browser } from "$app/environment";
+  import { productsInCart } from "$lib/cartStore";
   export let total;
-  console.log("🚀 ~ file: StripePayment.svelte:6 ~ total", total);
-  export let formStatus;
+  export let checkoutStatus;
   export let form;
   console.log("🚀 ~ file: StripePayment.svelte:8 ~ form", form);
   let emailFromShopingForm;
   $: emailFromShopingForm = form.data.email_or_phone.includes("@")
     ? form.data.email_or_phone
     : "";
-  // This is your test publishable API key.
 
   onMount(() => {
     const stripe = Stripe(
@@ -80,8 +80,28 @@
       // redirected to the `return_url`.
 
       if (!error) {
-        formStatus = true;
-        localStorage.removeItem("products");
+        const resultJson = await fetch("/shoping-cart/confirm-order", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            productsInCart: $productsInCart,
+            form: form,
+            total: total,
+          }),
+        });
+        const result = await resultJson.json();
+        console.log(
+          "🚀 ~ file: StripePayment.svelte:92 ~ handleSubmit ~ result",
+          result
+        );
+
+        if (result?.success) {
+          $checkoutStatus = "PAID";
+          browser ? localStorage.removeItem("products") : false;
+          $productsInCart = [];
+        } else {
+          alert(result.message);
+        }
       } else if (
         error?.type === "card_error" ||
         error?.type === "validation_error"

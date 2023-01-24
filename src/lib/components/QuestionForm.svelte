@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+
   import { fade } from "svelte/transition";
   import type { ActionData } from "../../routes/$types";
 
@@ -7,12 +8,14 @@
   export let currentUrl: string;
   export let pageSettings: any;
 
+  let formSubmited: boolean = false;
+
   const resetForm = () => {
     form = null;
   };
 </script>
 
-{#if form?.success}
+{#if formSubmited}
   <h4
     in:fade
     style:color={pageSettings?.textHeadingColor?.hex &&
@@ -23,7 +26,18 @@
     We will ask you soon!
   </h4>
 {:else}
-  <form action="{currentUrl}?/question" method="POST" use:enhance>
+  <form
+    method="POST"
+    action="{currentUrl}?/question"
+    use:enhance={({ form, data, action, cancel }) => {
+      return async ({ result, update }) => {
+        // @ts-ignore
+        if (result?.data.success == true) {
+          formSubmited = true;
+        }
+      };
+    }}
+  >
     <div class="md:flex justify-between">
       <div class="mb-6 md:max-w-[48%] w-full">
         <input

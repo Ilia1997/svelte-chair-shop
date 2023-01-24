@@ -5,10 +5,12 @@
   import type { IProduct } from "$lib/interfaces/interface";
   import type { ActionData } from "../$types";
   import StripePayment from "./StripePayment.svelte";
+  import type { Writable } from "svelte/store";
   export let products: Array<IProduct>;
   export let total: number;
   export let form: ActionData;
-  import SuccessPaymentImage from "$lib/assets/card/20943914.jpg";
+  export let checkoutStatus: Writable<string>;
+
   let formStatus = false;
   console.log("🚀 ~ file: ShopingDetail.svelte:10 ~ form", form);
 </script>
@@ -16,10 +18,10 @@
 {#if !formStatus}
   <div class="grid grid-cols-[1fr_371px] py-24 gap-7">
     {#if form?.success}
-      <StripePayment {total} bind:formStatus {form} />
+      <StripePayment {total} bind:checkoutStatus {form} />
     {:else}
       <div class="bg-[#F8F8FD] px-8 py-14">
-        <form action="?/addAddresAndShopingDetail" method="POST" use:enhance>
+        <form method="POST" action="?/addAddresAndShopingDetail" use:enhance>
           <div class="flex justify-between">
             <div class="font-josefin text-[18px] leading-5 text-shop-off-blue">
               Contact Information
@@ -154,16 +156,3 @@
     </div>
   </div>
 {/if}
-<div
-  class="py-24 text-center transition-opacity delay-100 duration-300 {formStatus
-    ? 'opacity-100'
-    : 'opacity-0'}"
->
-  <h3 class="text-shop-navy-blue">Payment Succeeded!</h3>
-  <img src={SuccessPaymentImage} alt="" class="max-w-[500px] mt-10 mx-auto" />
-  <a
-    href="/products"
-    class="block text-center w-40 mx-auto py-2.5 bg-shop-green mt-10 text-white font-bold font-lato hover:bg-shop-purple"
-    >Go Shopping</a
-  >
-</div>

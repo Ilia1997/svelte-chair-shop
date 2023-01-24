@@ -7,11 +7,11 @@ import { fail, type Actions } from "@sveltejs/kit";
 export const actions: Actions = {
   subscribe: async ({ request, locals }) => {
     const body = Object.fromEntries(await request.formData());
-    const { data, error: err } = await locals.sb.from('SubscribeForm').insert({ 
+    const { data, error: err } = await locals.sb.from("SubscribeForm").insert({
       user_email: body.email,
-    })
+    });
     if (err) {
-      console.log(err)
+      console.log(err);
       if (err instanceof AuthApiError && err.status == 500) {
         return fail(500, {
           error: {
@@ -27,7 +27,7 @@ export const actions: Actions = {
 };
 
 export const load = (async () => {
-  const queryProducts = `*[_type == 'products'] {code, is_sale, sale, slug, main_image,name,old_price, price,is_hero_slide,  categories[]->{title}}`;
+  const queryProducts = `*[_type == 'products'] {code, is_sale, sale, slug, main_image,name,old_price, price,is_hero_slide, available_quantity, categories[]->{title}}`;
   const quertCategories = `*[_type == 'category'] {title,main_image,is_top,description}`;
   const queryLatestPosts = `*[_type == 'post'] {author->{name}, body, _createdAt,main_image, short_desc, slug, title }[0..2]`;
 
