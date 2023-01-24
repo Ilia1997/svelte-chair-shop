@@ -1,6 +1,7 @@
 <script type="ts">
   import Icon from "@iconify/svelte";
   import Image from "./Image.svelte";
+  import { page } from "$app/stores";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
   const pageSettings: IPageSettings = getContext("pageSettings");
@@ -69,13 +70,24 @@
             >
           </li>
           <li>
-            <a
-              style:color={pageSettings?.linkColor?.hex &&
-                pageSettings.linkColor.hex}
-              href="/blog"
-              class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
-              >Blog</a
-            >
+            {#if $page.route.id === "/blog"}
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="/blog?page=1"
+                rel="nofollow"
+                class="font-lato text-base leading-5 hover:text-shop-pink duration-150 opacity-50 cursor-text pointer-events-none"
+                >Blog</a
+              >
+            {:else}
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="/blog?page=1"
+                class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
+                >Blog</a
+              >
+            {/if}
           </li>
           <li>
             <a

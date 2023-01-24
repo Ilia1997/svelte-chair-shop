@@ -101,12 +101,23 @@
             class="text-shop-sub-text text-base leading-5 font-lato font-normal list-none"
           >
             <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="/blog"
-                class="hover:text-shop-purple">Blog</a
-              >
+              {#if $page.route.id === "/blog"}
+                <a
+                  style:color={pageSettings?.linkColor?.hex &&
+                    pageSettings.linkColor.hex}
+                  href="/blog?page=1"
+                  rel="nofollow"
+                  class="hover:text-shop-purple opacity-50 cursor-text pointer-events-none"
+                  >Blog</a
+                >
+              {:else}
+                <a
+                  style:color={pageSettings?.linkColor?.hex &&
+                    pageSettings.linkColor.hex}
+                  href="/blog?page=1"
+                  class="hover:text-shop-purple">Blog</a
+                >
+              {/if}
             </li>
           </ul>
         </div>
@@ -165,7 +176,8 @@
         <a
           style:color={pageSettings?.linkColor?.hex &&
             pageSettings.linkColor.hex}
-          href="#"
+          href="https://www.facebook.com/"
+          rel="nofollow"
           class="group"
         >
           <div
@@ -185,7 +197,8 @@
         <a
           style:color={pageSettings?.linkColor?.hex &&
             pageSettings.linkColor.hex}
-          href="#"
+          href="https://www.instagram.com/"
+          rel="nofollow"
           class="group"
         >
           <div
@@ -205,7 +218,8 @@
         <a
           style:color={pageSettings?.linkColor?.hex &&
             pageSettings.linkColor.hex}
-          href="#"
+          href="https://twitter.com/"
+          rel="nofollow"
           class="group"
         >
           <div

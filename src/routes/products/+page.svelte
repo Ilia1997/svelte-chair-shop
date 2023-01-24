@@ -78,7 +78,13 @@
 </script>
 
 <svelte:head>
-  <title>Demo site - Products Page</title>
+  <title>{pageSettings.name} - Products</title>
+  <meta property="og:title" content="{pageSettings.name} - Products" />
+  <meta
+    name="description"
+    content="{pageSettings.name} - Products description"
+  />
+  <meta name="keywords" content="blog, article, post, blogpost" />
 </svelte:head>
 
 <BreadCrumbs
