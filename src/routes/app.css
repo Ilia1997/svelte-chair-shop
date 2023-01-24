@@ -29,6 +29,10 @@ a,
 button {
   transition: 0.3s;
 }
+a:hover,
+button:hover {
+  opacity: 0.75;
+}
 
 .rich-block p:not(:last-child) {
   margin-bottom: 1rem;

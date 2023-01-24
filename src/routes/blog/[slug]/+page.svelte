@@ -40,7 +40,7 @@
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
       1: {
         name: "Blog Page",
-        path: "/blog",
+        path: "/blog?page=1",
         class: "text-black hover:text-blue-700",
       },
       2: { name: post.title, class: "text-shop-pink" },
