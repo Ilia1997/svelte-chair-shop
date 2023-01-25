@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({ locals }) => {
   return { userData: { ...data, file: fileUrl.data.publicUrl } };
 };
 export const actions: Actions = {
-  update: async ({ request, locals }) => {
+  update_user: async ({ request, locals }) => {
     const session = locals.session;
 
     const formFields = await request.formData();

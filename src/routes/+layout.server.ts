@@ -6,7 +6,7 @@ export const load: LayoutServerLoad = async (event) => {
   const queryProjectSettings = `*[_type == "globalSettings"]`;
 
   let projectSettings = await client.fetch(queryProjectSettings);
-  if(projectSettings) {
+  if (projectSettings) {
     return {
       session: await getServerSession(event),
       projectSettings,
@@ -14,5 +14,5 @@ export const load: LayoutServerLoad = async (event) => {
   }
   return {
     session: await getServerSession(event),
-  }; 
+  };
 };

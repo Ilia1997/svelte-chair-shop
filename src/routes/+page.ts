@@ -1,6 +1,6 @@
 import type { PageLoad } from "./$types";
 
-export const load: PageLoad = ({ data }) => {
+export const load: PageLoad = ({ data }: { data: any }) => {
   if (data) {
     return data;
   }

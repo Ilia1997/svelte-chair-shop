@@ -4,6 +4,7 @@
 import type { TypedSupabaseClient } from "@supabase/auth-helpers-sveltekit/dist/types";
 import type { Session } from "@supabase/gotrue-js";
 import type { AuthSession } from "@supabase/supabase-js";
+import type { LayoutLoad } from "./routes/$types";
 
 // and what to do when importing types
 declare global {
@@ -34,8 +35,15 @@ declare global {
   }
   namespace svelteHTML {
     interface HTMLAttributes<T> {
-      content?: number | string;
+      content?: number | string | any;
     }
+  }
+  interface LayoutLoadWithSession extends LayoutLoad {
+    session?: any;
+  }
+
+  interface UserEvent extends Event {
+    UserId: string;
   }
   declare module "svelte-carousel";
   declare module "swiper/swiper-bundle.esm.js";

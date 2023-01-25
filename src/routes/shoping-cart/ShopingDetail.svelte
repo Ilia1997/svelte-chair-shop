@@ -8,20 +8,33 @@
   import type { Writable } from "svelte/store";
   export let products: Array<IProduct>;
   export let total: number;
-  export let form: ActionData;
-  export let checkoutStatus: Writable<string>;
 
-  let formStatus = false;
-  console.log("🚀 ~ file: ShopingDetail.svelte:10 ~ form", form);
+  export let checkoutStatus: Writable<string>;
+  let formSubmited: boolean = false;
+  let formData: any;
+  let formStatus: boolean = false;
 </script>
 
 {#if !formStatus}
   <div class="grid grid-cols-[1fr_371px] py-24 gap-7">
-    {#if form?.success}
-      <StripePayment {total} bind:checkoutStatus {form} />
+    {#if formSubmited}
+      <StripePayment {total} bind:checkoutStatus {formData} />
     {:else}
       <div class="bg-[#F8F8FD] px-8 py-14">
-        <form method="POST" action="?/addAddresAndShopingDetail" use:enhance>
+        <form
+          method="POST"
+          action="?/addAddresAndShopingDetail"
+          use:enhance={({ form, data, action, cancel }) => {
+            return async ({ result, update }) => {
+              // @ts-ignore
+              if (result?.data.success == true) {
+                formSubmited = true;
+                // @ts-ignore
+                formData = result.data;
+              }
+            };
+          }}
+        >
           <div class="flex justify-between">
             <div class="font-josefin text-[18px] leading-5 text-shop-off-blue">
               Contact Information

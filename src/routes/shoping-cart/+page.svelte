@@ -1,19 +1,13 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
-  import { fade, scale } from "svelte/transition";
+  import { fade } from "svelte/transition";
   import BreadCrumbs from "$lib/components/BreadCrumbs.svelte";
   import Image from "$lib/components/Image.svelte";
   import type { IAvailableQauntity, IProduct } from "$lib/interfaces/interface";
-  import client from "../../sanityClient";
   import { productsInCart } from "$lib/cartStore";
-
   import EmptyCard from "./EmptyCard.svelte";
   import ShopingDetail from "./ShopingDetail.svelte";
-  import type { ActionData } from "./$types";
-  import { writable, type Writable } from "svelte/store";
-  import { onMount } from "svelte";
 
-  export let form: ActionData;
+  import { writable, type Writable } from "svelte/store";
 
   let products: Array<IProduct>;
   let total: any;
@@ -64,20 +58,29 @@
       }
     }
   };
+
   const clearAllProducts = () => {
     localStorage.removeItem("products");
     $productsInCart = [];
   };
+
   const removeProduct = (item: IProduct) => {
     $productsInCart = products.filter((cartItem: IProduct) => cartItem != item);
   };
+
   const checkProductsAvailability = async () => {
     let result = true;
     const productsCodes = products.map((product) => `'${product.code}'`);
     const query = `*[_type == "products" && code in [${productsCodes}]]{code, available_quantity}`;
-    let availableQuantityFromDB: Array<IAvailableQauntity> = await client.fetch(
-      query
-    );
+    const response = await fetch("/shoping-cart/get-available-products", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query: query }),
+    });
+    const {
+      availableQuantityFromDB,
+    }: { availableQuantityFromDB: Array<IAvailableQauntity> } =
+      await response.json();
 
     products.forEach((product) => {
       availableQuantityFromDB.forEach((availableItem) => {
@@ -97,6 +100,7 @@
     products = products;
     return result;
   };
+
   const goToShopingDetailForm = async () => {
     const result = await checkProductsAvailability();
     result ? (checkoutPageCount = 1) : false;
@@ -282,7 +286,7 @@
         </div>
       </div>
     {:else if checkoutPageCount === 1}
-      <ShopingDetail {products} {total} {form} {checkoutStatus} />
+      <ShopingDetail {products} {total} {checkoutStatus} />
     {/if}
   {/if}
   <EmptyCard productLength={products.length} {checkoutStatus} />

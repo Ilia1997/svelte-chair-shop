@@ -32,7 +32,7 @@
           pageSettings.textHeadingColor.hex}
         class="mx-auto text-3xl font-josefin font-bold  text-center"
       >
-        Your password successfully changed!
+        Go to your email to reset password
       </h2>
     {:else}
       <h2
@@ -40,54 +40,39 @@
           pageSettings.textHeadingColor.hex}
         class="mx-auto text-3xl font-josefin font-bold  text-center"
       >
-        Reset password
+        Enter email
       </h2>
+
       <form
-        action="/reset-password/update-user"
+        action="/reset-password/reset-endpoint"
         method="POST"
         use:enhance={({ form, data, action, cancel }) => {
           return async ({ result, update }) => {
             console.log("🚀 ~ file: +page.svelte:42 ~ return ~ result", result);
             // @ts-ignore
-            formData = result;
+            if (result?.success == true) {
+              // @ts-ignore
+              formData = result;
+            }
           };
         }}
       >
         <div class="mb-6 mt-8">
           <input
-            type="password"
-            id="password"
-            name="password"
+            type="email"
+            id="email"
+            name="email"
             on:focus={resetForm}
             class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
-          {formData?.error
+          {formData?.error?.email
               ? 'border-red-600 text-red-600'
               : 'border-gray-300 text-gray-900'}"
-            placeholder="Enter Password"
+            placeholder="Email Address"
             required
           />
-          {#if formData?.error}
+          {#if formData?.error?.email}
             <p class="text-sm text-red-600 mt-1" transition:slide|local>
-              {formData?.message}
-            </p>
-          {/if}
-        </div>
-        <div class="mb-6">
-          <input
-            type="password"
-            id="password_2"
-            name="password_2"
-            on:focus={resetForm}
-            class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
-          {formData?.error
-              ? 'border-red-600 text-red-600'
-              : 'border-gray-300 text-gray-900'}"
-            placeholder="Confirm Password"
-            required
-          />
-          {#if formData?.error}
-            <p class="text-sm text-red-600 mt-1" transition:slide|local>
-              {formData?.message}
+              {formData?.error?.email}
             </p>
           {/if}
         </div>
@@ -96,7 +81,7 @@
             pageSettings.linkColor.hex}
           type="submit"
           class="text-white bg-shop-pink font-lato text-base font-bold hover:bg-shop-purple focus:ring-4 focus:outline-none focus:ring-blue-300  w-full   px-5 py-2.5 text-center "
-          >Set new password</button
+          >Reset</button
         >
       </form>
     {/if}

@@ -2,6 +2,7 @@
   import Icon from "@iconify/svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
+  import { page } from "$app/stores";
   const pageSettings: IPageSettings = getContext("pageSettings");
 </script>
 
@@ -56,10 +57,12 @@
     </div>
     <div class="flex ">
       <a href="/login" class="flex items-center transition-all duration-300">
-        <span class="lg:block hidden">Login</span>
+        {#if $page.data.session == null}
+          <span class="lg:block hidden">Login</span>
+        {/if}
 
         <div class="lg:block hidden">
-          <Icon icon="mdi:user-outline" color="#fff" width="18" />
+          <Icon icon="mdi:user-outline" color="#fff" width="22" />
         </div>
         <div class="lg:hidden block">
           <Icon icon="mdi:user-outline" color="#fff" width="24" />

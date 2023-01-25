@@ -114,7 +114,8 @@
     <form class="relative w-full sm:w-[317px] ml-10">
       <input
         type="text"
-        name="serch"
+        name="search"
+        placeholder="Search..."
         class="outline-0 sm:w-[317px] w-full h-[40px] border-2  border-gray-100 focus:border-black px-4 py-2"
       />
       <button

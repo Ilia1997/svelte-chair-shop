@@ -91,10 +91,11 @@
             </p>
           {/if}
         </div>
+
         <a
           style:color={pageSettings?.linkColor?.hex &&
             pageSettings.linkColor.hex}
-          href="reset-password"
+          href="reset-password/set-email"
           class="font-lato text-base text-shop-grey hover:text-shop-purple transition-colors mb-4 block"
           >Forgot your password?</a
         >

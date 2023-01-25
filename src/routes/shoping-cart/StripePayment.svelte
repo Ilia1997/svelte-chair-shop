@@ -6,11 +6,11 @@
   import { productsInCart } from "$lib/cartStore";
   export let total;
   export let checkoutStatus;
-  export let form;
-  console.log("🚀 ~ file: StripePayment.svelte:8 ~ form", form);
+  export let formData;
+  console.log("🚀 ~ file: StripePayment.svelte:8 ~ form", formData);
   let emailFromShopingForm;
-  $: emailFromShopingForm = form.data.email_or_phone.includes("@")
-    ? form.data.email_or_phone
+  $: emailFromShopingForm = formData.data.email_or_phone.includes("@")
+    ? formData.data.email_or_phone
     : "";
 
   onMount(() => {
@@ -43,7 +43,7 @@
       const paymentElementOptions = {
         layout: "tabs",
         billingDetails: {
-          name: `${form.data.first_name} ${form.data.last_name}`,
+          name: `${formData.data.first_name} ${formData.data.last_name}`,
           email: emailFromShopingForm,
           // address: {
           //   country: $contributionData.country["2DigitCode"],
@@ -85,7 +85,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             productsInCart: $productsInCart,
-            form: form,
+            form: formData,
             total: total,
           }),
         });

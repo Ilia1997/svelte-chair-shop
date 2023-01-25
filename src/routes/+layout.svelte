@@ -8,8 +8,10 @@
   import { onMount } from "svelte";
   import { setContext } from "svelte";
   import { urlFor } from "$lib/functions/createImage";
-
+  export let sb_session: Session;
+  console.log("🚀 ~ file: +layout.svelte:12 ~ sb_session", sb_session);
   import "./app.css";
+  import type { Session } from "@supabase/supabase-js";
 
   const projectSettings = $page?.data?.projectSettings
     ? $page.data.projectSettings[0]
