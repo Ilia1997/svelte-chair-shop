@@ -12,9 +12,14 @@ export const POST: RequestHandler = async ({ request, locals }) => {
   }: { productsInCart: Array<IProduct>; form: any; total: number } =
     await request.json();
 
+  const {
+    data: { user },
+  } = await locals.sb.auth.getUser();
+
   const productIds = productsInCart.map((product) => product.code).toString();
   const { data, error: err } = await locals.sb.from("Orders").insert({
-    email_or_phone: form.data.email_or_phone,
+    email: form.data.email,
+    user_id: user?.id || null,
     first_name: form.data.first_name,
     last_name: form.data.last_name,
     address: form.data.address,
@@ -23,6 +28,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     postal_code: form.data.postal_code,
     products_id: productIds,
     total_sum: total,
+    products_json: JSON.stringify(productsInCart),
   });
   if (err) {
     console.log(err);

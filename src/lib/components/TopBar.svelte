@@ -56,7 +56,11 @@
       </div>
     </div>
     <div class="flex ">
-      <a href="/login" class="flex items-center transition-all duration-300">
+      <a
+        data-sveltekit-preload-data
+        href="/login"
+        class="flex items-center transition-all duration-300"
+      >
         {#if $page.data.session == null}
           <span class="lg:block hidden">Login</span>
         {/if}

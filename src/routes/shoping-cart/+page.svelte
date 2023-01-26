@@ -5,8 +5,7 @@
   import type { IAvailableQauntity, IProduct } from "$lib/interfaces/interface";
   import { productsInCart } from "$lib/cartStore";
   import EmptyCard from "./EmptyCard.svelte";
-  import ShopingDetail from "./ShopingDetail.svelte";
-
+  import ShopingDetail from "./ShopingDetail.svelte"
   import { writable, type Writable } from "svelte/store";
 
   let products: Array<IProduct>;

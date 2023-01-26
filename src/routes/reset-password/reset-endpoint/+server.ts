@@ -3,14 +3,17 @@ import type { RequestHandler } from "@sveltejs/kit";
 import { AuthApiError } from "@supabase/supabase-js";
 
 export const POST: RequestHandler = async ({ request, locals, url }) => {
-  console.log(url);
   const { email } = Object.fromEntries(await request.formData());
 
   const { data, error: err } = await locals.sb.auth.resetPasswordForEmail(
     email as string,
     {
-      redirectTo: `${url.origin}/reset-password`,
+      redirectTo: `${url.origin}/reset-password/`,
     }
+  );
+  console.log(
+    "🚀 ~ file: +server.ts:14 ~ constPOST:RequestHandler= ~ data",
+    data
   );
   if (err) {
     console.log(err);

@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   }
   if (event.url.pathname.startsWith("/login")) {
     if (session) {
-      throw redirect(303, "/my-account");
+      throw redirect(303, "/my-account/personal-data");
     }
   }
   return resolve(event);

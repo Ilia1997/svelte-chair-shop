@@ -48,12 +48,8 @@
         method="POST"
         use:enhance={({ form, data, action, cancel }) => {
           return async ({ result, update }) => {
-            console.log("🚀 ~ file: +page.svelte:42 ~ return ~ result", result);
             // @ts-ignore
-            if (result?.success == true) {
-              // @ts-ignore
-              formData = result;
-            }
+            formData = result;
           };
         }}
       >
@@ -64,15 +60,15 @@
             name="email"
             on:focus={resetForm}
             class="bg-gray-50 border  text-gray-900 text-base font-lato rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-4  min-h-[40px] 
-          {formData?.error?.email
+          {formData?.error
               ? 'border-red-600 text-red-600'
               : 'border-gray-300 text-gray-900'}"
             placeholder="Email Address"
             required
           />
-          {#if formData?.error?.email}
+          {#if formData?.error}
             <p class="text-sm text-red-600 mt-1" transition:slide|local>
-              {formData?.error?.email}
+              {formData?.message}
             </p>
           {/if}
         </div>

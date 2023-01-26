@@ -50,9 +50,9 @@
           </div>
           <input
             type="text"
-            name="email_or_phone"
+            name="email"
             required
-            placeholder="Email or mobile phone number"
+            placeholder="Email"
             class="text-shop-navy-blue text-sm placeholder:text-[#C1C8E1] tracking-[0.01em] appearance-none border-b-[2px] border-[#BFC6E0] py-3 mt-7 w-full bg-transparent outline-none focus:outline-none"
           />
           <div

@@ -4,14 +4,10 @@
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
   import { productsInCart } from "$lib/cartStore";
+  import { page } from "$app/stores";
   export let total;
   export let checkoutStatus;
   export let formData;
-  console.log("🚀 ~ file: StripePayment.svelte:8 ~ form", formData);
-  let emailFromShopingForm;
-  $: emailFromShopingForm = formData.data.email_or_phone.includes("@")
-    ? formData.data.email_or_phone
-    : "";
 
   onMount(() => {
     const stripe = Stripe(
@@ -44,7 +40,7 @@
         layout: "tabs",
         billingDetails: {
           name: `${formData.data.first_name} ${formData.data.last_name}`,
-          email: emailFromShopingForm,
+          email: formData.data.email,
           // address: {
           //   country: $contributionData.country["2DigitCode"],
           //   postal_code: $postalCode,
@@ -67,7 +63,7 @@
         elements,
         confirmParams: {
           // Make sure to change this to your payment completion page
-          return_url: "http://localhost:5173/shoping-cart",
+          return_url: `${$page.url.origin}/shoping-cart`,
           receipt_email: emailAddress,
         },
         redirect: "if_required",

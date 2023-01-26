@@ -32,6 +32,6 @@ export const actions: Actions = {
         },
       });
     }
-    throw redirect(303, "/my-account");
+    throw redirect(303, "/my-account/personal-data");
   },
 };
