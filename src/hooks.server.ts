@@ -6,16 +6,12 @@ export const handle: Handle = async ({ event, resolve }) => {
   const { session, supabaseClient } = await getSupabase(event);
   event.locals.sb = supabaseClient;
   event.locals.session = session;
-  console.log(
-    "🚀 ~ file: hooks.server.ts:9 ~ consthandle:Handle= ~ session",
-    session
-  );
 
   if (event.url.pathname.startsWith("/my-account")) {
     if (!session) {
       throw redirect(303, "/login");
     } else if (session?.user?.app_metadata?.claims_admin) {
-      throw redirect(303, "/admin");
+      throw redirect(303, "/admin/dashboard");
     }
   }
   if (event.url.pathname.startsWith("/admin")) {
@@ -26,7 +22,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   if (event.url.pathname.startsWith("/login")) {
     if (session) {
       if (session?.user?.app_metadata?.claims_admin) {
-        throw redirect(303, "/admin");
+        throw redirect(303, "/admin/dashboard");
       } else {
         throw redirect(303, "/my-account/personal-data");
       }

@@ -38,6 +38,8 @@
     "@supabase/auth-helpers-sveltekit": "^0.8.6",
     "@supabase/supabase-js": "^2.2.0",
     "@swiper/core": "0.0.21",
+    "@types/chart.js": "^2.9.37",
+    "chart.js": "^4.2.0",
     "fs": "^0.0.1-security",
     "svelte-icons-pack": "^2.0.0",
     "swiper": "^8.4.4"
