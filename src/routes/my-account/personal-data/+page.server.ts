@@ -10,6 +10,10 @@ export const load: PageServerLoad = async ({ locals }) => {
     .eq("id", session?.user.id)
     .single();
   const userData = await locals.sb.auth.getUser();
+  // console.log(
+  //   "🚀 ~ file: +page.server.ts:13 ~ constload:PageServerLoad= ~ userData",
+  //   userData?.data?.user?.app_metadata
+  // );
 
   if (userData?.data?.user) {
     return {

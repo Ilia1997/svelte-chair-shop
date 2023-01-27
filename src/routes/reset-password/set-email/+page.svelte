@@ -18,7 +18,7 @@
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
       1: {
         name: "Reset password",
-        path: "/reset-password",
+        path: "/reset-password/set-email",
         class: "text-shop-pink hover:text-blue-700",
       },
     },
