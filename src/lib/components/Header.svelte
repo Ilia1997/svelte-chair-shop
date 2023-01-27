@@ -61,13 +61,24 @@
             >
           </li>
           <li>
-            <a
-              style:color={pageSettings?.linkColor?.hex &&
-                pageSettings.linkColor.hex}
-              href="/products"
-              class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
-              >Products</a
-            >
+            {#if $page.route.id === "/products"}
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="/products?page=1"
+                rel="nofollow"
+                class="font-lato text-base leading-5 hover:text-shop-pink duration-150 opacity-50 cursor-text pointer-events-none"
+                >Products</a
+              >
+            {:else}
+              <a
+                style:color={pageSettings?.linkColor?.hex &&
+                  pageSettings.linkColor.hex}
+                href="/products?page=1"
+                class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
+                >Products</a
+              >
+            {/if}
           </li>
           <li>
             {#if $page.route.id === "/blog"}

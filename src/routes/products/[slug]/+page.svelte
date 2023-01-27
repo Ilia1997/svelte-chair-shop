@@ -27,7 +27,7 @@
 
 <BreadCrumbs
   data={{
-    heading: "Product Details",
+    heading: product.name,
     li: {
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
       1: {
@@ -35,7 +35,7 @@
         path: "/products",
         class: "text-black hover:text-blue-700",
       },
-      2: { name: "Product Details", class: "text-shop-pink" },
+      2: { name: product.name, class: "text-shop-pink" },
     },
   }}
 />

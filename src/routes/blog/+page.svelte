@@ -4,14 +4,17 @@
   import PostCard from "./PostCard.svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
+  import Pagination from "$lib/components/Pagination.svelte";
 
   export let data: any;
 
   const pageSettings: IPageSettings = getContext("pageSettings");
   const PAGE_SIZE = data?.PAGE_SIZE;
+  let sortBy: string = "";
   let posts = data?.ALL_POSTS;
-  let pageCount = data?.PAGE_COUNT;
+  let pageCount = data?.pageCount;
   let currentPage = parseInt(data.PAGE_NUMBER);
+  let filter: string = "";
 </script>
 
 <svelte:head>
@@ -43,41 +46,6 @@
       {/if}
     {/each}
     <!-- pagination -->
-    <div
-      style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
-      class="flex items-center"
-    >
-      {#key currentPage}
-        <span class="mr-auto"
-          >Page: <span
-            style:background-color={pageSettings?.bgMainColor2?.hex &&
-              pageSettings.bgMainColor2.hex}
-            class="px-3 py-2 ml-2">{currentPage}</span
-          ></span
-        >
-        {#if currentPage > 1}
-          <a
-            style:background-color={pageSettings?.buttonBgColor?.hex &&
-              pageSettings.buttonBgColor.hex}
-            style:color={pageSettings?.buttonTextColor?.hex &&
-              pageSettings.buttonTextColor.hex}
-            data-sveltekit-reload
-            href="?page={+currentPage - 1}"
-            class="py-2 px-4">Previous</a
-          >
-        {/if}
-        {#if currentPage < pageCount}
-          <a
-            style:background-color={pageSettings?.buttonBgColor?.hex &&
-              pageSettings.buttonBgColor.hex}
-            style:color={pageSettings?.buttonTextColor?.hex &&
-              pageSettings.buttonTextColor.hex}
-            data-sveltekit-reload
-            href="?page={+currentPage + 1}"
-            class="ml-4 py-2 px-4">Next</a
-          >
-        {/if}
-      {/key}
-    </div>
+    <Pagination {currentPage} {pageCount} {sortBy} {filter} />
   </div>
 </div>
