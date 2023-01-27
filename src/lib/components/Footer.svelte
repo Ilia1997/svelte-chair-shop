@@ -78,12 +78,23 @@
             class="text-shop-sub-text text-base leading-5 font-lato font-normal list-none"
           >
             <li class="mb-5 last:mb-0">
-              <a
-                style:color={pageSettings?.linkColor?.hex &&
-                  pageSettings.linkColor.hex}
-                href="/products"
-                class="hover:text-shop-purple">Products</a
-              >
+              {#if $page.route.id === "/products"}
+                <a
+                  style:color={pageSettings?.linkColor?.hex &&
+                    pageSettings.linkColor.hex}
+                  href="/products?page=1"
+                  rel="nofollow"
+                  class="hover:text-shop-purple opacity-50 cursor-text pointer-events-none"
+                  >Products</a
+                >
+              {:else}
+                <a
+                  style:color={pageSettings?.linkColor?.hex &&
+                    pageSettings.linkColor.hex}
+                  href="/products?page=1"
+                  class="hover:text-shop-purple">Products</a
+                >
+              {/if}
             </li>
           </ul>
         </div>

@@ -9,10 +9,8 @@
   import Tabs from "./tabs/Tabs.svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
-  import { HtmlTag } from "svelte/internal";
   const pageSettings: IPageSettings = getContext("pageSettings");
   export let product: IProduct;
-
 
   let items = [
     {
@@ -74,20 +72,20 @@
       itemtype="https://schema.org/Offer"
       class="md:py-12 text-center md:text-left"
     >
-      <h1
+      <p
         itemprop="name"
         style:color={pageSettings?.textColor?.hex && pageSettings.textColor.hex}
         class="text-shop-off-blue text-4xl mb-2.5"
       >
         {product.name}
-      </h1>
+      </p>
       <div class="text-base py-2.5">
         <span
           style:color={pageSettings?.linkColor?.hex &&
             pageSettings.linkColor.hex}
           class="text-3xl"
         >
-          <meta itemprop="priceCurrency"  content="USD" />
+          <meta itemprop="priceCurrency" content="USD" />
           <span itemprop="price" content={product.price}>${product.price}</span>
           <link itemprop="availability" href="https://schema.org/InStock" />
         </span>
