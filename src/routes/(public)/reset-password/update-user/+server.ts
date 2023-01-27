@@ -4,10 +4,6 @@ import { AuthApiError, type UserAttributes } from "@supabase/supabase-js";
 
 export const POST: RequestHandler = async ({ request, locals }) => {
   const { password, password_2 } = Object.fromEntries(await request.formData());
-  console.log(
-    "🚀 ~ file: +server.ts:7 ~ constPOST:RequestHandler= ~ password",
-    password
-  );
 
   if (password != password_2) {
     return json({ error: true, message: "Passwords doesn`t match" });

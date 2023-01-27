@@ -98,3 +98,6 @@ export interface IPageSettings {
   seoDesc?: string;
   seoKeywords?: string;
 }
+export interface IOrders extends IProduct {
+ 
+}
