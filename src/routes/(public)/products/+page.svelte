@@ -22,8 +22,6 @@
   const PAGE_SIZE: number = data?.PAGE_SIZE;
   let productsPerPage: any = data?.productsPerPage;
   let allFeatures: any = data?.ALL_PRODUCTS_FEATURES;
-  let allProductFeatures: any = data?.PRODUCTS_FEATURES;
-  let sortBy: string = data?.SORT || "";
   let filter: string = data?.preparedFilters || "";
   let pageCount: number = data?.pageCount;
   let currentPage: number = parseInt(data.PAGE_NUMBER);
@@ -68,74 +66,87 @@
     >
       Products
     </h2>
-    <!-- sort block -->
-    <Sort {getSelectedSort} {currentPage} {pageSettings} {filter} />
+    {#if productsPerPage.length}
+      <!-- sort block -->
+      <Sort {getSelectedSort} {currentPage} {pageSettings} {filter} />
+    {/if}
   </div>
   <div class="sm:flex justify-between">
     <!-- filter -->
-    <Filter {currentPage} {allFeatures} />
-    <div
-      class="grid sm:max-w-[70%] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 pb-20"
-    >
-      {#key productsPerPage}
-        {#each productsPerPage as product, i}
-          {#if i < PAGE_SIZE}
-            <div
-              in:fade
-              class="transition duration-150 ease-linear text-center overflow-hidden"
-            >
-              <div class="group/main">
-                <div class="relative overflow-hidden">
-                  <div
-                    class="absolute bottom-6 left-[10px] sm:-left-[100%] transition-all duration-300 group-hover/main:z-10 group-hover/main:left-[10px]"
-                  >
-                    <AddToCartBtn {product} />
-
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <Filter {currentPage} {allFeatures} {pageSettings} />
+    {#if productsPerPage.length}
+      <div
+        class="grid sm:max-w-[70%] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 pb-20"
+      >
+        {#key productsPerPage}
+          {#each productsPerPage as product, i}
+            {#if i < PAGE_SIZE}
+              <div
+                in:fade
+                class="transition duration-150 ease-linear text-center overflow-hidden"
+              >
+                <div class="group/main">
+                  <div class="relative overflow-hidden">
                     <div
-                      class=" mt-2 group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"
-                      on:click|stopPropagation|preventDefault={() =>
-                        openModal(product.main_image)}
+                      class="absolute bottom-6 left-[10px] sm:-left-[100%] transition-all duration-300 group-hover/main:z-10 group-hover/main:left-[10px]"
                     >
-                      <ZoomIcon />
-                    </div>
-                  </div>
-                  <Image
-                    imageSrc={product.main_image}
-                    altText={product.name}
-                    className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB] group-hover/main:bg-[#EBF4F3] group-hover/main:scale-110 transition-transform duration-300"}
-                  />
-                </div>
-                <a href="/products/{product.slug.current}">
-                  <div
-                    style:color={pageSettings?.textColor?.hex &&
-                      pageSettings.textColor.hex}
-                    class="my-4"
-                  >
-                    {product.name}
-                  </div>
-                  <div
-                    style:color={pageSettings?.linkColor?.hex &&
-                      pageSettings.linkColor.hex}
-                    class="mb-4"
-                  >
-                    <span>${product.price}</span>
-                    {#if product.old_price}
-                      <span class="text-shop-pink line-through"
-                        >${product.old_price}</span
+                      <AddToCartBtn {product} />
+
+                      <!-- svelte-ignore a11y-click-events-have-key-events -->
+                      <div
+                        class=" mt-2 group w-[30px] h-[30px] rounded-full flex items-center justify-center hover:bg-[#EEEFFB] transition-colors  hover:shadow-sm cursor-pointer"
+                        on:click|stopPropagation|preventDefault={() =>
+                          openModal(product.main_image)}
                       >
-                    {/if}
+                        <ZoomIcon />
+                      </div>
+                    </div>
+                    <Image
+                      imageSrc={product.main_image}
+                      altText={product.name}
+                      className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB] group-hover/main:bg-[#EBF4F3] group-hover/main:scale-110 transition-transform duration-300"}
+                    />
                   </div>
-                </a>
+                  <a href="/products/{product.slug.current}">
+                    <div
+                      style:color={pageSettings?.textColor?.hex &&
+                        pageSettings.textColor.hex}
+                      class="my-4"
+                    >
+                      {product.name}
+                    </div>
+                    <div
+                      style:color={pageSettings?.linkColor?.hex &&
+                        pageSettings.linkColor.hex}
+                      class="mb-4"
+                    >
+                      <span>${product.price}</span>
+                      {#if product.old_price}
+                        <span class="text-shop-pink line-through"
+                          >${product.old_price}</span
+                        >
+                      {/if}
+                    </div>
+                  </a>
+                </div>
               </div>
-            </div>
-          {/if}
-        {/each}
-      {/key}
-    </div>
+            {/if}
+          {/each}
+        {/key}
+      </div>
+    {:else}
+      <h2 class="w-full sm:max-w-[75%]">No products</h2>
+    {/if}
   </div>
   <!-- pagination -->
-  <Pagination {currentPage} {pageCount} {sortBy} {filter} />
+  {#if productsPerPage.length}
+    <Pagination
+      {currentPage}
+      {pageCount}
+      itemsOnpage={productsPerPage.length}
+      pageSize={PAGE_SIZE}
+    />
+  {/if}
 </div>
 {#if productGalleryModal}
   <ModalSlot

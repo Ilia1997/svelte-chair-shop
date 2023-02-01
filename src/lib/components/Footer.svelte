@@ -84,6 +84,7 @@
                     pageSettings.linkColor.hex}
                   href="/products?page=1"
                   rel="nofollow"
+                  data-sveltekit-reload
                   class="hover:text-shop-purple opacity-50 cursor-text pointer-events-none"
                   >Products</a
                 >
@@ -92,6 +93,7 @@
                   style:color={pageSettings?.linkColor?.hex &&
                     pageSettings.linkColor.hex}
                   href="/products?page=1"
+                  data-sveltekit-reload
                   class="hover:text-shop-purple">Products</a
                 >
               {/if}

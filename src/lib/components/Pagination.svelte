@@ -1,27 +1,19 @@
 <script lang="ts">
+  import { page } from "$app/stores";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
   const pageSettings: IPageSettings = getContext("pageSettings");
+  let productsPage = $page.url.pathname.includes("/products") && true;
 
   export let currentPage: number;
   export let pageCount: number;
-  export let sortBy: string;
-  export let filter: string;
-
-  if (sortBy === "&undefined") sortBy = "";
-  if (
-    filter === "undefined" ||
-    filter === "&undefined" ||
-    filter === "" ||
-    filter === undefined
-  )
-    filter = "";
-  // console.log(pageCount);
+  export let itemsOnpage: number;
+  export let pageSize: number;
 </script>
 
 <div
   style:color={pageSettings?.linkColor?.hex && pageSettings.linkColor.hex}
-  class="flex items-center"
+  class="flex items-center {productsPage ? 'sm:pl-[30%]' : ''}"
 >
   {#key currentPage}
     <span
@@ -40,18 +32,24 @@
         style:color={pageSettings?.buttonTextColor?.hex &&
           pageSettings.buttonTextColor.hex}
         data-sveltekit-reload
-        href="?page={+currentPage - 1}{sortBy}{filter}"
+        href={$page.url.search.replace(
+          `?page=${currentPage}`,
+          `?page=${+currentPage - 1}`
+        )}
         class="py-2 px-4">Previous</a
       >
     {/if}
-    {#if currentPage < pageCount}
+    {#if currentPage < pageCount && itemsOnpage >= pageSize}
       <a
         style:background-color={pageSettings?.buttonBgColor?.hex &&
           pageSettings.buttonBgColor.hex}
         style:color={pageSettings?.buttonTextColor?.hex &&
           pageSettings.buttonTextColor.hex}
         data-sveltekit-reload
-        href="?page={+currentPage + 1}{sortBy}{filter}"
+        href={$page.url.search.replace(
+          `?page=${currentPage}`,
+          `?page=${+currentPage + 1}`
+        )}
         class="ml-4 py-2 px-4">Next</a
       >
     {/if}
