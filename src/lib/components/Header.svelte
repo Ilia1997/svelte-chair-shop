@@ -67,6 +67,7 @@
                   pageSettings.linkColor.hex}
                 href="/products?page=1"
                 rel="nofollow"
+                data-sveltekit-reload
                 class="font-lato text-base leading-5 hover:text-shop-pink duration-150 opacity-50 cursor-text pointer-events-none"
                 >Products</a
               >
@@ -76,7 +77,7 @@
                   pageSettings.linkColor.hex}
                 href="/products?page=1"
                 class="font-lato text-base leading-5 hover:text-shop-pink duration-150"
-                >Products</a
+                data-sveltekit-reload>Products</a
               >
             {/if}
           </li>
