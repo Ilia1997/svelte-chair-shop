@@ -32,7 +32,7 @@
       0: { name: "Home", path: "/", class: "text-black hover:text-blue-700" },
       1: {
         name: "Products",
-        path: "/products",
+        path: "/products?page=1",
         class: "text-black hover:text-blue-700",
       },
       2: { name: product.name, class: "text-shop-pink" },

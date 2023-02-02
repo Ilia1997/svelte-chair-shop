@@ -10,9 +10,8 @@
 
   const pageSettings: IPageSettings = getContext("pageSettings");
   const PAGE_SIZE = data?.PAGE_SIZE;
-  let sortBy: string = "";
   let posts = data?.ALL_POSTS;
-  let pageCount = data?.pageCount;
+  let pageCount = data?.PAGE_COUNT;
   let currentPage = parseInt(data.PAGE_NUMBER);
   let filter: string = "";
 </script>
@@ -46,6 +45,11 @@
       {/if}
     {/each}
     <!-- pagination -->
-    <Pagination {currentPage} {pageCount} {sortBy} {filter} />
+    <Pagination
+      {currentPage}
+      {pageCount}
+      itemsOnpage={PAGE_SIZE}
+      pageSize={PAGE_SIZE}
+    />
   </div>
 </div>
