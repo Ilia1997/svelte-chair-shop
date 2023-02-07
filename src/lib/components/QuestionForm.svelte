@@ -2,9 +2,8 @@
   import { enhance } from "$app/forms";
 
   import { fade } from "svelte/transition";
-  import type { ActionData } from "../../routes/$types";
 
-  export let form: ActionData;
+  export let form: any;
   export let currentUrl: string;
   export let pageSettings: any;
 
