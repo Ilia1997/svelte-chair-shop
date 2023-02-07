@@ -31,6 +31,7 @@
         fullDesc={item.fullDesc}
         shortDesc={item.shortDesc}
         productFeatures={item.productFeatures}
+        productReviews={item.productReviews}
       />
     </div>
   {/if}

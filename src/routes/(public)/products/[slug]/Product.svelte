@@ -9,8 +9,17 @@
   import Tabs from "./tabs/Tabs.svelte";
   import { getContext } from "svelte";
   import type { IPageSettings } from "$lib/interfaces/interface";
+  import { generateRatingStars } from "$lib/functions/generateRatingStars";
+  import ModalSlot from "$lib/components/modals/ModalSlot.svelte";
   const pageSettings: IPageSettings = getContext("pageSettings");
   export let product: IProduct;
+  let selectedProductImage: string;
+  let productGalleryModal: boolean;
+
+  const openModal = (currentProduct: any) => {
+    selectedProductImage = currentProduct;
+    productGalleryModal = true;
+  };
 
   let items = [
     {
@@ -27,7 +36,13 @@
       component: Tab2,
       productFeatures: product.features[0],
     },
-    { label: "Reviews", value: 3, component: Tab3 },
+    {
+      label: "Reviews",
+      value: 3,
+      component: Tab3,
+      productName: product.name,
+      productReviews: product.reviews,
+    },
   ];
 
   let addedStatus: boolean = false;
@@ -48,6 +63,25 @@
     product.total = product.price;
     $productsInCart = [...cartArray, product];
   };
+
+  //generate the rating
+  let currentRating: string = "";
+  let starsCount: number = 0;
+  let actualItemsCount: number = 0;
+  let actualItemsSum: number = 0;
+  if (product.reviews?.length) {
+    for (let item of product.reviews) {
+      if (item.rating) {
+        if (+item.rating > 0 && +item.rating <= 5) {
+          actualItemsCount++;
+          actualItemsSum += +item.rating;
+        }
+      }
+    }
+    starsCount = Math.round(actualItemsSum / actualItemsCount);
+
+    currentRating = generateRatingStars(starsCount);
+  }
 </script>
 
 <div itemscope itemtype="https://schema.org/Product">
@@ -56,15 +90,40 @@
     style="box-shadow: 0px 0px 25px 10px #F6F4FD;"
     in:fade
   >
-    <div>
-      <Image
-        imageSrc={product.main_image
-          ? product.main_image
-          : "/images/no-image.png"}
-        altText={product.name}
-        className={"w-[375px] m-auto"}
-        itemprop="image"
-      />
+    <div class="flex">
+      <div class="hidden lg:block overflow-auto max-h-[320px]">
+        {#if product.imagesGallery?.length}
+          {#each product.imagesGallery as item}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <div
+              class="cursor-pointer opacity-75 hover:opacity-100"
+              on:click|stopPropagation|preventDefault={() => openModal(item)}
+            >
+              <Image
+                imageSrc={item}
+                altText={product.name}
+                className={"max-h-[70px] m-2"}
+                itemprop="image"
+              />
+            </div>
+          {/each}
+        {/if}
+      </div>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="cursor-pointer"
+        on:click|stopPropagation|preventDefault={() =>
+          openModal(product.main_image)}
+      >
+        <Image
+          imageSrc={product.main_image
+            ? product.main_image
+            : "/images/no-image.png"}
+          altText={product.name}
+          className={"w-[375px] m-auto"}
+          itemprop="image"
+        />
+      </div>
     </div>
     <div
       itemprop="offers"
@@ -79,6 +138,26 @@
       >
         {product.name}
       </p>
+      {#if currentRating}
+        <div
+          itemprop="aggregateRating"
+          itemtype="http://schema.org/AggregateRating"
+          itemscope
+        >
+          <meta itemprop="reviewCount" content={product.reviews.length} />
+          <meta itemprop="worstRating" content="1" />
+          <meta itemprop="bestRating" content="5" />
+          <meta itemprop="ratingValue" content={actualItemsCount} />
+          <meta itemprop="itemReviewed" content={product.name} />
+          <div class="text-orange-400">
+            {currentRating}
+            <span
+              style:color={pageSettings?.textColor?.hex &&
+                pageSettings.textColor.hex}>({actualItemsCount})</span
+            >
+          </div>
+        </div>
+      {/if}
       <div class="text-base py-2.5">
         <span
           style:color={pageSettings?.linkColor?.hex &&
@@ -130,7 +209,7 @@
       </div>
     </div>
   </div>
-  <div class="bg-[#F9F8FE] py-10 md:py-20 px-[15px] mb-16 md:mb-32">
+  <div class="bg-[#F9F8FE] py-10 md:py-20 px-4 md:px-8 mb-16 md:mb-32">
     <Tabs {items} />
   </div>
 </div>
@@ -159,4 +238,21 @@
       </a>
     {/each}
   </div>
+{/if}
+
+{#if productGalleryModal}
+  <ModalSlot
+    onCloseModal={() => {
+      productGalleryModal = false;
+    }}
+  >
+    <div class="flex items-center justify-center">
+      <Image
+        imageSrc={selectedProductImage
+          ? selectedProductImage
+          : "/images/no-image.png"}
+        className={"w-[500px]"}
+      />
+    </div>
+  </ModalSlot>
 {/if}

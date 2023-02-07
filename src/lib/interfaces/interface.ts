@@ -16,12 +16,14 @@ export interface IProduct {
   short_desc?: string;
   price: number;
   main_image: any;
+  imagesGallery?: any;
   body?: any;
   slug: ISlug;
   is_sale?: boolean;
   old_price?: number;
   related?: any;
   features?: any;
+  reviews?: any;
   // seo
   seoTitle?: string;
   seoDesc?: string;
