@@ -3,7 +3,7 @@ import type { Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "../../../(public)/$types";
 
 export const load: PageServerLoad = async ({ locals }) => {
-   const session = locals.session;
+  
    const { data, error: err } = await locals.sb.from("profiles").select();
 
    if (err) {
