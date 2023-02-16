@@ -1,15 +1,35 @@
 <script lang="ts">
    import AdminNavbar from "$lib/components/admin/AdminNavbar.svelte";
+   import type { PageData } from "./$types";
+   import Table from "$lib/components/admin/tables/Table.svelte";
+
+   export let data: PageData;
    const breadCrumbsData = {
       heading: "Orders",
       li: {
          0: { name: "Orders", path: "/admin/orders" },
       },
    };
+
+   const { orders } = data;
+   console.log("🚀 ~ file: +page.svelte:15 ~ orders", orders);
 </script>
 
 <AdminNavbar {breadCrumbsData} />
-<div class="mt-12 mb-8 flex flex-col gap-12">
+<Table
+   data={orders}
+   columnsArray={[
+      { columnName: "id", accessor: "id" },
+      { columnName: "Email", accessor: "email" },
+      { columnName: "Is confirmed", accessor: "is_confirmed" },
+      { columnName: "Total", accessor: "total_sum" },
+      { columnName: "Created at", accessor: "created_at" },
+   ]}
+   clickable={false}
+   editable={false}
+   tableName={"Orders"}
+/>
+<!-- <div class="mt-12 mb-8 flex flex-col gap-12">
    <div class="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
       <div
          class="relative bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg -mt-6 mb-8 p-6"
@@ -336,4 +356,4 @@
          </table>
       </div>
    </div>
-</div>
+</div> -->

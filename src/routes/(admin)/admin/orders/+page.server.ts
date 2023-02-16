@@ -3,7 +3,7 @@ import type { Actions } from "@sveltejs/kit";
 import type { PageServerLoad } from "../../../(public)/$types";
 
 export const load: PageServerLoad = async ({ locals }) => {
-   const { data, error: err } = await locals.sb.from("profiles").select();
+   const { data, error: err } = await locals.sb.from("orders").select();
 
    if (err) {
       if (err instanceof AuthApiError && err.status == 500) {
@@ -13,5 +13,5 @@ export const load: PageServerLoad = async ({ locals }) => {
       }
    }
 
-   return { users: data };
+   return { orders: data };
 };
