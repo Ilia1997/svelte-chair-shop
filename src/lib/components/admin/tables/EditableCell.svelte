@@ -1,15 +1,16 @@
 <script lang="ts">
    import type { BodyRow, DataColumn } from "svelte-headless-table";
    import EditIcon from "../VectorImages/EditIcon.svelte";
-
+   import { toast } from "@zerodevx/svelte-toast";
    type Item = $$Generic;
 
    export let row: BodyRow<Item>;
    export let column: DataColumn<Item>;
    export let value: unknown;
-   export let onUpdateValue: (rowDataId: string, columnId: string, newValue: unknown) => void;
+   export let onUpdateValue: (rowDataId: string, columnId: string, newValue: unknown) => {};
 
    let isEditing = false;
+   const oldValue = value;
 
    let inputElement: HTMLInputElement | undefined;
    $: if (isEditing) {
@@ -18,11 +19,31 @@
 
    const handleCancel = () => {
       isEditing = false;
+      value = oldValue;
    };
-   const handleSubmit = () => {
+   const handleSubmit = async () => {
       isEditing = false;
+      console.log(oldValue);
       if (row.isData()) {
-         onUpdateValue(row.dataId, column.id, value);
+         const res = await onUpdateValue(row.dataId, column.id, value);
+         if (!res) {
+            value = oldValue;
+            toast.push("Error", {
+               theme: {
+                  "--toastColor": "mintcream",
+                  "--toastBackground": "rgb(139 29 59 / 80%);",
+                  "--toastBarBackground": "red",
+               },
+            });
+         } else {
+            toast.push("Success!", {
+               theme: {
+                  "--toastColor": "mintcream",
+                  "--toastBackground": "rgba(72,187,120,0.9)",
+                  "--toastBarBackground": "#2F855A",
+               },
+            });
+         }
       }
    };
 </script>

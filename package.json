@@ -18,6 +18,7 @@
     "@sveltejs/adapter-auto": "^1.0.0",
     "@sveltejs/kit": "^1.0.0",
     "@types/swiper": "^6.0.0",
+    "@zerodevx/svelte-toast": "^0.8.2",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
     "stripe": "^11.7.0",

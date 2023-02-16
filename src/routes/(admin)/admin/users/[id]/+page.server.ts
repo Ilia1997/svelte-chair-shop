@@ -1,8 +1,12 @@
-import client from "$lib/sanityClient";
-import type { PageServerLoad } from ".svelte-kit/types/src/routes/(public)/$types";
 import { AuthApiError } from "@supabase/supabase-js";
 
-export const load = (async ({ params, locals }) => {
+export const load = async ({
+   params,
+   locals,
+}: {
+   params: RouteParamsForUsers;
+   locals: App.Locals;
+}) => {
    let userId = params.id;
 
    const userProfile = await locals.sb.from("profiles").select().eq("id", userId);
@@ -25,4 +29,4 @@ export const load = (async ({ params, locals }) => {
    }
 
    return { user: userProfile.data, orders: orders.data };
-}) satisfies PageServerLoad;
+};

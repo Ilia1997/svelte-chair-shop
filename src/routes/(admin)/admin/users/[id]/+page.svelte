@@ -39,6 +39,7 @@
    columnsArray={[
       { columnName: "First Name", accessor: "first_name" },
       { columnName: "Last Name", accessor: "last_name" },
+      { columnName: "Phone", accessor: "phone" },
       { columnName: "Country", accessor: "country" },
       { columnName: "City", accessor: "city" },
       { columnName: "Address", accessor: "address" },

@@ -1,4 +1,5 @@
 <script lang="ts">
+   import { error } from "@sveltejs/kit";
    import { goto } from "$app/navigation";
    import {
       createRender,
@@ -27,19 +28,35 @@
    const storedData = writable(data);
 
    // @ts-ignore
-   const updateData = (rowDataId, columnId, newValue) => {
+   const updateData = async (rowDataId, columnId, newValue) => {
       // In this case, the dataId of each item is its index in $data.
       // You can also handle any server-synchronization necessary here.
       const idx = parseInt(rowDataId);
 
       const currentItem = $storedData[idx];
+
       const key = columnId; // Cast as `keyof YourDataItem`
       const newItem = { ...currentItem, [key]: newValue };
-      console.log(newItem);
-      $storedData[idx] = newItem;
-      $storedData = $storedData;
 
+      const response = await updateUserInDB({ id: currentItem.id, [key]: newValue });
+      if (response?.success) {
+         $storedData[idx] = newItem;
+         $storedData = $storedData;
+         return true;
+      } else {
+         return false;
+      }
       // Handle any server-synchronization.
+   };
+   const updateUserInDB = async (data: any) => {
+      const userData = data;
+      const rawResponse = await fetch("/admin/users/server/update-user", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({ userData }),
+      });
+      const response = await rawResponse.json();
+      return response;
    };
 
    const EditableCellLabel: DataLabel<unknown> = ({ column, row, value }) =>
