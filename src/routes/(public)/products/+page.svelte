@@ -12,6 +12,8 @@
   import Pagination from "$lib/components/Pagination.svelte";
   import Sort from "$lib/components/Sort.svelte";
   import Filter from "$lib/components/Filter.svelte";
+  import { generateRatingStars } from "$lib/functions/generateRatingStars";
+  import { prepareRatingData } from "$lib/functions/prepareRatingData";
   const pageSettings: IPageSettings = getContext("pageSettings");
 
   export let data: any;
@@ -30,6 +32,15 @@
   const openModal = (currentProduct: any) => {
     selectedProductImage = currentProduct;
     productGalleryModal = true;
+  };
+  //generate the rating
+  let ratingData: any = {};
+  let currentRating: string = "";
+
+  const addReviewStars = (reviewArr: any) => {
+    ratingData = prepareRatingData(reviewArr);
+    currentRating = generateRatingStars(ratingData.starsCount);
+    return currentRating;
   };
 </script>
 
@@ -85,7 +96,7 @@
                 in:fade
                 class="transition duration-150 ease-linear text-center overflow-hidden"
               >
-                <div class="group/main">
+                <div class="group/main relative">
                   <div class="relative overflow-hidden">
                     <div
                       class="absolute bottom-6 left-[10px] sm:-left-[100%] transition-all duration-300 group-hover/main:z-10 group-hover/main:left-[10px]"
@@ -101,11 +112,26 @@
                         <ZoomIcon />
                       </div>
                     </div>
-                    <Image
-                      imageSrc={product.main_image}
-                      altText={product.name}
-                      className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB] group-hover/main:bg-[#EBF4F3] group-hover/main:scale-110 transition-transform duration-300"}
-                    />
+                    <div class="relative">
+                      <Image
+                        imageSrc={product.main_image}
+                        altText={product.name}
+                        className={"w-full h-[200px] py-[30px] px-[25px] object-contain m-auto bg-[#F6F7FB] group-hover/main:bg-[#EBF4F3] group-hover/main:scale-110 transition-transform duration-300"}
+                      />
+                      {#if product.labels?.length}
+                        <div class="absolute top-0 left-auto right-0 h-[100%]">
+                          {#each product.labels as item}
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            <Image
+                              imageSrc={item}
+                              altText="label"
+                              className={"max-h-[36px] mb-5"}
+                              itemprop="image"
+                            />
+                          {/each}
+                        </div>
+                      {/if}
+                    </div>
                   </div>
                   <a href="/products/{product.slug.current}">
                     <div
@@ -115,6 +141,11 @@
                     >
                       {product.name}
                     </div>
+                    {#if product.reviews?.length}
+                      <div class="text-orange-400 absolute top-1 left-1">
+                        {addReviewStars(product.reviews)}
+                      </div>
+                    {/if}
                     <div
                       style:color={pageSettings?.linkColor?.hex &&
                         pageSettings.linkColor.hex}
