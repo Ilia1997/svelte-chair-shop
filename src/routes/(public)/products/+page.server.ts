@@ -54,7 +54,7 @@ export const load: PageServerLoad = (async ({ url }) => {
   }`;
   // query: from .. to
   let queryProductsPerPage = `*[_type == 'products'] {
-      _id, code, is_sale, sale, slug, main_image, name, old_price, price, categories[]->{title}, features[]-> {
+      _id, code, is_sale, sale, slug, main_image, labels, name, old_price, price, categories[]->{title}, reviews[]->{rating}, features[]-> {
         brand[0]->{brand},
         type[0]->{type},
         color,
@@ -94,7 +94,15 @@ export const load: PageServerLoad = (async ({ url }) => {
       }
     );
     
-    let queryExample = `*[_type == 'products' && references(*[_type=="features" ]._id)] | order(${
+    let queryExample = `*[_type == 'products' && references(*[_type=="features" ]._id)] {
+      _id, code, is_sale, sale, slug, main_image, labels, name, old_price, price, categories[]->{title}, reviews[]->{rating}, features[]-> {
+        brand[0]->{brand},
+        type[0]->{type},
+        color,
+        size,
+        warranty,
+      }, available_quantity
+    } | order(${
       SORT === "&sort=by-name"
         ? SORT_BY_NAME
         : SORT === "&sort=by-price"
@@ -128,8 +136,9 @@ export const load: PageServerLoad = (async ({ url }) => {
           queryChankExample = queryChankExample.replace("_CHANGE_IT_", `brand == \"${byBrandChoice[i]}\"`);
         }
       }
+      queryChankExample = queryChankExample.replaceAll('-', " ");
       queryExample = queryExample.replace(`[_type=="features" `, `[_type=="features" ${queryChankExample}`);
-      byAllQuery = queryExample.replaceAll('-', " ");
+      byAllQuery = queryExample;
     }
     if(byTypeChoice.length) { 
       let queryChankExample = `&& (references(*[_type=="product_type" && _CHANGE_IT_]._id))`;
@@ -149,8 +158,9 @@ export const load: PageServerLoad = (async ({ url }) => {
           queryChankExample = queryChankExample.replace("_CHANGE_IT_", `type == \"${byTypeChoice[i]}\"`);
         }
       }
+      queryChankExample = queryChankExample.replaceAll('-', " ");
       queryExample = queryExample.replace(`[_type=="features" `, `[_type=="features" ${queryChankExample}`);
-      byAllQuery = queryExample.replaceAll('-', " ");
+      byAllQuery = queryExample;
     }
     if(bySizeChoice.length) { 
       let queryChankExample = `&& (_CHANGE_IT_)`;
@@ -170,8 +180,9 @@ export const load: PageServerLoad = (async ({ url }) => {
           queryChankExample = queryChankExample.replace("_CHANGE_IT_", `size == \"${bySizeChoice[i]}\"`);
         }
       }
+      queryChankExample = queryChankExample.replaceAll('-', " ");
       queryExample = queryExample.replace(`[_type=="features" `, `[_type=="features" ${queryChankExample}`);
-      byAllQuery = queryExample.replaceAll('-', " ");
+      byAllQuery = queryExample;
     }
     if(byColorChoice.length) { 
       let queryChankExample = `&& (_CHANGE_IT_)`;
@@ -191,8 +202,9 @@ export const load: PageServerLoad = (async ({ url }) => {
           queryChankExample = queryChankExample.replace("_CHANGE_IT_", `color.hex == \"#${byColorChoice[i]}\"`);
         }
       }
+      queryChankExample = queryChankExample.replaceAll('-', " ");
       queryExample = queryExample.replace(`[_type=="features" `, `[_type=="features" ${queryChankExample}`);
-      byAllQuery = queryExample.replaceAll('-', " ");
+      byAllQuery = queryExample;
     }
     if(byWarrantyChoice.length) {
       let queryChankExample = `&& (_CHANGE_IT_)`;
@@ -212,8 +224,9 @@ export const load: PageServerLoad = (async ({ url }) => {
           queryChankExample = queryChankExample.replace("_CHANGE_IT_", `warranty == ${byWarrantyChoice[i]}`);
         }
       }
+      queryChankExample = queryChankExample.replaceAll('-', " ");
       queryExample = queryExample.replace(`[_type=="features" `, `[_type=="features" ${queryChankExample}`);
-      byAllQuery = queryExample.replaceAll('-', " ");
+      byAllQuery = queryExample;
     }
 
     productsPerPage = byAllQuery?.length ? await client.fetch(byAllQuery) : await client.fetch(queryProductsPerPage);
