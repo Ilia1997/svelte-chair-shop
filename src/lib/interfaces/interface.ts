@@ -11,30 +11,31 @@ interface ISlug {
    current: string;
 }
 export interface IProduct {
-   name: string;
-   code: string;
-   short_desc?: string;
-   price: number;
-   main_image: any;
-   imagesGallery?: any;
-   body?: any;
-   slug: ISlug;
-   is_sale?: boolean;
-   old_price?: number;
-   related?: any;
-   features?: any;
-   reviews?: any;
-   // seo
-   seoTitle?: string;
-   seoDesc?: string;
-   seoKeywords?: string;
-   content?: any;
-   // cart
-   available_quantity?: number;
-   quantity?: number;
-   total?: number;
-   // errors
-   available_quantity_error?: boolean;
+  name: string;
+  code: string;
+  short_desc?: string;
+  price: number;
+  main_image: any;
+  labels?: any;
+  imagesGallery?: any;
+  body?: any;
+  slug: ISlug;
+  is_sale?: boolean;
+  old_price?: number;
+  related?: any;
+  features?: any;
+  reviews?: any;
+  // seo
+  seoTitle?: string;
+  seoDesc?: string;
+  seoKeywords?: string;
+  content?: any;
+  // cart
+  available_quantity?: number;
+  quantity?: number;
+  total?: number;
+  // errors
+  available_quantity_error?: boolean;
 }
 export interface IAvailableQauntity {
    code: string;

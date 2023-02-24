@@ -19,6 +19,7 @@ export const load = (async ({ params }) => {
     code,
     main_image,
     imagesGallery,
+    labels,
     name,
     price,
     old_price,
