@@ -39,6 +39,7 @@
     "@sanity/image-url": "^1.0.1",
     "@supabase/auth-helpers-sveltekit": "^0.8.6",
     "@supabase/supabase-js": "^2.2.0",
+    "@sveltejs/adapter-vercel": "^2.4.1",
     "@swiper/core": "0.0.21",
     "@types/chart.js": "^2.9.37",
     "chart.js": "^4.2.0",

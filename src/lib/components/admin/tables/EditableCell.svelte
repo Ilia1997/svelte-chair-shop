@@ -26,6 +26,7 @@
       console.log(oldValue);
       if (row.isData()) {
          const res = await onUpdateValue(row.dataId, column.id, value);
+         console.log("🚀 ~ file: EditableCell.svelte:29 ~ handleSubmit ~ res:", res);
          if (!res) {
             value = oldValue;
             toast.push("Error", {

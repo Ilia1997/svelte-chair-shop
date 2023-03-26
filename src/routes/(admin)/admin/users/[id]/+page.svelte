@@ -17,6 +17,18 @@
       return Object.fromEntries(values);
    });
 
+   const updateUserInDB = async (data: any) => {
+      const userData = data;
+      const rawResponse = await fetch("/admin/users/server/update-user", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({ userData }),
+      });
+      const response = await rawResponse.json();
+      console.log("🚀 ~ file: +page.svelte:27 ~ updateUserInDB ~ response:", response);
+      return response;
+   };
+
    let ordersNewArray: Array<IOrders> = [];
 
    if (orders) {
@@ -49,6 +61,7 @@
    editable={true}
    clickableMainPath="user"
    tableName={"User data"}
+   updateItemInDB={updateUserInDB}
 />
 
 <Table

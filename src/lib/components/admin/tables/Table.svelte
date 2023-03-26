@@ -1,4 +1,5 @@
 <script lang="ts">
+   //@ts-nocheck
    import { error } from "@sveltejs/kit";
    import { goto } from "$app/navigation";
    import {
@@ -18,6 +19,7 @@
    export let clickable: boolean = false;
    export let editable: boolean = false;
    export let clickableMainPath: string = "";
+   export let updateItemInDB = (data: any) => {};
 
    const clickableCallBack = (id: string) => {
       if (clickable) {
@@ -27,7 +29,6 @@
 
    const storedData = writable(data);
 
-   // @ts-ignore
    const updateData = async (rowDataId, columnId, newValue) => {
       // In this case, the dataId of each item is its index in $data.
       // You can also handle any server-synchronization necessary here.
@@ -38,7 +39,7 @@
       const key = columnId; // Cast as `keyof YourDataItem`
       const newItem = { ...currentItem, [key]: newValue };
 
-      const response = await updateUserInDB({ id: currentItem.id, [key]: newValue });
+      const response = await updateItemInDB({ id: currentItem.id, [key]: newValue });
       if (response?.success) {
          $storedData[idx] = newItem;
          $storedData = $storedData;
