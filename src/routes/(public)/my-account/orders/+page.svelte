@@ -9,15 +9,17 @@
    import { convertDate } from "$lib/functions/convertDate";
    import type { IOrders } from "$lib/interfaces/interface";
    export let data: PageData;
+   console.log("data-23", data);
    const { previousOrders } = data;
    console.log("🚀 ~ file: +page.svelte:8 ~ previousOrders", previousOrders?.length);
-   let orders: Array<IOrders>;
+   let orders: Array<IOrders> = [];
 
-   if (previousOrders) {
+   if (previousOrders && previousOrders?.length > 0) {
       orders = previousOrders.map((order) => {
          return { ...order, parsedProducts: JSON.parse(order.products_json) };
       });
    }
+   $: console.log("orders", orders);
 </script>
 
 <MyAccountGridSlot>
@@ -53,24 +55,27 @@
                      </div>
                   </div>
                   <div class="flex justify-around gap-5">
-                     {#each order.parsedProducts as product}
-                        <div class="flex ">
-                           <Image
-                              imageSrc={product.main_image
-                                 ? product.main_image
-                                 : "/images/no-image.png"}
-                              className=" w-[65px] h-auto relative mr-2 rounded-sm object-contain"
-                              altText={product.name}
-                           />
-                           <div class="pt-2">
-                              <div class="text-sm font-lato">{product.name}</div>
-                              <div class="text-xs text-gray-500 font-lato">
-                                 Quantity: {product.quantity}
+                     <!-- {JSON.parse(order.parsedProducts)} -->
+                     {#if order?.parsedProducts && order?.parsedProducts != null}
+                        {#each order.parsedProducts as product}
+                           <div class="flex ">
+                              <Image
+                                 imageSrc={product.main_image
+                                    ? product.main_image
+                                    : "/images/no-image.png"}
+                                 className=" w-[65px] h-auto relative mr-2 rounded-sm object-contain"
+                                 altText={product.name}
+                              />
+                              <div class="pt-2">
+                                 <div class="text-sm font-lato">{product.name}</div>
+                                 <div class="text-xs text-gray-500 font-lato">
+                                    Quantity: {product.quantity}
+                                 </div>
+                                 <div class="text-xs font-lato">$ {product.total}</div>
                               </div>
-                              <div class="text-xs font-lato">$ {product.total}</div>
                            </div>
-                        </div>
-                     {/each}
+                        {/each}
+                     {/if}
                   </div>
                </div>
             {/each}
